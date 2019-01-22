@@ -42,7 +42,7 @@
       <br />
       <?php } ?>
     </div>
-    <div class="modal-footer"><?php echo $pagination; ?></div>
+    <div class="modal-footer"><!--<?php echo $pagination; ?>--></div>
   </div>
 </div>
 <script type="text/javascript"><!--

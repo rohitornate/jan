@@ -1,0 +1,47 @@
+.popup{
+          background:$white; padding:$space25 $space25 $space20; box-sizing:border-box;
+    .title{ @include font-size($font20); color:$grey-medium; text-transform:uppercase; padding-bottom:$space20; display:block;}
+    .one-half{ width:300px; float:left; margin-right:$space30+2; position:relative;}
+    .rating-box{ background:#f5f5f5; padding:$space20 $space50+5 $space0 $space30;  width:300px; float:left;  @include all-my-icons-sprites;
+                 span{ @include font-size($font12+1); color:#545454; padding-bottom:$space20; display: inline-block;
+                      i{@include size(81px,14px);  vertical-align:middle; margin-right:$space5; float:right;}
+                   
+                 }
+      
+    }
+
+      label{ @include font-size($font12+1); color:#545454; font-family:$ubuntulight;  padding-bottom:$space5; display:block;}
+     .form-control{ @include size(100%,33px);  @include font-size($font12+1);  font-family:$ubuntulight; color:$grey-medium; @include input-placeholder{ color:#b3b3b3}; margin-bottom:$space10+2;}
+     .captcha{
+         .form-control{padding-right: 175px;}
+     }
+      .code{position:absolute; right:30px; top:0; height: 33px;
+          //&:after{@include my-icons-sprite(refresh); position:absolute; right:-25px; top:4px; content:'';  @include size(20px,20px);}
+      }
+      .reload{position: absolute; top: 9px; right: 8px; cursor: pointer;}
+      
+      textArea{ height:80px!important; padding-top:$space10;}
+ 
+         
+      .btncom{ @include size(125px,36px); background:$yellow; border:none; @include font-size($font14); color:$black; text-transform:uppercase; @include border-radius(3px); margin-right:$space5+2; margin-top:$space15+2; float:right; cursor:pointer;
+      &:last-child{ background:#e6e7e8;}
+      
+      }
+      
+      .bg-none{ background:none; padding:0 }
+       .pr{ padding-right:$space70+15;}
+}
+
+//req a call vback 
+
+.request-popup{
+    .popup{
+        .in{ margin-right:-20px;}
+        .one-half{ margin-right:$space20; width:306px;}
+        .title{ @include font-size($font18); color:$black; font-family:$ubuntumedium; display:inline-block; vertical-align:middle; padding-right:$space10;}
+        .call-back{ display:inline-block; @include font-size($font18); color:$black; font-family:$ubuntumedium; vertical-align:top; border-left:2px solid #d0d0d0; padding-left:$space15; }
+        textArea{ height:95px!important;}
+       button{background: #e9c21c; float: none; margin: 0 auto; display: block; margin-top: 10px; border: 0; padding: 10px 50px; @include border-radius(3px); font-size: 14px; text-transform: uppercase; cursor: pointer; outline: 0;}
+       select{ background:url(../images/drop-down.png) no-repeat right center; @include appearance (none);}
+    }
+}  

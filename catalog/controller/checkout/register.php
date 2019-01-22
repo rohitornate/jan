@@ -277,6 +277,58 @@ class ControllerCheckoutRegister extends Controller {
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
+		
+		/* AbandonedCarts - Begin */
+
+$this->load->model('setting/setting');
+
+$abandonedCartsSettings = $this->model_setting_setting->getSetting('abandonedcarts', $this->config->get('store_id'));
+
+if (isset($abandonedCartsSettings['abandonedcarts']['Enabled']) && $abandonedCartsSettings['abandonedcarts']['Enabled']=='yes') { 
+    $cart = $this->cart->getProducts();
+    $cart = (!empty($cart)) ? $cart : '';
+    
+    if (!empty($cart)) {
+        if (isset($this->session->data['abandonedCart_ID']) & !empty($this->session->data['abandonedCart_ID'])) {
+            $id = $this->session->data['abandonedCart_ID'];
+        } else if ($this->customer->isLogged()) {
+            $id = (!empty($this->session->data['abandonedCart_ID'])) ? $this->session->data['abandonedCart_ID'] : $this->customer->getEmail();
+        } else {
+            $id = (!empty($this->session->data['abandonedCart_ID'])) ? $this->session->data['abandonedCart_ID'] : session_id();
+        }
+        $exists = $this->db->query("SELECT * FROM `" . DB_PREFIX . "abandonedcarts` WHERE `restore_id` = '$id' AND `ordered`=0");
+        
+        if (empty($exists->row['customer_info'])) { 
+            $customer = array(); 
+        
+            if (!empty($this->request->post['telephone'])) {
+                $customer['telephone'] = $this->request->post['telephone'];
+            }
+            if (!empty($this->request->post['email'])) {
+                $customer['email'] = $this->request->post['email'];
+            }
+            if (!empty($this->request->post['firstname'])) {
+                $customer['firstname'] = $this->request->post['firstname'];
+            }
+            if (!empty($this->request->post['lastname'])) {
+                $customer['lastname'] = $this->request->post['lastname'];
+            }
+            if (!empty($this->session->data['language'])) {
+                $customer['language'] = $this->session->data['language'];
+            }
+            $customer = json_encode($customer);
+            $this->db->query("UPDATE `" . DB_PREFIX . "abandonedcarts` SET `customer_info`='".$this->db->escape($customer)."', `restore_id`='".$this->request->post['email']."' WHERE `restore_id`='$id'");
+            
+            $this->session->data['abandonedCart_ID'] = $this->request->post['email'];
+        }
+    }
+}
+/* AbandonedCarts - End */
+		
+		
+		
+		
+		
 		$this->response->setOutput(json_encode($json));
 	}
 }

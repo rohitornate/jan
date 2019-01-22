@@ -2,8 +2,12 @@
 class ControllerCommonHeader extends Controller {
 	public function index() {
 		// Analytics
+		$this->load->library('user');
+		$this->user = new User($this->registry);
+		
+		
 		$this->load->model('extension/extension');
-
+		$this->load->model('tool/image');
 		$data['analytics'] = array();
 
 		$analytics = $this->model_extension_extension->getExtensions('analytics');
@@ -21,12 +25,16 @@ class ControllerCommonHeader extends Controller {
 		}
 
 		if (is_file(DIR_IMAGE . $this->config->get('config_icon'))) {
-			$this->document->addLink($server . 'image/' . $this->config->get('config_icon'), 'icon');
+		//	$this->document->addLink($server . 'image/' . $this->config->get('config_icon'), 'icon');
 		}
 
 		$data['title'] = $this->document->getTitle();
 
 		$data['base'] = $server;
+		
+		
+		
+		
 		$data['description'] = $this->document->getDescription();
 		$data['keywords'] = $this->document->getKeywords();
 		$data['links'] = $this->document->getLinks();
@@ -34,17 +42,74 @@ class ControllerCommonHeader extends Controller {
 		$data['scripts'] = $this->document->getScripts();
 		$data['lang'] = $this->language->get('code');
 		$data['direction'] = $this->language->get('direction');
-
+                //$link = $_SERVER['QUERY_STRING'];
+                $link_array = explode('/',$_SERVER['QUERY_STRING']);
+                $data['end'] = end($link_array);
 		$data['name'] = $this->config->get('config_name');
 
+		
+		
+		
+		
+		$data['robots'] = '';
+				$extendedseo = $this->config->get('extendedseo');
+				if (isset($extendedseo['robots'])) {
+					$data['robots'] = '<meta name="robots" content="index">';
+					}
+				
+				foreach ($data['links'] as $link) { 
+					if ($link['rel']=='canonical') {$hasCanonical = true;
+					if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) {
+					$this->db->query("insert into " . DB_PREFIX . "bots_report (link, bot, ip, `date`) values ('".$link['href']."','".$_SERVER['HTTP_USER_AGENT']."','".$_SERVER['REMOTE_ADDR']."',now());");
+					}
+					}
+				}
+				
+				if (isset($this->request->get['route']) && !isset($hasCanonical) && (strpos($this->request->get['route'], 'error') === false)) {
+					if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) {
+					$this->db->query("insert into " . DB_PREFIX . "bots_report (link, bot, ip, `date`) values ('".$this->url->link($this->request->get['route'])."','".$_SERVER['HTTP_USER_AGENT']."','".$_SERVER['REMOTE_ADDR']."',now());");
+					}
+				}
+				
+				$data['canonical_link'] = '';
+				$canonicals = $this->config->get('canonicals'); 
+				//if (!isset($hasCanonical) && isset($this->request->get['route']) && (isset($canonicals['canonicals_extended']))) {
+				//	$data['canonical_link'] = $this->url->link($this->request->get['route']);					
+				//	}
+		
+		//print_r($data['canonical_link']);
+		
+		
+		/*----------------onj_code_starts----------------*/		
+				$data['track_action']=$this->url->link('information/shipway_track');
+				$data['hasAccount'] = $this->config->get('shipway_login');
+				/*----------------onj_code_ends----------------*/
+		
+		
+		
+		
+		
+		
 		if (is_file(DIR_IMAGE . $this->config->get('config_logo'))) {
 			$data['logo'] = $server . 'image/' . $this->config->get('config_logo');
 		} else {
 			$data['logo'] = '';
 		}
 
+		if (is_file(DIR_IMAGE . 'logo1.png')) {
+			
+			//echo "<img src='image/logo1.png'>";
+		$data['logo1'] =$this->model_tool_image->resize('logo1.png', 400, 400);
+		}else{
+			$data['logo1']=  $this->model_tool_image->resize('image/logo1.png', 400, 400);
+		}
+		
 		$this->load->language('common/header');
 
+		
+		
+		
+		
 		$data['text_home'] = $this->language->get('text_home');
 
 		// Wishlist
@@ -84,17 +149,42 @@ class ControllerCommonHeader extends Controller {
 		$data['checkout'] = $this->url->link('checkout/checkout', '', true);
 		$data['contact'] = $this->url->link('information/contact');
 		$data['telephone'] = $this->config->get('config_telephone');
+		$data['timmer'] = $this->config->get('config_timer_status');
 
+		$data['ga_tracking_type'] = $this->config->get('config_ga_tracking_type');
+		$data['ga_exclude_admin'] = $this->config->get('config_ga_exclude_admin');
+		$data['ua_tracking'] = $this->config->get('config_ua_tracking');
+		$data['ga_domain'] = $this->config->get('config_ga_domain');
+		$data['ga_remarketing'] = $this->config->get('config_ga_remarketing');
+		$data['ga_cookie'] = $this->config->get('config_ga_cookie');
+		$data['user_logged'] = $this->user->isLogged();
+		$data['template'] = $this->config->get('config_template');
+		
+		
 		// Menu
 		$this->load->model('catalog/category');
 
 		$this->load->model('catalog/product');
 
+		//META FOLLOW
+     
+	   if (isset($this->request->get['product_id'])) {
+            $this->load->model('catalog/product');
+            $follow_query = $this->model_catalog_product->getNoFollow($this->request->get['product_id']);
+            if ($follow_query) {
+                $data['follow'] = $follow_query;
+            } else {
+                $data['follow'] = 'FOLLOW, INDEX';
+            }
+        } else {
+            $data['follow'] = 'FOLLOW, INDEX';
+        }
+		
 		$data['categories'] = array();
 
 		$categories = $this->model_catalog_category->getCategories(0);
 
-		foreach ($categories as $category) {
+		foreach ($categories as $category) {  
 			if ($category['top']) {
 				// Level 2
 				$children_data = array();
@@ -108,15 +198,25 @@ class ControllerCommonHeader extends Controller {
 					);
 
 					$children_data[] = array(
-						'name'  => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : ''),
+					'category_id'  => $child['category_id'],
+						'name'  => $child['name'] ,
 						'href'  => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])
 					);
 				}
-
+				if (is_file(DIR_IMAGE . $category['image'])) {
+					$image = $this->model_tool_image->resize($category['image'], 391, 269);
+				} else {
+					$image = $this->model_tool_image->resize('no_image.png', 100, 100);
+				}
+		//	print_r($image);	exit;
 				// Level 1
 				$data['categories'][] = array(
+					'category_id'     => $category['category_id'],
 					'name'     => $category['name'],
+						'icon'     => $category['icon_image'],
 					'children' => $children_data,
+					'image1' => $category['image'],
+					'image'    => $image,
 					'column'   => $category['column'] ? $category['column'] : 1,
 					'href'     => $this->url->link('product/category', 'path=' . $category['category_id'])
 				);
@@ -141,12 +241,38 @@ class ControllerCommonHeader extends Controller {
 			} else {
 				$class = '';
 			}
+			
 
 			$data['class'] = str_replace('/', '-', $this->request->get['route']) . $class;
+			
+			if (strpos($data['class'], 'product-product') !== false) {
+				  $this->document->addOGMeta('property="og:type"', 'product');
+				} elseif (strpos($data['class'], 'information') !== false) {
+				  $this->document->addOGMeta('property="og:type"', 'article');
+				} else {
+				  $this->document->addOGMeta('property="og:type"', 'website');
+				}
+			
 		} else {
 			$data['class'] = 'common-home';
+			
+				$this->document->addOGMeta('property="og:type"', 'website');
 		}
 
+		
+		$data['logo_meta'] = str_replace(' ', '%20', $this->model_tool_image->resize($this->config->get('config_logo'), 300, 300));
+				$data['ogmeta'] = $this->document->getOGMeta();
+		if($this->document->isMobile()){
+	//	$this->response->setOutput($this->load->view('common/m_home', $data));
+		return $this->load->view('common/m_header', $data);
+		
+		}else{
+		
 		return $this->load->view('common/header', $data);
+	//	$this->response->setOutput($this->load->view('common/home', $data));
+		}		
+		
+		//return $this->load->view('common/header', $data);
 	}
+	
 }

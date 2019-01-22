@@ -147,7 +147,7 @@ class ControllerApiCart extends Controller {
 
 	public function products() {
 		$this->load->language('api/cart');
-
+		$this->load->model('tool/image');
 		$json = array();
 
 		if (!isset($this->session->data['api_id'])) {
@@ -165,7 +165,16 @@ class ControllerApiCart extends Controller {
 
 			foreach ($products as $product) {
 				$product_total = 0;
+				
+				
 
+				   if ($product['image']) {
+                	$image = $this->model_tool_image->resize($product['image'], $this->config->get($this->config->get('config_theme') . '_image_cart_width'), $this->config->get($this->config->get('config_theme') . '_image_cart_height'));
+                } else {
+                	$image = '';
+                }
+				
+				
 				foreach ($products as $product_2) {
 					if ($product_2['product_id'] == $product['product_id']) {
 						$product_total += $product_2['quantity'];
@@ -193,6 +202,7 @@ class ControllerApiCart extends Controller {
 					'product_id' => $product['product_id'],
 					'name'       => $product['name'],
 					'model'      => $product['model'],
+					'thumb'               => $image,
 					'option'     => $option_data,
 					'quantity'   => $product['quantity'],
 					'stock'      => $product['stock'] ? true : !(!$this->config->get('config_stock_checkout') || $this->config->get('config_stock_warning')),

@@ -368,13 +368,13 @@ class ControllerCustomerCustomer extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'name';
+			$sort = 'customer_id';
 		}
 
 		if (isset($this->request->get['order'])) {
 			$order = $this->request->get['order'];
 		} else {
-			$order = 'ASC';
+			$order = 'DESC';
 		}
 
 		if (isset($this->request->get['page'])) {
@@ -479,6 +479,8 @@ class ControllerCustomerCustomer extends Controller {
 				'customer_id'    => $result['customer_id'],
 				'name'           => $result['name'],
 				'email'          => $result['email'],
+				'telephone'      => $result['telephone'],
+				'balance'        => round($this->model_customer_customer->getTransactionTotal($result['customer_id'])),
 				'customer_group' => $result['customer_group'],
 				'status'         => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
 				'ip'             => $result['ip'],
@@ -503,6 +505,8 @@ class ControllerCustomerCustomer extends Controller {
 		$data['column_name'] = $this->language->get('column_name');
 		$data['column_email'] = $this->language->get('column_email');
 		$data['column_customer_group'] = $this->language->get('column_customer_group');
+		$data['column_customer_contact'] = $this->language->get('column_customer_contact');
+		$data['column_customer_credit'] = $this->language->get('column_customer_credit');
 		$data['column_status'] = $this->language->get('column_status');
 		$data['column_approved'] = $this->language->get('column_approved');
 		$data['column_ip'] = $this->language->get('column_ip');

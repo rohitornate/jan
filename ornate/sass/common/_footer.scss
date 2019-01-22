@@ -1,0 +1,82 @@
+footer{ padding-top:$space35; border-top:1px solid #dadada;
+    
+ .brand-list{ margin-bottom:$space30;
+        li{ 
+            display:inline-block; vertical-align:middle; width:32%; text-align:center; border-right:1px solid #e5e5e5; text-transform:uppercase;  @include all-my-icons-sprites;
+         i{ display:inline-block; vertical-align:middle; @include size(50px,50px);}
+        .content{ display:inline-block; vertical-align:middle; @include font-size($font18); font-family:$ubuntumedium; text-transform:capitalize; text-align:left; padding-left:$space5+2;
+         small{ display:block; @include font-size($font14); color:#545454; padding-top:$space5+2; font-family:$ubuntulight;  }
+        }
+        
+        &:last-child{
+            border-right:(0)
+        }
+     }
+        
+   
+        
+        
+ }
+    
+    
+    .f-menu{ border-top:1px solid #dadada; padding-top:$space30+3}
+            h5{@include font-size($font16+2); text-transform:capitalize; font-family:$ubuntulight; position:relative; padding-bottom:$space10+2; margin-bottom:$space20+2;
+      &:after{ position:absolute; left:0; bottom:0; background:$yellow; @include size(123px,1px); content:'';}
+     
+     }
+     nav{ float:left; width:23%;
+   
+          ul{
+              li{ display:block;
+                  a{ display:block; @include font-size($font12+1); text-transform:capitalize; color:$grey; padding-bottom:$space15+5;}
+              &:last-child{ 
+                  a{padding-bottom:$space0;}
+              }
+              }
+              
+          }
+     }
+     
+    .newsletter{ float:left; width:31%; @include all-my-icons-sprites;
+        .form-group{ width:283px; position:relative;
+             .form-control{ @include size(100%,36px); padding:$space0 $space10; @include border-radius(3px); border:1px solid #dadada; @include font-size($font12+1); color:$black; @include input-placeholder{ color:#7c7c7c};} 
+            button{ @include border-radius(3px); background:$yellow; border:none; @include size(50px,36px); position:absolute; right:-55px; top:0; cursor:pointer;
+              &:after{ position:absolute; left:20px; top:9px; content:''; @include size(10px,16px);   @include my-icons-sprite(btn-arrow);}
+              }
+        }
+    
+    .lead{ display:block; @include font-size($font12+1); color:#7c7c7c; line-height:$space20; padding-top:$space5+2; }
+    i{ display:block; @include size(74px,72px); margin:$space10 auto 0;}
+   }
+    
+   
+    .social-list{ border-top:1px solid #e5e5e5; margin-top:$space10; padding-top:$space10+5;
+        li{  float:left; width:33%;
+            span{ display:block; padding-bottom:$space10;}
+        }
+        .text-center{ text-align:center!important;}
+.text-right{ text-align:right!important;
+ span{ padding-right:$space60+7;}
+}
+    }
+    
+    .copyright{ color:$black; background:$yellow; text-align:center; padding:$space10+2 $space0 $space5+2; margin-top:$space15+3;}
+    
+}
+
+.social-list{
+     a{
+               display:inline-block; vertical-align:middle; padding:$space0 $space5 ;
+                i{@include font-size($font26);}
+                .fa.fa-facebook{ color:$blue;}
+                .fa.fa-twitter{ color:$bluedark;}
+                .fa.fa-pinterest{color:$red;}
+                .fa.fa-instagram{color:$blue;}
+                
+            }
+}
+
+//Back to top
+.go-top{position: fixed; @include size(45px); background: $yellow; bottom: 20px; right: 20px; @include border-radius(50%); border: $border1 $white; display: none; text-align: center;
+       &:before{content: '\f077'; font-family: 'FontAwesome'; color: #000; display: inline-block; padding-top: 12px; @include font-size(18px);}
+}

@@ -19,7 +19,7 @@
         <div class="col-sm-6">
           <ul>
             <?php foreach ($categories as $category_1) { ?>
-            <li><a href="<?php echo $category_1['href']; ?>"><?php echo $category_1['name']; ?></a>
+            <li><a href="<?php echo $category_1['href']; ?>"><?php echo $category_1['name']; ?></a> 
               <?php if ($category_1['children']) { ?>
               <ul>
                 <?php foreach ($category_1['children'] as $category_2) { ?>
@@ -27,7 +27,7 @@
                   <?php if ($category_2['children']) { ?>
                   <ul>
                     <?php foreach ($category_2['children'] as $category_3) { ?>
-                    <li><a href="<?php echo $category_3['href']; ?>"><?php echo $category_3['name']; ?></a></li>
+                    <li><a href="<?php echo $category_3['href']; ?>"><?php echo $category_3['name']; ?></a></li><br>
                     <?php } ?>
                   </ul>
                   <?php } ?>
@@ -40,7 +40,7 @@
           </ul>
         </div>
         <div class="col-sm-6">
-          <ul>
+         <!-- <ul>
             <li><a href="<?php echo $special; ?>"><?php echo $text_special; ?></a></li>
             <li><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a>
               <ul>
@@ -62,7 +62,7 @@
                 <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
               </ul>
             </li>
-          </ul>
+          </ul>-->
         </div>
       </div>
       <?php echo $content_bottom; ?></div>

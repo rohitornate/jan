@@ -1,0 +1,83 @@
+
+header{  @include box-shadow(0 2px 3px rgba(0,0,0,.1)); background:$bg-pink-light;
+    .top-bar{  text-align:right; background:$bg-grey; padding:$space5+2 $space0 $space5; font-family:$ubunturegular;  @include all-my-icons-sprites;
+     .call{ display:inline-block; vertical-align:middle; @include size(17px,16px);}
+     span{ display:inline-block; vertical-align:middle;
+      a{ @include font-size($font12); color:$black;
+      &:hover{color:$pink;}
+      }
+     } 
+     //.request-back{ padding-right:$space70+10+1;} 
+     
+      
+    }
+    
+    .divider{background:$greylight; @include size(1px,14px); margin-left:$space5+2 ; margin-right:$space5+2; vertical-align:middle; padding:$space0!important;}   
+    
+    .bottom-header{  padding-top:$space10;
+    > .container{display: flex;}
+    }
+    
+    .logo{ float:left; width:240px;
+        a{ display:block;}
+    }
+   
+    .search-header{ float:left; width:600px; padding:$space0; position:relative; margin-left:$space50; padding-top:$space5+3;  
+     .form-control{ width:100%; border:none; outline:none; @include size(100%,38px);@include font-size($font12+1); color:$black; @include input-placeholder{ color:#7c7c7c}; padding:$space0 $space50+50+10 $space0 $space10+2; @include border-radius(2px);}
+     button{ background:$yellow; border:none; outline:none; position:absolute; right:0; top:8px; @include size(106px,38px); @include font-size($font14); color:$darkblue; @include border-radius(2px); cursor:pointer; 
+     i{ color:$darkblue; padding-right:$space5 - 1 ;
+     }
+    &:hover{background:darken($yellow,5%);}
+     }
+    }
+    
+    .login{ float:left; padding-left:$space30; padding-top:$space15+3; width:330px; text-align: right;
+            
+    span{ 
+        a{  @include font-size($font12+1); color:$black; padding-left:$space35;
+           &:hover{color:$pink;}
+           &:before{ position:absolute; left:0; top:-5px; content:''; @include size(23px,23px); @include my-icons-sprite(user);}
+        }
+        display:inline-block; vertical-align:middle; position:relative; 
+    
+     
+   }
+   #cart{display: inline-block;
+    a{ border-left:1px solid #403e3e; margin-left:$space5 - 1; padding-left:$space40;
+         &:before{@include my-icons-sprite(cart); left:12px;}
+     }
+     }
+    } 
+   
+    
+    .menu{border-top:1px solid #f1ecec; margin-top:$space10+2;
+          .container{position: relative;}
+          > ul{
+              > li{ display:inline-block;
+                  > a{ display:block; @include font-size($font12+1); color:$black; text-transform:uppercase; padding:$space15 49px; border-bottom:$border2 $bg-pink-light;
+                  
+                  }
+                  &.sm-opened{
+                      a{border-color: $yellow;}
+                  }
+              }
+              
+          }
+        
+    } 
+    
+    //Dropdown Menu
+    .dropdown{position: absolute; z-index: 1; background: $white; left: $space0; right: $space0; top: 100%; padding: $space10; display: none;
+              a{@include font-size(13px); color: #545454;
+                &:hover{color: #000 ;}
+              }
+              .box{padding: $space10 $space10;
+                   li{padding: $space10 $space0;}
+                   ul{display: block !important;}
+                }
+    }
+    
+    
+}
+//mobile
+.m-menu{display: none;}

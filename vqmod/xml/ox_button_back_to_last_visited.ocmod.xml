@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @version		$Id: ox_button_back_to_last_visited.ocmod.xml 4301 2013-07-07 09:43:00Z mic $ -->
+<modification>
+	<name><![CDATA[<abbr title="Replace Continue button to go back to last visited product or category.&#10;Tauscht den Weiter-Button mit Link zu letzt angesehenen Produkt oder Kategorie aus">Back to last visited product, category / Zurück zu letzt angesehenen Produkt, Kategorie.</abbr>]]></name>
+	<id>Button Back to last visited product</id>
+	<code>ox_button_back_to_last_visited</code>
+	<version>1.0.0</version>
+	<vqmver>2.4.1</vqmver>
+	<ocVersion>2.0</ocVersion>
+	<atVersion>1.0.0</atVersion>
+    <author>Loren Bast / OSWorX</author>
+    <authorEmail>info@osworx.net</authorEmail>
+    <link>http://osworx.net</link>
+    <license>AGPL - www.gnu.org/licenses/agpl-3.0.html</license>
+    <date>2015.07.08</date>
+
+	<file name="system/engine/controller.php">
+		<operation error="log">
+			<search position="after" >
+				<![CDATA[
+					protected $registry;
+				]]>
+			</search>
+			<add>
+				<![CDATA[
+	/** + OSWorX */
+	public function setLastViewed() {
+		$this->session->data['lastViewed'] = $_SERVER['REQUEST_URI'];
+	}
+
+	/** + OSWorX */
+	public function getLastViewed() {
+		if( !empty( $this->session->data['lastViewed'] ) ) {
+			return $this->session->data['lastViewed'];
+		}else{
+			return $this->url->link('common/home');
+		}
+	}
+        		]]>
+			</add>
+		</operation>
+    </file>
+
+	<!-- Set category and product page to have Continue Shopping go back to them. -->
+	<!-- One of them is visited at least - if you want only one of them, remove the part below -->
+	<file name="catalog/controller/product/category.php,catalog/controller/product/product.php">
+        <operation error="log">
+            <search position="after" >
+                <![CDATA[
+					public function index() {
+				]]>
+			</search>
+            <add>
+				<![CDATA[
+		/** + OSWorX */
+		$this->setLastViewed();
+    			]]>
+			</add>
+        </operation>
+    </file>
+
+    <!-- Add or remove to the file list below to have it work on different pages -->
+    <!-- currently set: cart, checkout (success), information (texts), contact -->
+    <file name="catalog/controller/checkout/cart.php,catalog/controller/checkout/success.php,catalog/controller/information/information.php,catalog/controller/information/contact.php">
+        <operation error="log">
+            <search position="replace" >
+                <![CDATA[
+					$data['continue'] = $this->url->link('common/home');
+				]]>
+			</search>
+            <add>
+				<![CDATA[
+		/** OSWorX replaced */
+		$data['continue'] = $this->getLastViewed();
+            	]]>
+			</add>
+        </operation>
+    </file>
+</modification>

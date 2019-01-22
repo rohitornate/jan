@@ -1,0 +1,27 @@
+//
+.myaccount{display: flex; justify-content: space-between;
+          #column-left{width: 20%;
+                       a{display: block; border-bottom: $border1 #dadada; padding: 15px 10px;
+                         &:hover{background: #f3f3f3;}
+                       }
+          }
+          #content{width: 75%}
+          .title{display: block; @include font-size(18px); @extend .font-medium; width: 100%; padding: $space15 $space0;}
+          .form-group{width: 48%; margin: 0 0 20px;
+                      &.has-error{
+                          .control-label{color: #a94442;}
+                          .form-control{
+                              @include input-placeholder{color: #a94442;}
+                          }
+                      }
+          }
+          .inset{ display: flex; justify-content: space-between; flex-wrap: wrap;}
+          .control-label{display: block; padding: 0 0 5px;}
+          .form-control{
+              &:focus{border-color: #c0c0c0;}
+          }
+          .btn-yellow{@include font-size(15px); color: #000;}
+              p{margin: 0 0 10px;}
+              .marspace{margin-bottom: 20px;}
+              .btnedre{font-size: 16px;}
+}

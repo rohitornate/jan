@@ -1,144 +1,304 @@
 <?php echo $header; ?>
-<div class="container">
-  <ul class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
-    <?php } ?>
-  </ul>
-  <div class="row"><?php echo $column_left; ?>
+ <style>
+  
+ /* contact us*/
+
+.breadcrumb li a {
+    color: #000;
+    font-size: 14px;
+    padding: 0 2px;
+	text-transform:uppercase
+}
+.text-center .title {
+    font-size: 1.875rem;
+    line-height: normal;
+    padding-bottom: 5px;
+    font-family: "'Roboto Condensed', sans-serif";
+    font-weight: 400;
+}
+.contactus p {
+    font-size: .9375rem;
+}
+
+.cous-inqury a {
+    background: #fff;
+    -moz-box-shadow: 0 0 3px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.1);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);
+    display: block;
+    width:100%;
+    padding: 20px 0 40px;
+    font-size: 1rem;
+	border:1px solid #e6dcdc;
+}
+.cous-form {
+    
+    margin: auto;
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background: #fff;
+    padding: 20px 30px;
+    text-align: left;
+    display: none;
+    position: relative;
+}
+.cous-form p {
+    font-size: 1.375rem;
+    line-height: normal;
+    padding-bottom: 10px;
+    width: 100%;
+}
+.cous-inqury {
+    margin: 50px 0 80px;
+}
+.cous-form .close {
+    width: 28px;
+    height: 28px;
+    background: #f5f5f5;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    font-size: .8125rem;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+.cous-form .form-control {
+    border: 0;
+    border-bottom: 1px solid #e3e8eb;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    padding: 10px;
+    height: 40px;
+    margin-top: 20px;
+	font-size: .875rem;
+    font-family: "Roboto Condensed";
+}
+
+.form-control {
+    outline: 0;
+    width: 100%;
+    height: 36px;
+    padding: 0 10px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    /* border: 1px solid #4a4a4a; */
+    font-size: .8125rem;
+    color: #000;
+    background-color: #ededed;
+    border: 0;
+}
+.cous-form textarea.form-control {
+    height: 101px;
+	padding-top:10px;
+}
+.cous-form .captcha .form-control {
+    padding-right: 192px;
+}
+.cous-form .code, .cous-form .reload {
+    position: absolute;
+    right: 40px;
+    top: 22px;
+}
+.cous-form .reload {
+    right: 18px;
+    top: 32px;
+}
+.form-group.required {
+    margin: 0 -15px;
+}
+.btn-yellow {
+    margin-top: 35px;
+    display: inline-block;
+    width: auto;
+    font-size: 1rem;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 8px 30px;
+	background:#6e2653 !important;
+	color:#fff;
+}
+
+.cous-inqury .my-icons-support {
+    background-position: 0 -959px;
+	
+}
+.cous-inqury .my-icons-inquriry {
+    background-position: 0 -524px;
+}
+.cous-inqury .my-icons-call {
+    background-position: 0 -116px;
+}
+
+.cous-inqury strong {
+    font-size: 1.125rem;
+    display: block;
+    padding: 20px 0 10px;
+}
+.cous-inqury i {
+    width: 58px;
+    height: 58px;
+    display: block;
+    margin: auto;
+}
+
+.cous-inqury a:hover{
+	background:#f0f6fc;
+	
+}
+
+
+</style>
+ <script src='https://www.google.com/recaptcha/api.js'></script>
+<div class="container"> 
+
+ <div class="row"><?php echo $column_left; ?>
     <?php if ($column_left && $column_right) { ?>
     <?php $class = 'col-sm-6'; ?>
     <?php } elseif ($column_left || $column_right) { ?>
     <?php $class = 'col-sm-9'; ?>
     <?php } else { ?>
-    <?php $class = 'col-sm-12'; ?>
+    <?php $class = 'col-sm-12 col-md-12'; ?>
     <?php } ?>
-    <div id="content" class="<?php echo $class; ?>"><?php echo $content_top; ?>
-      <h1><?php echo $heading_title; ?></h1>
-      <h3><?php echo $text_location; ?></h3>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="row">
-            <?php if ($image) { ?>
-            <div class="col-sm-3"><img src="<?php echo $image; ?>" alt="<?php echo $store; ?>" title="<?php echo $store; ?>" class="img-thumbnail" /></div>
-            <?php } ?>
-            <div class="col-sm-3"><strong><?php echo $store; ?></strong><br />
-              <address>
-              <?php echo $address; ?>
-              </address>
-              <?php if ($geocode) { ?>
-              <a href="https://maps.google.com/maps?q=<?php echo urlencode($geocode); ?>&hl=<?php echo $geocode_hl; ?>&t=m&z=15" target="_blank" class="btn btn-info"><i class="fa fa-map-marker"></i> <?php echo $button_map; ?></a>
-              <?php } ?>
-            </div>
-            <div class="col-sm-3"><strong><?php echo $text_telephone; ?></strong><br>
-              <?php echo $telephone; ?><br />
-              <br />
-              <?php if ($fax) { ?>
-              <strong><?php echo $text_fax; ?></strong><br>
-              <?php echo $fax; ?>
-              <?php } ?>
-            </div>
-            <div class="col-sm-3">
-              <?php if ($open) { ?>
-              <strong><?php echo $text_open; ?></strong><br />
-              <?php echo $open; ?><br />
-              <br />
-              <?php } ?>
-              <?php if ($comment) { ?>
-              <strong><?php echo $text_comment; ?></strong><br />
-              <?php echo $comment; ?>
-              <?php } ?>
-            </div>
-          </div>
-        </div>
-      </div>
-      <?php if ($locations) { ?>
-      <h3><?php echo $text_store; ?></h3>
-      <div class="panel-group" id="accordion">
-        <?php foreach ($locations as $location) { ?>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title"><a href="#collapse-location<?php echo $location['location_id']; ?>" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><?php echo $location['name']; ?> <i class="fa fa-caret-down"></i></a></h4>
-          </div>
-          <div class="panel-collapse collapse" id="collapse-location<?php echo $location['location_id']; ?>">
-            <div class="panel-body">
-              <div class="row">
-                <?php if ($location['image']) { ?>
-                <div class="col-sm-3"><img src="<?php echo $location['image']; ?>" alt="<?php echo $location['name']; ?>" title="<?php echo $location['name']; ?>" class="img-thumbnail" /></div>
-                <?php } ?>
-                <div class="col-sm-3"><strong><?php echo $location['name']; ?></strong><br />
-                  <address>
-                  <?php echo $location['address']; ?>
-                  </address>
-                  <?php if ($location['geocode']) { ?>
-                  <a href="https://maps.google.com/maps?q=<?php echo urlencode($location['geocode']); ?>&hl=<?php echo $geocode_hl; ?>&t=m&z=15" target="_blank" class="btn btn-info"><i class="fa fa-map-marker"></i> <?php echo $button_map; ?></a>
-                  <?php } ?>
-                </div>
-                <div class="col-sm-3"> <strong><?php echo $text_telephone; ?></strong><br>
-                  <?php echo $location['telephone']; ?><br />
-                  <br />
-                  <?php if ($location['fax']) { ?>
-                  <strong><?php echo $text_fax; ?></strong><br>
-                  <?php echo $location['fax']; ?>
-                  <?php } ?>
-                </div>
-                <div class="col-sm-3">
-                  <?php if ($location['open']) { ?>
-                  <strong><?php echo $text_open; ?></strong><br />
-                  <?php echo $location['open']; ?><br />
-                  <br />
-                  <?php } ?>
-                  <?php if ($location['comment']) { ?>
-                  <strong><?php echo $text_comment; ?></strong><br />
-                  <?php echo $location['comment']; ?>
-                  <?php } ?>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <?php } ?>
-      </div>
-      <?php } ?>
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
-        <fieldset>
-          <legend><?php echo $text_contact; ?></legend>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-name"><?php echo $entry_name; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="name" value="<?php echo $name; ?>" id="input-name" class="form-control" />
-              <?php if ($error_name) { ?>
-              <div class="text-danger"><?php echo $error_name; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-email"><?php echo $entry_email; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="email" value="<?php echo $email; ?>" id="input-email" class="form-control" />
-              <?php if ($error_email) { ?>
-              <div class="text-danger"><?php echo $error_email; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-enquiry"><?php echo $entry_enquiry; ?></label>
-            <div class="col-sm-10">
-              <textarea name="enquiry" rows="10" id="input-enquiry" class="form-control"><?php echo $enquiry; ?></textarea>
-              <?php if ($error_enquiry) { ?>
-              <div class="text-danger"><?php echo $error_enquiry; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-          <?php echo $captcha; ?>
-        </fieldset>
-        <div class="buttons">
-          <div class="pull-right">
-            <input class="btn btn-primary" type="submit" value="<?php echo $button_submit; ?>" />
-          </div>
-        </div>
-      </form>
+    
+     
+      <div class="container">
+	
+		<div class="row">
+			<div class="col-md-12">
+				
+				<ul class="breadcrumb">
+				<li><a href="https://www.ornatejewels.com/">Home</a></li> /
+				<li><a href="https://www.ornatejewels.com/contact">Contact Us</a></li>
+				</ul>
+			</div>
+		</div>
+	
+	<div class="contactus">
+		
+			<div class="row">
+				<div class="col-md-12">
+					<div class="text-center">
+						<h1 class="title">Contact Us </h1>
+						<p>524,Amanora Chambers, Hadapsar,</p>
+						<p>Pune, 411028</p>
+					</div>
+				</div>
+			
+			</div>
+	
+		<!--<div class="container">	-->
+			<div class="row">
+				<div class="col-md-4 text-center">
+				<div class="cous-inqury disflex-spbetween">
+						
+							<a href="tel:+91-8600718666">
+								<i class="my-icons-call"></i>
+								<p><strong>Call Us / Whats App</strong></p>
+								<p>+91-8600718666</p>
+							</a>
+						
+					</div>	
+				</div>
+				<div class="col-md-4 text-center">
+					<div class="cous-inqury disflex-spbetween">
+						<a href="#cous-form" class="cous-support custom-scroll">
+							<i class="my-icons-inquriry"></i>
+							<p><strong>Wholesale Inquiry</strong></p>
+							<p>sales@ornatejewels.com</p>
+						</a>
+					</div>
+				</div>
+				<div class="col-md-4 text-center">
+					
+					<div class="cous-inqury disflex-spbetween">
+						<a href="#cous-form" class="cous-support custom-scroll">
+							<i class="my-icons-support"></i>
+							<p><strong>Help and Support</strong></p>
+							<p>We're here to help.</p>
+						</a>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div><!--</div>-->
+	 	
+			<div class="row">
+				<div class="col-md-12">
+				    <div class="col-md-1">
+					</div>
+					<div class="col-md-10">
+						<div class="col-md-12">
+							<div class="cous-form" id="cous-form" style="display: none;">
+								<form action="https://www.ornatejewels.com/contact" method="post" class="disflex-wrap-spbetween clearfix">
+									<span class="close">X</span>
+									<p>Send Us a Message</p>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="box">
+												<input type="text" placeholder="Name" name="name" class="form-control">
+												<input type="email" placeholder="Email" name="email" class="form-control">
+												<input type="text" placeholder="Phone" name="phone" class="form-control">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="box">
+												<textarea placeholder="Message" name="enquiry" class="form-control"></textarea>
+												
+											</div>
+										</div>
+										<div class="col-md-12" style="margin-top: 15px;">
+											<div class="box">
+												
+												<div class="captcha">
+													<fieldset>
+														<div class="form-group required">
+															<div class="col-sm-12">
+																<div class="g-recaptcha" data-sitekey="6Lc__WUUAAAAAGAmJgREUszxoqXNLlnOkkjkv1_p"></div>
+
+																
+															</div>
+														</div>
+													</fieldset>
+													
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<input type="submit" value="Submit" class="btn-yellow">
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-1">
+					</div>
+				</div>
+			</div>
+	 
+	<script>
+				$(window).load(function(){
+					$(".cous-support").click(function(){
+						$(".cous-form").fadeIn("fast");
+						});
+					$(".close").click(function(){
+						$(".cous-form").hide();
+					});
+						$('.custom-scroll').on('click',function(event){
+							var target=$($(this).attr('href'));if(target.length){event.preventDefault();}
+					$('html, body').animate({scrollTop:target.offset().top},1000);}});
+				});
+	</script>
       <?php echo $content_bottom; ?></div>
-    <?php echo $column_right; ?></div>
-</div>
+    <?php echo $column_right; ?>
+	</div>
+
 <?php echo $footer; ?>

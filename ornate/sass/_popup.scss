@@ -1,0 +1,36 @@
+.popup{
+          background:$white; @include box-shadow(0 2px 5px rgba(0,0,0,.2)); padding:$space25 $space25 $space20; box-sizing:border-box;
+    .title{ @include font-size($font20); color:$grey-medium; text-transform:uppercase; padding-bottom:$space20; display:block;}
+    .one-half{ width:300px; float:left; margin-right:$space30+2; position:relative;}
+    .rating-box{ background:#f5f5f5; padding:$space20 $space50+5 $space0 $space30;  width:300px; float:left;  @include all-my-icons-sprites;
+                 p{ @include font-size($font12+1); color:#545454; padding-bottom:$space20;
+                      i{@include size(81px,14px);  vertical-align:middle; margin-right:$space5; float:right;}
+                   
+                 }
+      
+    }
+
+      label{ @include font-size($font12+1); color:#545454; font-family:$ubuntulight;  padding-bottom:$space5; display:block;}
+     .form-control{ @include size(100%,33px);  @include font-size($font12+1);  font-family:$ubuntulight; color:$grey-medium; @include input-placeholder{ color:#b3b3b3}; margin-bottom:$space10+2;}
+   
+      .code{  position:relative;  position:absolute; right:30px; top:23px;  @include size(50px,24px); background:#1656a5; display:inline-block; padding-top:$space5; text-align:center;  color:$white; @include font-size($font16); 
+          &:after{@include my-icons-sprite(refresh); position:absolute; right:-25px; top:4px; content:'';  @include size(20px,20px);}
+      }
+      
+      textArea{ height:80px!important; padding-top:$space10;}
+ 
+         
+      button{ @include size(125px,36px); background:$yellow; border:none; @include font-size($font14); color:$black; text-transform:uppercase; @include border-radius(3px); margin-right:$space5+2; margin-top:$space15+2; float:right; cursor:pointer;
+      &:last-child{ background:#e6e7e8;}
+      
+      }
+      
+      .bg-none{ background:none; padding:0 }
+       .pr{ padding-right:$space70+15;}
+}
+   
+    
+    
+    
+    
+    

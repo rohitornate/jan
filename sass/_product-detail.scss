@@ -1,0 +1,232 @@
+.product-detail-main{
+     .product-detail-box{ padding-top:$space50; padding-bottom:$space50;}
+     
+     section{ padding-bottom:$space50+50;}
+     
+    .product-slider-box{ float:left; width:56%; position:relative; 
+            .flex-control-thumbs{ padding-top:$space0; width:95px; float:left;
+             li{ margin-right:$space5 - 1; margin-bottom:$space5+3;  border:1px solid #dadada; display:block; padding:$space30+2  $space5 - 3; float:none; width:auto;
+                    
+                }              
+           }  
+          
+           
+           .flex-viewport{ width:555px; padding-top:$space50+50+30; text-align:center;}
+           
+    }
+           
+           
+           .product-detail{ 
+               float:left; width:44%; padding-left:$space35+2;
+               .heading{ @include font-size($font16+1); color:$black; padding-bottom:$space10; line-height: 26px;}
+               .subhead{ display:inline-block; font-family:$ubuntumedium; color:#3c3c3c;  @include font-size($font14); padding-bottom:$space20;}
+               .rating{ display:inline-block; float:right; @include font-size($font12+2); color:#545454;@include all-my-icons-sprites; cursor:pointer; 
+                 i{@include size(81px,14px); display:inline-block; vertical-align:middle; margin: -5px $space5 0 0;}
+               }
+         .form-group{ border-top:1px solid #e7e7e7; padding:$space10+5 $space0;
+            label{ @include font-size($font14); color:$grey-medium; display:inline-block; width:120px;}
+            .form-control{@include font-size($font14); color:$grey-medium; @include size(137px,27px);}
+            .size-file{ @include font-size($font14);  color:$grey-medium; display:inline-block; position:relative; padding-left:$space20+5; padding-top:$space5+1; float:right; 
+            &:before{ position:absolute; left:0; top:0;  @include my-icons-sprite(pdf); content:''; @include size(17px,23px);}
+            }
+            
+            .quantity-select{ width:75px;}
+            select{ background:#fff url(../images/drop-quantity.png) no-repeat right center; @include appearance(none); cursor: pointer;} 
+           }
+           
+           .btn-default{ @include all-my-icons-sprites; margin-top:$space10;
+                  i{  @include size(24px,24px); display:inline-block; vertical-align:middle; margin-right:$space10;}
+            }
+           
+            .p-number{ @include font-size($font12+1); color:$black; display:block; text-align:center; padding-top:$space10+5;
+             strong{@include font-size($font14); display:inline-block;}
+            }
+            
+            .delievrt-text { @extend .p-number;   @include all-my-icons-sprites; padding-top:$space10+2;
+              i{  @include size(24px,18px); display:inline-block; vertical-align:middle; margin-right:$space5;}
+            }
+            
+           }
+           
+   
+     .product-detail-price{ display:inline-block;  vertical-align:top; width:300px; margin-bottom:$space25+3;
+       p{ color:$grey-medium; @include font-size($font14); font-family:$ubuntulight; padding-top:$space5+5;  
+         strike{color:$grey-medium; @include font-size($font20); padding-left:$space50; display:inline-block; vertical-align:middle;}
+          span{color:$black; @include font-size($font24+1); padding-left:$space50; display:inline-block; vertical-align:middle;}
+          small{  font-family:$ubunturegular; @include font-size($font14); padding-left:$space50; display:inline-block; color:$grey-medium;}
+      }
+     }      
+           
+           
+     
+     .product-detail-offer{ position:relative;
+         display:inline-block; vertical-align:top; width:170px; border:1px solid #eeeeee; text-align:center; padding:$space20 $space10; color:$yellow; @include font-size($font20);
+         small{ display:block; @include font-size($font12+1); color:$black; padding-top:$space5;}
+         &:before,&:after{ @include arrow ("left", white, 12px); position:absolute; left:-10px; top:35%; z-index:2; }
+         &:after{ border-right-color:#eeeeee;  z-index:1; left:-11px; }
+     }
+     
+     
+     .service{ background:#f9f9f9; padding:$space10+2 $space0;}
+     
+     .related-main{ position: relative;
+            .flex-direction-nav{
+     a{ opacity:1; margin:-7px 0 0; 
+    
+     }
+  .flex-prev{ left:-20px; @include size(15px,20px);  background:url(../images/direction-left-small.png) no-repeat center; outline:none;
+ 
+  }
+  .flex-next{ right:-20px; background:url(../images/direction-right-small.png) no-repeat center;  @include size(15px,20px); outline:none;}
+  .flex-disabled{cursor: pointer;}
+ }
+ 
+     
+     }
+     
+     .related-coloum{ background-color:$white;	@include box-shadow(0 0 3px rgba(0,0,0,.2)); text-align:center; margin:$space5; display:block; cursor:pointer;  
+                    img{ padding:$space45 $space0;}
+                    p{ color:$grey-medium; @include font-size($font12+1); margin-bottom:$space10+3; @include oneline; padding: 0 10px;}
+                      
+                  .price-discount{ border-top:1px solid #eeeeee; display:block; padding:$space15 $space0; @include font-size($font18); color:$black;
+                   small{ display:inline-block; color:$pink; @include font-size($font12+1); display:inline-block; vertical-align: top; padding-left:$space5+2; padding-top:$space5 - 3;}
+                  }    
+                      
+     }
+
+     .product-info{background-color:$white; @include box-shadow(0 0 3px rgba(0,0,0,.2)); padding:$space20 $space45; margin-top:$space45+3; margin-bottom:$space45+3;
+      
+                  .title{ color:$grey-medium; @include font-size($font20); font-family:$ubuntumedium; padding-bottom:$space20; padding-top:$space5+2;}
+                   }
+                   
+             aside{ float:left; width:35%; border-right:1px solid #eeeeee;
+                    ul{
+                        li{ display:inline-block; width: 100%; padding-bottom:15px; @include font-size ($font14); font-family:$ubuntumedium;} 
+                       span{ color:#666666;  font-family:$ubunturegular; float:right; width:200px; line-height: 22px;}
+                        
+                    }
+             } 
+             article{ float:left; width:63%; padding-left:$space50;
+             
+              p{color:#666666; @include font-size($font14); line-height:$space25; margin-bottom:$space10+2;}
+             } 
+    
+             .contact-main{ display:flex; flex-wrap:wrap; justify-content:space-between; padding-bottom:$space30;}
+    
+             .contact-form{ background-color:$white; @include box-shadow(0 0 3px rgba(0,0,0,.2)); padding:$space25 $space45;  width:64%;
+                       .title{ color:$grey-medium; @include font-size($font20); font-family:$ubuntumedium; padding-bottom:$space20;}
+
+                   .left{ display:inline-block; vertical-align:top; width:45%;}
+                   .right{ display:inline-block; vertical-align:top; width:54%; padding-left:$space20;}
+                   .form-control{ margin-bottom:$space15; font-family:$ubuntulight;@include input-placeholder{ color:#8a8a8a};}
+                   textarea{ height:190px; padding-top:$space10}
+                 
+             }
+     
+             
+             .contact-box{   background-color:$white; @include box-shadow(0 0 3px rgba(0,0,0,.2));  width:34%;text-align:center; padding:$space50 $space30 $space0; position:relative;
+                 img{  vertical-align:bottom;}
+                 small{ font-family:$ubuntumedium; @include font-size($font14); color:$black; display:block;}
+                 strong{@include font-size($font30); display:block; text-align:right; padding:$space5 $space0; font-family:$ubuntumedium;}
+                 span{ display:block; text-align:right; @include font-size($font18);}
+                 
+                 &:before,&:after{ @include arrow(left, white, 15px); position:absolute; left:-11px; z-index:2; top:50%;}
+                 &:after{ z-index:1; border-right-color:#eeeeee; left:-13px;}
+             } 
+             
+     
+    
+             .review-main{padding-top:$space45;
+              .comment{ border-bottom:1px solid #cccccc; padding-bottom:$space15+3; margin-bottom:$space20; 
+                .title{@include font-size($font14); font-family:$ubuntumedium; color:$black; display:block; padding-bottom:$space10;}
+                p{@include font-size($font14); font-family:$ubuntulight; color:#545454; padding-bottom:$space10+2;}
+                .date-tag{ color:#949494; @include font-size($font12+1); display:block;
+                   i{ display:inline-block; color:#949494; @include font-size($font14); padding-right:$space5;}
+                }
+              }
+             } 
+             
+             .review{ float:left; width:42%; border-right:1px solid #cccccc; margin-bottom:$space40;
+                      .review-result{ width:25%; text-align:center; display:inline-block; vertical-align:top;
+                          background:#e6e7e8; padding:$space5 - 3; @include font-size($font14+1); color:$black; padding-bottom:$space10;
+                          span{ display:block; background:$white;@include font-size($font34+1); color:$yellow; font-family:$ubuntumedium; padding:$space20 $space10; position:relative; margin-bottom:$space10; 
+                            &:after{ @include arrow("top", #e6e7e8, 10px); position:absolute; bottom:0; left:45px;}
+                           
+                          }
+                      }
+                      .progress{ width:74%; display:inline-block; vertical-align: top; padding-left:$space25;
+                                 .in{ padding-bottom:$space10+2;}
+                          span{ @include font-size($font14+1); color:$black; display:inline-block; vertical-align:middle; width:35px;
+                           i{ color:$yellow; @include font-size($font12+1)}
+                          }
+                          .bar{background:#cccccc; @include size(60%,10px); display:inline-block;}
+                          .bar-yellow{background:$yellow; @include size(10%,10px); }
+                           .two{ @include size(20%,10px); }
+                           .three{ @include size(30%,10px); }
+                           .four{ @include size(40%,10px); }
+                            .five{ @include size(50%,10px); }
+                      }
+             }
+             
+              .review-write{ 
+                  float:left; width:58%; @include font-size($font14+1); color:$black; text-align:center; padding-top:$space40;
+                  a{@include font-size($font14+1); color:$black; text-transform:uppercase; background:#e6e7e8; padding:$space10+5 $space10; display:block; width:215px; text-align:center; margin:$space15  auto $space0;}
+                 
+              
+              }
+             
+        .service ul{ margin: 20px auto 15px;}
+}
+
+
+
+
+
+
+.share-list{ text-align:center; position:relative; padding-top:$space15; 
+             &:before{
+               @include my-icons-sprite(share-divider);  @include size(367px,1px); position:absolute; top:0; left:50%; content: '';  @include transform(translate(-50%,0px))
+             }
+
+    li{ display:inline-block; margin:$space0 $space5 - 3 ;
+        
+        &.title{ display: block; padding-bottom:$space5+3;}
+        
+        a{
+            display:block; @include size(28px,28px) ; border:1px solid #808080; @include border-radius(100%); @include font-size($font16); color:#686868; line-height:$space25+3;
+        &:hover{ color:#365497; border:1px solid #365497;}
+        }
+    }
+         
+    
+}
+
+//New 
+.product-slider .slides > li {display: none;} 
+
+            .product-detail-main .product-slider-box .flex-viewport {
+                    float: right;
+            }
+            .product-detail-main .product-slider-box .flex-control-thumbs li{
+                padding: 2px 2px;
+            }
+            .product-detail-main .product-slider-box .flex-viewport{
+                padding-top: 0px;
+            }
+            
+            //FAq question
+            .faq-question{ margin-top:$space40;
+    h5{color:#565656; font-family:$ubuntumedium; @include font-size($font20); padding-bottom:$space15+3;}
+    .answer{ border-top:1px solid #eeeeee; padding:$space10+5 $space0 $space20;
+        span{ color:$black; font-family:$ubuntumedium; @include font-size($font14); display:block; padding-bottom:$space10+5;
+          &:first-letter{ color:$yellow; padding-right:$space10+2;}
+        }
+         p{ color:#545454; padding-bottom:$space10+2;
+            &:before{ content:"\f00c";  font-family: 'FontAwesome'; color:$yellow; font-size:$font18; padding-right:$space10+2;}
+       
+         }
+         small{ color:#929292; font-family:$ubuntumedium; @include font-size($font10+1); padding-bottom:$space10+2;  padding-left:$space25+3; display:block;}
+    }
+    
+    
+}

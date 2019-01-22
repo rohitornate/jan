@@ -1,0 +1,2 @@
+
+2 0 * * * /usr/bin/php /var/www/html/ornatenew/vendors/abandonedcarts/sendReminder.php

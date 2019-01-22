@@ -1,0 +1,584 @@
+<?php
+
+class ModelToolBetaout extends Model {
+
+    // Used to store Betaout Tracker object (don't touch!)
+    private $t;
+
+    /* Variables defined to be used later in the code */
+    /* ---------------------------------------------------------------------------------------- */
+    private $betaout_https_url; // Betaout installation URL (https).
+    private $betaout_http_url; // Betaout installation URL.
+    private $betaout_site_id;  // The Site ID for the site in Betaout.
+    // False for basic page tracking.
+    private $betaout_use_sku;  // True - Report Betaout SKU from Opencart 'SKU'.
+    // False - Report Betaout SKU from Opencart 'Model'.
+    private $betaout_api_key;  // True - to enable the use of the betaout proxy script to hide trhe betaout URL.
+    private $baseurl;
+
+    // False - for regular Betaout tracking.
+    // The full path to the BetaoutTracker.php file
+    /* ---------------------------------------------------------------------------------------- */
+
+    // Function to set various things up
+    // Not 100% certain where most efficient to run, so just blanket running before each big block of API code
+    // Called internally by other functions
+    private function init() {
+        // Load config data
+        $this->load->model('setting/setting');
+
+        $this->model_setting_setting->getSetting('betaout');
+
+        $this->betaout_http_url = $this->config->get('config_url') . 'betaout/';
+        $this->betaout_https_url = $this->config->get('config_url') . 'betaout/';
+        $this->betaout_site_id = $this->config->get('betaout_site_id');
+        $this->betaout_api_key = $this->config->get('betaout_api_key');
+
+        $this->session->data['betaout_visitorid'] = "gh"; // $this->t->getVisitorId();
+
+        $this->load->model('catalog/category');
+        $this->load->model('catalog/product');
+        $this->load->model('account/order');
+        $this->load->model('checkout/order');
+        if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+            $this->baseurl = $this->config->get('config_ssl');
+        } else {
+            $this->baseurl = $this->config->get('config_url');
+        }
+    }
+
+    // Returns the text needed for the JAVASCRIPT method of setEcommerceView
+    // (to be inserted in javascript footer as it occurs on every page)
+    // Other ecommerce actions not on every page use PHP API.
+    // Private as this is called internally to this class by getFooterText()
+    private function setEcommerceView() {
+        /* Get the Category info */
+        // First, check the GET variable 'path' is set
+        // Set to false - category reporting not fully supported in this version
+        /* Get the Product info */
+        // Read the product ID from the GET variable
+        $product_id = $this->request->get['product_id'];
+
+        $i = 0;
+        $productarray = array();
+        // Look up the product info using the product ID					
+        // Uses function from the catalog/product model
+        $product = $this->model_catalog_product->getProduct($product_id);
+        $abc = $this->get_category_names_by_product($product['product_id']);
+        // Get the individual pieces of info
+        if ($this->betaout_use_sku) {
+            $product_info_sku = '"' . $product['sku'] . '"';
+        } else {
+            $product_info_sku = '"' . $product['model'] . '"';
+        }
+        $betaout_product = '"' . $product['name'] . '"';
+        $betaout_price = (string) $product['price'];
+
+
+        $productarray[$i]['name'] = $product['name'];
+        $productarray[$i]['sku'] = $product_info_sku;
+        $productarray[$i]['price'] = $product['price'];
+        $productarray[$i]['id'] = $product['product_id'];
+
+        $productarray[$i]['categories'] = $abc;
+
+        // If there is no 'product_id' GET variable, then we are not in a product
+        // So set the appropriate 'false' text to use (see betaout JavaScript function)
+
+        $parray = array('identifiers' => $this->betaout_get_defaults(),
+            'activity_type' => 'view',
+            'products' => $productarray);
+
+        $betaoutparams = array_merge($parray, $this->betaout_system_property());
+        $requesturl = 'http://api.betaout.com/v2/ecommerce/activities';
+        $result = $this->betaout_make_request($requesturl, $betaoutparams);
+
+        return $result;
+    }
+
+    public function track() {
+        $this->init();
+        $pq = $this->session->data['pro_qty'];
+        $cart_info = $this->cart->getProducts();
+        foreach ($cart_info as $info) {
+            if ($info['quantity'] != $pq[$info['product_id']]) {
+                $this->cartUpdate($info['product_id'], $info['quantity']);
+            }
+        }
+    }
+
+    public function cartUpdate($id, $qty) {
+        $product = $this->model_catalog_product->getProduct($id);
+        $abc = $this->get_category_names_by_product($id);
+        $productd = $pro_qty = array();
+        if ($this->betaout_use_sku) {
+            $product_info_sku = $product['sku'];
+        } else {
+            $product_info_sku = $product['model'];
+        }
+        $i = 0;
+
+        $cartinfo = array("total" => $this->cart->getTotal(),
+            'revenue' => $this->cart->getSubTotal(),
+            'currency' => $this->session->data['currency']);
+        $productd[$i]['name'] = $product['name'];
+        $productd[$i]['sku'] = $product_info_sku;
+        $productd[$i]['price'] = $product['price'];
+        $productd[$i]['id'] = $product['product_id'];
+        $productd[$i]['categories'] = $abc;
+        $productd[$i]['quantity'] = $qty;
+
+        $parray = array('identifiers' => $this->betaout_get_defaults(),
+            "products" => $productd,
+            "cart_info" => $cartinfo,
+            "activity_type" => "update_cart"
+        );
+//        $this->session->data['btest'] = json_encode($parray);
+        $default = $this->betaout_system_property();
+        $betaoutparams = array_merge($default, $parray);
+        $requesturl = 'http://api.betaout.com/v2/ecommerce/activities';
+        $result = $this->betaout_make_request($requesturl, $betaoutparams);
+
+        $this->session->data['pro_qty'][$i] = $qty;
+
+        return;
+    }
+
+    // Tracks a cart update with Betaout PHP API
+    // Calls BetaoutTracker 'addEcommerceItem' iteratively for each product in cart
+    // Calls BetaoutTracker 'doTrackEcommerceCartUpdate' at the end to track the cart update
+
+    public function trackEcommerceCartUpdate() {
+
+        $this->init();
+        $productd = $productIdArray = $pro_qty = $padd = $productarray = array();
+        /* Get the Cart info */
+        // First, check if the cart has items in
+        // Read all the info about items in the cart
+        $cart_info = $this->cart->getProducts();
+        // For product in the cart...
+        $i = null;
+        foreach ($cart_info as $cart_item) {
+            // Get the info for this product ID					
+            // Uses function from the catalog/product model
+            $product = $this->model_catalog_product->getProduct($cart_item['product_id']);
+            
+            $abc = $this->get_category_names_by_product($cart_item['product_id']);
+
+            if ($this->betaout_use_sku) {
+                $product_info_sku = $product['sku'];
+            } else {
+                $product_info_sku = $product['model'];
+            }
+            $i = $product['product_id'];
+
+            $productarray[$i]['name'] = $product['name'];
+            $productarray[$i]['sku'] = $product_info_sku;
+            $productarray[$i]['price'] = $product['price'];
+            $productarray[$i]['id'] = $product['product_id'];
+            $productarray[$i]['categories'] = $abc;
+            $productarray[$i]['quantity'] = $cart_item['quantity'];
+
+            $pro_qty[$i] = $cart_item['quantity'];
+
+            array_push($productIdArray, $product['product_id']);
+        }
+
+
+        $prev_cookie = isset($this->session->data['cookie']) ? $this->session->data['cookie'] : FALSE;
+
+        $this->session->data['cookie'] = implode(',', $productIdArray);
+        $added = array_diff($productIdArray, explode(',', $prev_cookie));
+
+
+        $carray = $this->session->data['cookie'] == NULL ? NULL : explode(',', $this->session->data['cookie']);
+        $parray = explode(',', $prev_cookie);
+
+        if ((count($parray)) > (count($carray))) {
+
+            $deleted = array_diff(explode(',', $prev_cookie), $productIdArray);
+        } else {
+            $deleted = array();
+        }
+
+        $adcount = count($added);
+        $deletecount = count($deleted);
+
+        $cartinfo = array("total" => $this->cart->getTotal(),
+            'revenue' => $this->cart->getSubTotal(),
+            'currency' => $this->session->data['currency']);
+        if ($adcount) {
+
+            foreach ($added as $id) {
+                $padd[0] = $productarray[$id];
+                $parray = array('identifiers' => $this->betaout_get_defaults(),
+                    "products" => $padd,
+                    "cart_info" => $cartinfo,
+                    "activity_type" => "add_to_cart"
+                );
+
+//                $this->session->data['btest'] = json_encode($parray);
+                $default = $this->betaout_system_property();
+                $betaoutparams = array_merge($default, $parray);
+                $requesturl = 'http://api.betaout.com/v2/ecommerce/activities';
+                $result = $this->betaout_make_request($requesturl, $betaoutparams);
+            }
+        }
+
+        if ($deletecount) {
+            foreach ($deleted as $id) {
+              
+                $product = $this->model_catalog_product->getProduct($id);
+                $abc = $this->get_category_names_by_product($id);
+
+                if ($this->betaout_use_sku) {
+                    $product_info_sku = $product['sku'];
+                } else {
+                    $product_info_sku = $product['model'];
+                }
+                $i = 0;
+
+                $productd[$i]['name'] = $product['name'];
+                $productd[$i]['sku'] = $product_info_sku;
+                $productd[$i]['price'] = $product['price'];
+                $productd[$i]['id'] = $product['product_id'];
+                $productd[$i]['categories'] = $abc;
+                $productd[$i]['quantity'] = 1;
+
+                $parray = array('identifiers' => $this->betaout_get_defaults(),
+                    "products" => $productd,
+                    "cart_info" => $cartinfo,
+                    "activity_type" => "remove_from_cart"
+                );
+//                $this->session->data['btest'] = json_encode($parray);
+                $default = $this->betaout_system_property();
+                $betaoutparams = array_merge($default, $parray);
+                $requesturl = 'http://api.betaout.com/v2/ecommerce/activities';
+                $result = $this->betaout_make_request($requesturl, $betaoutparams);
+            }
+        }
+        if ($adcount == 0 && $deletecount == 0) {
+
+            $pq = $this->session->data['pro_qty'];
+
+            foreach ($cart_info as $info) {
+                if ($info['quantity'] != $pq[$info['product_id']]) {
+                    $productarray[$info['product_id']]['quantity'] = $info['quantity'] - $pq[$info['product_id']];
+                    $padd[0] = $productarray[$info['product_id']];
+                    $parray = array('identifiers' => $this->betaout_get_defaults(),
+                        "products" => $padd,
+                        "cart_info" => $cartinfo,
+                        "activity_type" => "add_to_cart"
+                    );
+//                    $this->session->data['btest'] = json_encode($parray);
+                    $default = $this->betaout_system_property();
+                    $betaoutparams = array_merge($default, $parray);
+                    $requesturl = 'http://api.betaout.com/v2/ecommerce/activities';
+                    $result = $this->betaout_make_request($requesturl, $betaoutparams);
+                }
+            }
+        }
+        $this->session->data['pro_qty'] = $pro_qty;
+        return true;
+    }
+
+    private function get_category_names_by_product($id, $array = true) {
+
+        $_categories = $this->model_catalog_product->getCategories($id);
+        if (!is_array($_categories)) {
+            if ($array)
+                return array();
+            else
+                return "[]";
+        }
+        $categories = array();
+        foreach ($_categories as $key) {
+            $category = $this->model_catalog_category->getCategory($key['category_id']);
+
+            if (isset($category['parent_id'])) {
+
+                if ($category['parent_id'] == 0) {
+                    array_push($categories, array('cat_name' => $category['name'], 'cat_id' => $category['category_id'], 'parent_cat_id' => 0));
+                } else {
+                    $pcategory = $this->model_catalog_category->getCategory($category['parent_id']);
+
+                    array_push($categories, array('cat_name' => $category['name'], 'cat_id' => $pcategory['category_id'], 'parent_cat_id' => $category['parent_id']));
+
+                    while (isset($pcategory['parent_id'])) {
+                        array_push($categories, array('cat_name' => $pcategory['name'], 'cat_id' => $pcategory['category_id'], 'parent_cat_id' => $pcategory['parent_id']));
+
+                        $pcategory = $this->model_catalog_category->getCategory($pcategory['parent_id']);
+                    }
+                }
+            }
+        }
+
+        return $categories;
+    }
+
+    // Tracks an order with Betaout PHP API
+    // Calls BetaoutTracker 'addEcommerceItem' iteratively for each product in order
+    // Calls BetaoutTracker 'doTrackEcommerceOrder' at the end to track order
+    public function trackEcommerceOrder($order_id) {
+
+        $this->init();
+        $productarray = array();
+        $or_status = $this->model_checkout_order->getOrder($order_id);
+        $order_info = $this->model_account_order->getOrder($order_id);
+        $order_info_products = $this->model_account_order->getOrderProducts($order_id);
+        $order_info_totals = $this->model_account_order->getOrderTotals($order_id);
+        $i = $tax = 0;
+        $currency = $this->session->data['currency'];
+        // Add ecommerce items for each product in the order before tracking
+        foreach ($order_info_products as $order_product) {
+            // Get the info for this product ID	
+            $product_info = $this->model_catalog_product->getProduct($order_product['product_id']);
+
+            $abc = $this->get_category_names_by_product($order_product['product_id']);
+            // Decide whether to use 'Model' or 'SKU' from product info
+            if ($this->betaout_use_sku) {
+                $product_info_sku = (string) $product_info['sku'];
+            } else {
+                $product_info_sku = (string) $product_info['model'];
+            }
+            $tax +=$order_product['tax'];
+
+            $productarray[$i]['name'] = $order_product['name'];
+            $productarray[$i]['sku'] = $product_info_sku;
+            $productarray[$i]['price'] = $order_product['price'];
+            $productarray[$i]['id'] = $order_product['product_id'];
+            $productarray[$i]['categories'] = $abc;
+            $productarray[$i]['quantity'] = $order_product['quantity'];
+
+            $i++;
+        }
+
+        $order_shipping = 0;
+        $order_subtotal = 0;
+        $order_taxes = 0;
+        $order_grandtotal = 0;
+        $order_discount = 0;
+        $promo_code = "";
+        // Find out shipping / taxes / total values
+        foreach ($order_info_totals as $order_totals) {
+            switch ($order_totals['code']) {
+                case "shipping":
+                    $order_shipping += $order_totals['value'];
+                    break;
+                case "sub_total":
+                    $order_subtotal += $order_totals['value'];
+                    break;
+                case "tax":
+                    $order_taxes += $order_totals['value'];
+                    break;
+                case "total":
+                    $order_grandtotal += $order_totals['value'];
+                    break;
+                case "coupon":
+                    $order_discount += $order_totals['value'];
+                    $promo_code+=$this->session->data['coupon'] + " ";
+                    break;
+                case "voucher":
+                    $order_discount += $order_totals['value'];
+                    $promo_code+=$this->session->data['coupon'] + " ";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        $cartinfo = array("order_id" => $order_info['order_id'],
+            "revenue" => $order_subtotal,
+            "shipping" => $order_shipping,
+            "tax" => $tax,
+            "discount" => $order_discount,
+            "total" => $order_grandtotal,
+            "status" => $or_status['order_status'],
+            "payment_method" => $order_info['payment_method'],
+            "shipping_method " => $or_status['shipping_method'],
+            "currency" => $currency
+        );
+        if ($promo_code != "") {
+            array_merge($cartinfo, array(
+                "coupon" => $promo_code
+            ));
+        }
+
+        if (!$this->customer->isLogged()) {
+            if (isset($this->session->data['guest'])) {
+                $email = $this->session->data['guest']['email'];
+                $this->betaoutidentify($email);
+            }
+        }
+        $parray = array('identifiers' => $this->betaout_get_defaults(),
+            "products" => $productarray,
+            "order_info" => $cartinfo,
+            "activity_type" => "purchase");
+
+
+        $default = $this->betaout_system_property();
+        $betaoutparams = array_merge($default, $parray);
+        $requesturl = 'http://api.betaout.com/v2/ecommerce/activities';
+        $result = $this->betaout_make_request($requesturl, $betaoutparams);
+    
+        $this->session->data['cookie'] = NULL;
+
+        return $result;
+    }
+
+    public function betaoutidentify($email) {
+        $default = array("identifiers"=>$this->betaout_get_defaults());
+        $requesturl = 'https://api.betaout.com/v2/user/identify';
+
+        if (isset($default['identifiers']['email'])) {
+            $_ampUser=array(
+                "customer_id"=>isset($default['identifiers']["customer_id"])?$default['identifiers']["customer_id"]:"",
+                "email"=>$default['identifiers']['email'],
+                "phone"=>$default['identifiers']["phone"]
+            );
+            
+            setcookie("_ampUSER", base64_encode(json_encode($_ampUser)));
+            setcookie("_ampUITN", "");
+        }
+    }
+
+    // Returns the Betaout Javascript text to place at the page footer
+    // Generates based on Betaout URLs and settings
+    // Includes code for setEcommerceView, depending on whether this option is set
+    public function getFooterText() {
+
+        $this->init();
+
+        $customer_fname = "";
+        $email = "";
+        $phone = "";
+        $cid = "";
+        $newLettere = "";
+        $newLettern = "";
+        if ($this->customer->getNewsletter()) {
+            $newLettere = $this->customer->getEmail();
+            $newLettern = $this->customer->getFirstName();
+        }
+        if ($this->customer->isLogged()) {
+            $customer_fname = $this->customer->getFirstName();
+            $email = $this->customer->getEmail();
+            $phone = $this->customer->getTelePhone();
+            $cid = $this->session->data['customer_id'];
+        }
+        if (isset($this->request->get['product_id'])) {
+            $this->setEcommerceView();
+        }
+       
+
+        $betaout_footer = '<script type="text/javascript">
+        var _bout = _bout || []; var
+        _boutAKEY = "' . $this->betaout_api_key . '"; var
+        _boutPID = "' . $this->betaout_site_id . '";
+        function _boutS(u) {
+        var d = document, f = d.getElementsByTagName("script")[0], _sc = d.createElement("script");
+        _sc.type = "text/javascript"; _sc.async = true; _sc.src = u; f.parentNode.insertBefore(_sc, f);
+        }
+        _boutS("//d22vyp49cxb9py.cloudfront.net/jal-v2.min.js");
+        _bout.push(["identify", { "customer_id": "' . $cid . '", "email": "' . $email . '", "phone": "' . $phone . '", "gcm_id": "", "apn_id": "" } ]);
+      </script>';
+        return $betaout_footer;
+    }
+
+    public function betaout_get_defaults() {
+        $token = "";
+        if (isset($_COOKIE['_ampUITN'])) {
+            $token = $_COOKIE['_ampUITN'];
+        }
+        $email = "";
+        $cemail = "";
+        $phone = "";
+        $cid = "";
+        if ($this->customer->isLogged()) {
+            $bout_cookie = json_decode(base64_decode($_COOKIE['_ampUSER']));
+            $email = $this->customer->getEmail();
+
+            $cid = isset($bout_cookie->customer_id)?$bout_cookie->customer_id:"";
+            $phone = $this->customer->getTelePhone();
+        } elseif (isset($this->session->data['guest'])) {
+            $email = $this->session->data['guest']['email'];
+            $phone= $this->session->data['guest']['telephone'];
+            
+        } elseif (isset($_COOKIE['_ampUSER'])) {
+
+            $bout_cookie = json_decode(base64_decode($_COOKIE['_ampUSER']));
+            $email = $bout_cookie->email;
+            $cid = isset($bout_cookie->customer_id)?$bout_cookie->customer_id:"";
+            $phone = $bout_cookie->phone;
+            $cemail = $bout_cookie->email;
+        }
+
+        if ($email != "" && !is_null($email) && (isset($_COOKIE['_ampUSER']) && $email == $cemail)) {
+            $token = "";
+        }
+
+//        $http_referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : FALSE;
+       if($email!=""){ 
+           $properties = array(
+//            'customer_id' => $cid,
+            'email' => $email,
+            'phone' => $phone,
+        );
+            if($cid!=""){
+                 array_merge($properties,array('customer_id' => $cid));
+             }
+       }
+
+        if ($token != "") {
+            $properties = array(
+                'token' => $token,
+            );
+        }
+        if (isset($this->session->data['guest']) && $token != "") {
+             $properties = array(
+//            'customer_id' => $cid==""?:$cid,
+            'email' => $email,
+            'phone' => $phone,
+            'token' => $token,
+            );
+             
+             if($cid!=""){
+                 array_merge($properties,array('customer_id' => $cid));
+             }
+            
+        }
+        // Let other modules alter the defaults.
+
+        return $properties;
+    }
+
+    public function betaout_system_property() {
+        $http_referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : FALSE;
+        $properties = array(
+            'apikey' => $this->betaout_api_key,
+            'project_id' => $this->betaout_site_id,
+            'ip' => $_SERVER['REMOTE_ADDR'],
+            'useragent' => $_SERVER['HTTP_USER_AGENT'],
+            'referrer' => $http_referer,
+        );
+        return $properties;
+    }
+
+    public function betaout_make_request($requesturl, $params) {
+
+        try {
+            $data_string = json_encode($params);
+            $ch = curl_init($requesturl);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+            $result = curl_exec($ch);
+        } catch (Exception $e) {
+            
+        }
+        return $result;
+    }
+
+}

@@ -122,6 +122,9 @@
                     <?php } else { ?>
                     <a href="<?php echo $sort_model; ?>"><?php echo $column_model; ?></a>
                     <?php } ?></td>
+					  <td class="text-left">
+                    <?php echo 'Total'; ?>
+                   </td>
                   <td class="text-left"><?php if ($sort == 'status') { ?>
                     <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
                     <?php } else { ?>
@@ -132,11 +135,14 @@
                     <?php } else { ?>
                     <a href="<?php echo $sort_date_added; ?>"><?php echo $column_date_added; ?></a>
                     <?php } ?></td>
+					
+
                   <td class="text-left"><?php if ($sort == 'r.date_modified') { ?>
                     <a href="<?php echo $sort_date_modified; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_modified; ?></a>
                     <?php } else { ?>
                     <a href="<?php echo $sort_date_modified; ?>"><?php echo $column_date_modified; ?></a>
                     <?php } ?></td>
+					<td class="text-left">Invoices</td>
                   <td class="text-right"><?php echo $column_action; ?></td>
                 </tr>
               </thead>
@@ -152,12 +158,28 @@
                   <td class="text-right"><?php echo $return['return_id']; ?></td>
                   <td class="text-right"><?php echo $return['order_id']; ?></td>
                   <td class="text-left"><?php echo $return['customer']; ?></td>
-                  <td class="text-left"><?php echo $return['product']; ?></td>
+                  <td class="text-left"><img src="<?php echo $return['thumb'];?>"><?php echo $return['product']; ?></td>
                   <td class="text-left"><?php echo $return['model']; ?></td>
+				   <td class="text-left"><?php echo $return['total']; ?></td>
                   <td class="text-left"><?php echo $return['status']; ?></td>
                   <td class="text-left"><?php echo $return['date_added']; ?></td>
                   <td class="text-left"><?php echo $return['date_modified']; ?></td>
-                  <td class="text-right"><a href="<?php echo $return['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+
+					<td class="text-left">
+					<?php if($return['status']=='Refund Processed' || $return['status']=='Complete' ){ ?>
+					
+					<a target="_blank" href="<?php echo $return['invoice']; ?>" data-toggle="tooltip" title="<?php echo 'Invoice'; ?>" class="btn btn-primary"><i class="fa fa-print"></i></a>
+					
+					<?php }else {?>
+					
+					<?php } ?>
+					
+					</td>
+                  <td class="text-right"><a href="<?php echo $return['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+				  
+				  <a href="<?php echo $return['view']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+				  
+				  </td>
                 </tr>
                 <?php } ?>
                 <?php } else { ?>

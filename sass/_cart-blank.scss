@@ -1,0 +1,13 @@
+.cart-blank{ padding:$space50+50+30 $space0;
+        
+   .checkout{  width:235px; margin:0 auto; text-align:center;
+         figure{ margin:0; padding-bottom:$space15;}
+            h3{ @include font-size($font24+1); color:$black; font-family:$ubuntumedium;}
+          span{ color:#535353; display:block;  @include font-size($font18); padding-top:$space10+3;}
+                 
+  .btn-yellow{ float:none; text-align:center; color:$black; @include font-size($font14+1); @include border-radius(3px); padding:$space10+4 $space10; margin-top:$space25;}
+   }
+        
+                
+}
+

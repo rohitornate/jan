@@ -1,0 +1,59 @@
+.cart-header{@extend .sm-paddin-tb10;
+    .cart-logo{display: none;}
+    .logo{width: 100%; left: 0; right: 0; text-align: center; top:10px;
+          img{width: 160px;}
+    }
+} 
+.cart-header{
+    .contact-us{margin-top: 40px; float: none; padding-left: 0; text-align: center; border-top: 1px solid #f1ecec; width: 100%;
+                small{@extend .sm-hide;}
+                &:before{@extend .sm-hide;}
+     }
+}
+.cart-main{
+    h1{padding:0 0 $space15; font-size:$font18; text-align: center;}
+    .heading{ display: none;}
+    .cart-box{padding:$space0 0 $space5; margin-bottom:$space10; border: 0;}
+    .cart-descraption{padding:10px; position:relative; border:$border1 #eeeeee; margin-bottom: 10px;
+      .col:nth-child(1){width:100%; padding-right:0;} 
+      .product{
+          p{ line-height: 18px; padding: 0; @include oneline;}
+          small{display: block; margin: -6px 0 27px;}
+      }
+      .col{width:100%;}
+      .price{
+          p{font-size:$font18;padding:0 0 0 57px; margin-top: -42px; color: $yellow;}
+          small{    padding: 8px 0 5px 57px;}
+      } 
+      .col:nth-child(n + 2){padding-top:$space0;text-align:left;}
+      .quantity{border-top:$border1 #eeeeee; padding-top: 10px !important; text-align: left; margin-top: 10px;
+          select{text-align:left; width:60%;}
+      }  
+      .remove-btn{margin:0;position:absolute;bottom:10px; left: 65%; @include size(28px);
+       i{font-size:$font16; line-height:27px;}
+      }
+      .remove{padding: 0 !important;}
+      .total{@extend .sm-hide;}
+    }
+     
+    .cart-coupon{float:none; width:auto;
+       .form-control{height:30px;width:100%;}
+       .btn-apply{width:20%; height:30px;}
+    }   
+     .cart-coupon-info{width:100%;margin:$space15 0;}
+     .btn-yellow{width:100%; padding:$space10 0; margin-top:$space10;}
+     .btn-yellow-small{width:100% !important;}
+     .buttons{margin:0;
+              .pull-left, .pull-right{width: 49%;}
+              .btn-yellow{@extend .sm-font14;
+                  &.pull-left, &.pull-right{ width: 100%;}
+              }
+     }
+    a img{float: left; padding-right:$space10;}
+}
+.cart-footer{ margin-top:$space15;
+    .payement-service{width:100%; float:none; padding-top:$space5; text-align:center;}
+     .payement-col{@extend .sm-hide;}
+} 
+
+

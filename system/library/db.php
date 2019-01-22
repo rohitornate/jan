@@ -13,7 +13,21 @@ class DB {
 	}
 
 	public function query($sql, $params = array()) {
-		return $this->adaptor->query($sql, $params);
+		
+	date_default_timezone_set('Asia/Kolkata');
+    
+    $now = new DateTime();
+    $mins = $now->getOffset() / 60;
+    $sgn = ($mins < 0 ? -1 : 1);
+    $mins = abs($mins);
+    $hrs = floor($mins / 60);
+    $mins -= $hrs * 60;
+    $offset = sprintf('%+d:%02d', $hrs * $sgn, $mins);
+		
+    $this->adaptor->query("SET time_zone = '" . $offset . "'");
+		
+	
+	return $this->adaptor->query($sql, $params);
 	}
 
 	public function escape($value) {

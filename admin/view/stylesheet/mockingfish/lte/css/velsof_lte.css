@@ -1,0 +1,347 @@
+#velsof_plugin .left-td{text-align:right; width:250px !important;}
+#velsof_plugin .right-td{text-align:left;
+padding-right: 6%! important;
+
+}
+
+#velsof_plugin label {
+    width:100px;
+    border-radius:3px;
+    border:1px solid #D1D3D4;
+}
+
+
+/* hide input */
+
+
+#velsof_plugin input.radio:empty {
+    margin-left:-999px;
+    display:none;
+}
+
+/* style label */
+
+
+#velsof_plugin input.radio:empty ~ label {
+    position:relative;
+    float:left;
+    line-height:2.5em;
+    text-indent:3.25em;
+    margin-right:12px;
+    cursor:pointer;
+    width: 160px! important;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+#velsof_plugin input.radio:empty ~ label:before {
+    position:absolute;
+    display:block;
+    top:0;
+    bottom:0;
+    left:0;
+    content:'';
+    width:2.5em;
+    background:#D1D3D4;
+    border-radius:3px 0 0 3px;
+}
+
+/* toggle hover */
+
+
+#velsof_plugininput.radio:hover:not(:checked) ~ label:before {
+    content:'\2714';
+    text-indent:.9em;
+    color:#C2C2C2;
+}
+
+#velsof_plugin input.radio:hover:not(:checked) ~ label {
+    color:#888;
+}
+
+/* toggle on */
+
+
+#velsof_plugin input.radio:checked ~ label:before {
+    content:'\2714';
+    text-indent:.9em;
+    color:#ffffff;
+    background-color:#27A1CA;
+}
+
+
+
+#velsof_plugin input.radio:checked ~ label {
+    color:#777;
+}
+
+/* radio focus */
+
+
+#velsof_plugin input.radio:focus ~ label:before {
+    box-shadow:0 0 0 3px #999;
+}
+
+
+    #velsof_plugin     .onoffswitch {
+    position:relative;
+    width:100px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    margin-left:0px;
+}
+
+#velsof_plugin  .onoffswitch-checkbox {
+    display:none;
+}
+
+#velsof_plugin .onoffswitch-label {
+    display:block;
+    overflow:hidden;
+    cursor:pointer;
+    border:0 solid #999999;
+    border-radius:0;
+}
+
+#velsof_plugin .onoffswitch-inner {
+    width:200%;
+    margin-left:-100%;
+    -moz-transition:margin 0.3s ease-in 0s;
+    -webkit-transition:margin 0.3s ease-in 0s;
+    -o-transition:margin 0.3s ease-in 0s;
+    transition:margin 0.3s ease-in 0s;
+}
+
+#velsof_plugin .onoffswitch-inner > div {
+    float:left;
+    position:relative;
+    width:50%;
+    height:30px;
+    padding:0;
+    line-height:30px;
+    font-size:14px;
+    color:white;
+    
+    font-weight:bold;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+#velsof_plugin .onoffswitch-inner .onoffswitch-active {
+    padding-left:15px;
+    background-color:#C2C2C2;
+    color:#FFFFFF;
+}
+
+#velsof_plugin .onoffswitch-inner .onoffswitch-inactive {
+    padding-right:15px;
+    background-color:#C2C2C2;
+    color:#FFFFFF;
+    text-align:right;
+}
+
+#velsof_plugin .onoffswitch-switch {
+    width:40px;
+    margin:0;
+    text-align:center;
+    border:0 solid #999999;
+    border-radius:0;
+    position:absolute;
+    top:0;
+    bottom:0;
+}
+
+#velsof_plugin .onoffswitch-active .onoffswitch-switch {
+    background:#27A1CA;
+    left:0;
+}
+
+#velsof_plugin .onoffswitch-inactive .onoffswitch-switch {
+    background:#A1A1A1;
+    right:0;
+}
+
+#velsof_plugin .onoffswitch-active .onoffswitch-switch:before {
+    content:"";
+    position:absolute;
+    top:0;
+    left:40px;
+    border-style:solid;
+    border-color:#27A1CA transparent transparent #27A1CA;
+    border-width:15px 10px;
+}
+
+#velsof_plugin .onoffswitch-inactive .onoffswitch-switch:before {
+    content:" ";
+    position:absolute;
+    top:0;
+    right:40px;
+    border-style:solid;
+    border-color:transparent #A1A1A1 #A1A1A1 transparent;
+    border-width:15px 10px;
+}
+
+#velsof_plugin .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left:0;
+}
+
+
+
+    #velsof_plugin{font-family:'FontAwesome';src:url('../font/fontawesome-webfont.eot?v=3.2.0');src:url('../font/fontawesome-webfont.eot?#iefix&v=3.2.0') format('embedded-opentype'),url('../font/fontawesome-webfont.woff?v=3.2.0') format('woff'),url('../font/fontawesome-webfont.ttf?v=3.2.0') format('truetype'),url('../font/fontawesome-webfont.svg#fontawesomeregular?v=3.2.0') format('svg');font-weight:normal;font-style:normal;}
+    [class^="icon-"],[class*=" icon-"]{font-family:FontAwesome;font-weight:normal;font-style:normal;text-decoration:inherit;-webkit-font-smoothing:antialiased;*margin-right:.3em;}
+[class^="icon-"]:before,[class*=" icon-"]:before{color:#526D9E;text-decoration:inherit;display:inline;cursor:default;speak:none;}
+
+#velsof_plugin .icon-question-sign:before{content:"\f059";}
+
+#velsof_plugin .alert.alert-error {
+background: #bd362f! important;
+color: #fff! important;
+border-color: #bd362f! important;
+}
+
+
+
+
+
+.gritter-title {
+font-size: 14px;
+font-weight: bold;
+padding: 0 0 7px 0;
+display: block;
+text-shadow: 1px 1px 0 #000;
+}
+
+
+
+.gritter-item-wrapper .gritter-item p {
+    margin: 0 0 10px;
+}
+.gritter-item-wrapper .gritter-item p:last-child {
+    margin: 0;
+}
+.gritter-item-wrapper.gritter-primary .gritter-top {
+    display: none;
+}
+.gritter-item-wrapper.gritter-primary .gritter-bottom {
+    display: none;
+}
+.gritter-item-wrapper.gritter-primary .gritter-item {
+    background: #496CAD;
+    padding: 10px 10px 15px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    color: #fff;
+}
+.gritter-item-wrapper.gritter-primary .gritter-item a {
+    color: #fff;
+    text-decoration: underline;
+}
+.notyfy_wrapper {
+    border: none;
+    -webkit-border-radius: 0 0 0 0;
+    -moz-border-radius: 0 0 0 0;
+    border-radius: 0 0 0 0;
+}
+.notyfy_wrapper.notyfy_alert {
+    background: #ffffff url("../images/mosaic-pattern.png") repeat;
+}
+.notyfy_wrapper.notyfy_error {
+    background: #bd362f url("../images/mosaic-pattern.png") repeat;
+    color: #fff;
+}
+.notyfy_wrapper.notyfy_success {
+    background: #51a351 url("../images/mosaic-pattern.png") repeat;
+    color: #fff;
+}
+.notyfy_wrapper.notyfy_warning {
+    background: #74614f url("../images/mosaic-pattern.png") repeat;
+    color: #fff;
+}
+.notyfy_wrapper.notyfy_information {
+    background: #57b7e2 url("../images/mosaic-pattern.png") repeat;
+    color: #fff;
+}
+.notyfy_wrapper.notyfy_confirm {
+    background: #ffffff url("../images/mosaic-pattern.png") repeat;
+}
+.notyfy_wrapper.notyfy_primary {
+    background: #e04545;
+    border: none;
+}
+.notyfy_wrapper.notyfy_primary,
+.notyfy_wrapper.notyfy_primary * {
+    color: #fff;
+}
+.notyfy_wrapper.notyfy_default {
+    background: #fafafa;
+}
+.notyfy_wrapper.notyfy_dark {
+    background: #4a4846;
+}
+.notyfy_wrapper.notyfy_dark,
+.notyfy_wrapper.notyfy_dark * {
+    color: #fff;
+}
+ #notyfy_container_top {
+    top: 500;
+    left: 0;
+    width: 100%;
+}
+ #notyfy_container_top .notyfy_wrapper {
+    -webkit-border-radius: 0 0 0 0;
+    -moz-border-radius: 0 0 0 0;
+    border-radius: 0 0 0 0;
+}
+ #content-notification .notyfy_wrapper {
+    border: none;
+    box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.2), inset 0 -8px 8px -8px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.2), inset 0 -8px 8px -8px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.2), inset 0 -8px 8px -8px rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 0 0 0 0;
+    -moz-border-radius: 0 0 0 0;
+    border-radius: 0 0 0 0;
+}
+ #content-notification .notyfy_wrapper p {
+    margin: 0;
+}
+ #content-notification .notyfy_wrapper .notyfy_message {
+    padding: 15px 10px;
+}
+ #content-notification .notyfy_wrapper.notyfy_default {
+    /*  background: #fafafa url("../images/pattern1.png") repeat;*/
+}
+#content-notification .notyfy_wrapper.notyfy_dark {
+    /*  background: #4a4846 url("../images/pattern1.png") repeat;*/
+}
+#content-notification .notyfy_wrapper.notyfy_primary {
+    /*  background: #e04545 url("../images/pattern1.png") repeat;*/
+    box-shadow: inset 0 8px 8px -8px #360909, inset 0 -8px 8px -8px #a41b1b;
+    -moz-box-shadow: inset 0 8px 8px -8px #360909, inset 0 -8px 8px -8px #a41b1b;
+    -webkit-box-shadow: inset 0 8px 8px -8px #360909, inset 0 -8px 8px -8px #a41b1b;
+}
+
+#velsof_plugin .url_field{
+margin-left: 17px! important;
+float: left! important;
+left: 19px! important;
+width: 272px! important;
+}
+
+#velsof_plugin .right-td2{text-align:left;
+padding-right: 12%! important;}
+#velsof_plugin .right-td3{text-align:left;
+padding-right: 34%! important;}
+#velsof_plugin .right-td4{text-align:left;
+padding-right: 6%! important;}
+#gritter-notice-wrapper {
+	position:fixed;
+	top: 0px! important;
+	right:20px;
+	width:301px;
+	z-index:9999;
+}

@@ -81,6 +81,53 @@ class ControllerCheckoutLogin extends Controller {
 
 			// Default Shipping Address
 			$this->load->model('account/address');
+			
+			/* AbandonedCarts - Begin */
+
+$this->load->model('setting/setting');
+
+$abandonedCartsSettings = $this->model_setting_setting->getSetting('abandonedcarts', $this->config->get('store_id'));
+
+if (isset($abandonedCartsSettings['abandonedcarts']['Enabled']) && $abandonedCartsSettings['abandonedcarts']['Enabled']=='yes') { 
+    $this->db->query("DELETE FROM `" . DB_PREFIX . "abandonedcarts` WHERE `restore_id` = '".session_id()."'");
+
+    $cart = $this->cart->getProducts();
+    $cart = (!empty($cart)) ? $cart : '';
+    
+    if (!empty($cart)) {
+        if (isset($this->session->data['abandonedCart_ID']) & !empty($this->session->data['abandonedCart_ID'])) {
+            $id = $this->session->data['abandonedCart_ID'];
+        } else if ($this->customer->isLogged()) {
+            $id = (!empty($this->session->data['abandonedCart_ID'])) ? $this->session->data['abandonedCart_ID'] : $this->customer->getEmail();
+        } else {
+            $id = (!empty($this->session->data['abandonedCart_ID'])) ? $this->session->data['abandonedCart_ID'] : session_id();
+        }
+        $exists = $this->db->query("SELECT * FROM `" . DB_PREFIX . "abandonedcarts` WHERE `restore_id` = '$id' AND `ordered`=0 ORDER BY `date_created`")->row;
+        
+        if (empty($exists['customer_info'])) { 
+            $customer = array(
+                    'id'=> $this->customer->getId(), 
+                    'email' => $this->customer->getEmail(),		
+                    'telephone' => $this->customer->getTelephone(),
+                    'firstname' => $this->customer->getFirstName(),
+                    'lastname' => $this->customer->getLastName(),
+                    'language' => $this->session->data['language']
+            );
+            $customer = json_encode($customer);
+            $this->db->query("UPDATE `" . DB_PREFIX . "abandonedcarts` SET `customer_info` = '".$this->db->escape($customer)."', `restore_id`='".$this->customer->getEmail()."' WHERE `restore_id`='$id'");
+            
+            $this->session->data['abandonedCart_ID'] = $this->customer->getEmail();
+        }
+    }
+}
+
+/* AbandonedCarts - End */
+			
+			
+			
+			
+			
+			
 
 			if ($this->config->get('config_tax_customer') == 'payment') {
 				$this->session->data['payment_address'] = $this->model_account_address->getAddress($this->customer->getAddressId());

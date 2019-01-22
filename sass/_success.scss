@@ -1,0 +1,5 @@
+.success-text{ text-align: center; @include all-my-icons-sprites; padding: 80px 0;
+               h1{@include font-size(30px); @extend .font-medium; color: #4b5d6b; padding-bottom: 15px;}
+              p{@include font-size(15px); padding: 0 0 10px;}
+              .btn-yellow{display: inline-block; width: auto; color: #000; font-size: 16px; text-transform: inherit; @include border-radius(3px); padding: 12px 60px;}
+}

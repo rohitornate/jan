@@ -4,6 +4,7 @@ $_['heading_title']     = 'Product Comparison';
 
 // Text
 $_['text_product']      = 'Product Details';
+$_['text_home']        = 'Home';
 $_['text_name']         = 'Product';
 $_['text_image']        = 'Image';
 $_['text_price']        = 'Price';

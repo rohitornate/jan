@@ -1,0 +1,18 @@
+.cart-header{
+       padding:$space20 $space0 $space15;
+    
+       .cart-logo{  @include all-my-icons-sprites; font-size:$font24; color:$black; text-align:center; width:730px; float:left; padding-top:$space10;
+                   i{@include size(32px,30px); display:inline-block;  margin-bottom:$space0 - 4; margin-right:$space10+3;} 
+                   
+              
+       }
+       
+       
+       .contact-us{ float:right; @include font-size($font20); font-family:$ubuntumedium; position:relative; padding-left:$space35;width:200px;
+         small{ display:block;  @include font-size($font12+1); font-family:$ubunturegular;}
+          &:before{ position:absolute; left:0; top:6px; @include size(24px,24px); content:'';  @include my-icons-sprite(call-contact);}
+       }
+    
+}
+
+

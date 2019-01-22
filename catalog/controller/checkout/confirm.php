@@ -228,7 +228,9 @@ class ControllerCheckoutConfirm extends Controller {
 				$order_data['products'][] = array(
 					'product_id' => $product['product_id'],
 					'name'       => $product['name'],
+					'mrp'       => $product['mrp'],
 					'model'      => $product['model'],
+					'image'      => $product['image'],
 					'option'     => $option_data,
 					'download'   => $product['download'],
 					'quantity'   => $product['quantity'],
@@ -337,12 +339,19 @@ class ControllerCheckoutConfirm extends Controller {
 			$data['column_total'] = $this->language->get('column_total');
 
 			$this->load->model('tool/upload');
-
+			$this->load->model('tool/image');
 			$data['products'] = array();
 
 			foreach ($this->cart->getProducts() as $product) {
 				$option_data = array();
 
+				
+				 if ($product['image']) {
+                	$image = $this->model_tool_image->resize($product['image'], $this->config->get($this->config->get('config_theme') . '_image_cart_width'), $this->config->get($this->config->get('config_theme') . '_image_cart_height'));
+                } else {
+                	$image = '';
+                }
+			
 				foreach ($product['option'] as $option) {
 					if ($option['type'] != 'file') {
 						$value = $option['value'];
@@ -388,6 +397,7 @@ class ControllerCheckoutConfirm extends Controller {
 					'cart_id'    => $product['cart_id'],
 					'product_id' => $product['product_id'],
 					'name'       => $product['name'],
+					'image'      => $image,
 					'model'      => $product['model'],
 					'option'     => $option_data,
 					'recurring'  => $recurring,

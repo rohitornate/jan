@@ -54,4 +54,8 @@ class ControllerExtensionTotalCoupon extends Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
+	public function removeCoupon(){
+            unset($this->session->data['coupon']);
+            $this->response->setOutput(json_encode('1'));
+        }
 }

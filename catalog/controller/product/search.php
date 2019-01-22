@@ -62,7 +62,7 @@ class ControllerProductSearch extends Controller {
 		if (isset($this->request->get['limit'])) {
 			$limit = (int)$this->request->get['limit'];
 		} else {
-			$limit = $this->config->get($this->config->get('config_theme') . '_product_limit');
+			$limit = 20;
 		}
 
 		if (isset($this->request->get['search'])) {
@@ -210,8 +210,12 @@ class ControllerProductSearch extends Controller {
 			);
 
 			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
-
-			$results = $this->model_catalog_product->getProducts($filter_data);
+			$data['lazy_load_width_height'] = 'width="' . $this->config->get('config_image_product_width') . '" height="' . $this->config->get('config_image_product_height') . '"';
+			$data['logged'] = $this->customer->isLogged();
+			if ($this->customer->isLogged()){
+			$data['firstname'] = $this->customer->getFirstName();
+			}
+			$results = $this->model_catalog_product->getProductsearch($filter_data);
 
 			foreach ($results as $result) {
 				if ($result['image']) {
@@ -228,8 +232,12 @@ class ControllerProductSearch extends Controller {
 
 				if ((float)$result['special']) {
 					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                                        $discount_price = $result['price'] - $result['special'];
+                                        $discount_percent = (($result['price'] - $result['special'])/$result['price'])*100;
 				} else {
 					$special = false;
+                    $discount_percent=false;
+                                        $discount_price=false;
 				}
 
 				if ($this->config->get('config_tax')) {
@@ -243,14 +251,29 @@ class ControllerProductSearch extends Controller {
 				} else {
 					$rating = false;
 				}
+				
+				
+				$plated_category_value=$this->model_catalog_product->getProductCategoryForGoldPlated($result['product_id']);
+				$new_arrival=$this->model_catalog_product->getProductCategoryForNewArrival($result['product_id']);
+				
 
 				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
-					'name'        => $result['name'],
-					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')) . '..',
+					//'name'        => $result['name'],
+					'name'        => utf8_substr(strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8')), 0, 27) . '..',
+					'quantity'        => $result['quantity'],
+					//'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 15) . '..',
+									//	'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, 27) . '..',
+
 					'price'       => $price,
+					
+					'goold_category_id' => $plated_category_value,
+					'category_id_new_arrical' => $new_arrival,
+					'alt'       => $result['alt'],
 					'special'     => $special,
+					'discount_price'=> $this->currency->format($this->tax->calculate($discount_price, $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']),
+                                        'discount_persent'=>round($discount_percent),
 					'tax'         => $tax,
 					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
 					'rating'      => $result['rating'],
@@ -292,7 +315,7 @@ class ControllerProductSearch extends Controller {
 				'href'  => $this->url->link('product/search', 'sort=p.sort_order&order=ASC' . $url)
 			);
 
-			$data['sorts'][] = array(
+/*			$data['sorts'][] = array(
 				'text'  => $this->language->get('text_name_asc'),
 				'value' => 'pd.name-ASC',
 				'href'  => $this->url->link('product/search', 'sort=pd.name&order=ASC' . $url)
@@ -303,7 +326,7 @@ class ControllerProductSearch extends Controller {
 				'value' => 'pd.name-DESC',
 				'href'  => $this->url->link('product/search', 'sort=pd.name&order=DESC' . $url)
 			);
-
+*/
 			$data['sorts'][] = array(
 				'text'  => $this->language->get('text_price_asc'),
 				'value' => 'p.price-ASC',
@@ -330,7 +353,7 @@ class ControllerProductSearch extends Controller {
 				);
 			}
 
-			$data['sorts'][] = array(
+			/*$data['sorts'][] = array(
 				'text'  => $this->language->get('text_model_asc'),
 				'value' => 'p.model-ASC',
 				'href'  => $this->url->link('product/search', 'sort=p.model&order=ASC' . $url)
@@ -340,7 +363,7 @@ class ControllerProductSearch extends Controller {
 				'text'  => $this->language->get('text_model_desc'),
 				'value' => 'p.model-DESC',
 				'href'  => $this->url->link('product/search', 'sort=p.model&order=DESC' . $url)
-			);
+			);*/
 
 			$url = '';
 
@@ -485,9 +508,13 @@ class ControllerProductSearch extends Controller {
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
+	//	$data['footer'] = $this->load->controller('common/footer_c');
+	//	$data['header'] = $this->load->controller('common/header_c');
+
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
+		
 		$this->response->setOutput($this->load->view('product/search', $data));
 	}
 }

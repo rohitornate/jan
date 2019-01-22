@@ -1,6 +1,103 @@
 <?php
 class ControllerCheckoutCart extends Controller {
+	
+	/* AbandonedCarts - Begin */
+	private function update_abandonedCarts() {
+
+    $this->load->model('setting/setting');
+    
+    $abandonedCartsSettings = $this->model_setting_setting->getSetting('abandonedcarts', $this->config->get('store_id'));
+    $abandonedCartsSettings = isset($abandonedCartsSettings['abandonedcarts']) ? $abandonedCartsSettings['abandonedcarts'] : array();
+    
+    if ($abandonedCartsSettings['Enabled']=='yes') {
+			if (isset($this->session->data['abandonedCart_ID']) & !empty($this->session->data['abandonedCart_ID'])) {
+				$id = $this->session->data['abandonedCart_ID'];
+			} else if ($this->customer->isLogged()) {
+				$id = (!empty($this->session->data['abandonedCart_ID'])) ? $this->session->data['abandonedCart_ID'] : $this->customer->getEmail();
+			} else {
+				$id = (!empty($this->session->data['abandonedCart_ID'])) ? $this->session->data['abandonedCart_ID'] : session_id();
+			}
+
+			$ABcart = $this->cart->getProducts();
+
+			$exists = $this->db->query("SELECT * FROM `" . DB_PREFIX . "abandonedcarts` WHERE `restore_id` = '$id' AND `ordered`=0");
+
+			if (!empty($exists->row) && empty($ABcart)) {
+				$this->db->query("DELETE FROM `" . DB_PREFIX . "abandonedcarts` WHERE `restore_id` = '$id'");
+				$this->session->data['abandonedCart_ID']=''; 
+				unset($this->session->data['abandonedCart_ID']);
+			} else if (!empty($exists->row) && !empty($ABcart))	{
+				$cart = json_encode($ABcart);
+				$this->db->query("UPDATE `" . DB_PREFIX . "abandonedcarts` SET `cart` = '".$this->db->escape($cart)."', `date_modified`=NOW() WHERE `restore_id`='$id'");
+			}
+		}
+	}
+
+	private function register_abandonedCarts() {
+		$this->load->model('setting/setting');
+		$abandonedCartsSettings = $this->model_setting_setting->getSetting('abandonedcarts', $this->config->get('store_id'));
+		if (isset($abandonedCartsSettings['abandonedcarts']['Enabled']) && $abandonedCartsSettings['abandonedcarts']['Enabled']=='yes') { 
+			$ip = (!empty($_SERVER['REMOTE_ADDR'])) ? $_SERVER['REMOTE_ADDR'] : '*HiddenIP*';
+			if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+				$ip = $_SERVER["HTTP_CF_CONNECTING_IP"];
+        }
+        
+        if (isset($this->session->data['abandonedCart_ID']) & !empty($this->session->data['abandonedCart_ID'])) {
+            $id = $this->session->data['abandonedCart_ID'];
+        } else if ($this->customer->isLogged()) {
+            $id = (!empty($this->session->data['abandonedCart_ID'])) ? $this->session->data['abandonedCart_ID'] : $this->customer->getEmail();
+        } else {
+            $id = (!empty($this->session->data['abandonedCart_ID'])) ? $this->session->data['abandonedCart_ID'] : session_id();
+        }
+        $exists = $this->db->query("SELECT * FROM `" . DB_PREFIX . "abandonedcarts` WHERE `restore_id` = '$id' AND `ordered`=0");
+        $cart = $this->cart->getProducts();
+        $store_id = (int)$this->config->get('config_store_id');
+        $cart = (!empty($cart)) ? $cart : '';
+        
+        $lastpage = "$_SERVER[REQUEST_URI]";
+        
+        $checker = $this->customer->getId();
+        if (!empty($checker)) {
+            $customer = array(
+            'id'        => $this->customer->getId(), 
+            'email'     => $this->customer->getEmail(),		
+            'telephone' => $this->customer->getTelephone(),
+            'firstname' => $this->customer->getFirstName(),
+            'lastname'  => $this->customer->getLastName(),
+            'language'  => $this->session->data['language']
+            );
+        } 
+        
+        if (empty($exists->row)) {
+            if (!empty($cart)) {
+                if (!isset($customer)) {
+                    $customer = array(
+                        'language' => $this->session->data['language']
+                    );
+                }
+                $cart = json_encode($cart);
+                $customer = (!empty($customer)) ? json_encode($customer) : '';
+                $this->db->query("INSERT INTO `" . DB_PREFIX . "abandonedcarts` SET `cart`='".$this->db->escape($cart)."', `customer_info`='".$this->db->escape($customer)."', `last_page`='$lastpage', `ip`='$ip', `date_created`=NOW(), `date_modified`=NOW(), `restore_id`='".$id."', `store_id`='".$store_id."'");
+                $this->session->data['abandonedCart_ID'] = $id;
+            } 
+        } else {
+            if (!empty($cart)) {
+                $cart = json_encode($cart);
+                $this->db->query("UPDATE `" . DB_PREFIX . "abandonedcarts` SET `cart` = '".$this->db->escape($cart)."', `last_page`='".$this->db->escape($lastpage)."', `date_modified`=NOW() WHERE `restore_id`='$id'");
+            }
+            if (isset($customer)) {
+                $customer = json_encode($customer);
+                $this->db->query("UPDATE `" . DB_PREFIX . "abandonedcarts` SET `customer_info` = '".$this->db->escape($customer)."', `last_page`='".$this->db->escape($lastpage)."', `date_modified`=NOW() WHERE `restore_id`='$id'");
+            }
+        }
+    }
+}
+/* AbandonedCarts - End */
+	
+	
 	public function index() {
+            $link_array = explode('/',$_SERVER['QUERY_STRING']);
+                $data['end'] = end($link_array);
 		$this->load->language('checkout/cart');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -70,6 +167,7 @@ class ControllerCheckoutCart extends Controller {
 
 			$this->load->model('tool/image');
 			$this->load->model('tool/upload');
+			$this->load->model('catalog/product');
 
 			$data['products'] = array();
 
@@ -114,16 +212,31 @@ class ControllerCheckoutCart extends Controller {
 						'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
 					);
 				}
-
+                                $allPrice = $this->model_catalog_product->getAllPrice($product['product_id']);
+                              //  echo '<pre>'; print_r($allPrice); die();
 				// Display prices
 				if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
 					$unit_price = $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'));
-					
+                                        if($allPrice){
+                                        $custom_price = $this->currency->format($allPrice['price'], $this->session->data['currency']);
+                                        $custom_special = $this->currency->format($allPrice['special'], $this->session->data['currency']);
+                                        $discount = $allPrice['price']-$allPrice['special'];
+                                        $custom_discount = $this->currency->format($discount, $this->session->data['currency']);
+                                        $spclwithformat = $allPrice['special'];
+                                        }else{
+                                            $custom_price=false;
+                                            $custom_special=false;
+                                            $discount=false;
+                                            $custom_discount=false;
+                                            $spclwithformat=false;
+                                        }
 					$price = $this->currency->format($unit_price, $this->session->data['currency']);
 					$total = $this->currency->format($unit_price * $product['quantity'], $this->session->data['currency']);
+					$total1 = $unit_price * $product['quantity'];
 				} else {
 					$price = false;
 					$total = false;
+					$total1 = false;
 				}
 
 				$recurring = '';
@@ -147,10 +260,13 @@ class ControllerCheckoutCart extends Controller {
 						$recurring .= sprintf($this->language->get('text_payment_cancel'), $this->currency->format($this->tax->calculate($product['recurring']['price'] * $product['quantity'], $product['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']), $product['recurring']['cycle'], $frequencies[$product['recurring']['frequency']], $product['recurring']['duration']);
 					}
 				}
-
+				
+				
 				$data['products'][] = array(
 					'cart_id'   => $product['cart_id'],
+					'product_id'   => $product['product_id'],
 					'thumb'     => $image,
+					
 					'name'      => $product['name'],
 					'model'     => $product['model'],
 					'option'    => $option_data,
@@ -159,11 +275,39 @@ class ControllerCheckoutCart extends Controller {
 					'stock'     => $product['stock'] ? true : !(!$this->config->get('config_stock_checkout') || $this->config->get('config_stock_warning')),
 					'reward'    => ($product['reward'] ? sprintf($this->language->get('text_points'), $product['reward']) : ''),
 					'price'     => $price,
+                                        'custom_price'=>$custom_price,
+                                        'custom_special'=>$custom_special,
+                                        'custom_special_withoutformat'=>$spclwithformat,
+                                        'custom_discount'=>$custom_discount,
 					'total'     => $total,
+					'total1'     => $total1,
 					'href'      => $this->url->link('product/product', 'product_id=' . $product['product_id'])
 				);
 			}
 
+			
+			
+			if (isset($this->request->post['coupon'])) {
+				$data['coupon'] = $this->request->post['coupon'];			
+			} elseif (isset($this->session->data['coupon'])) {
+				$data['coupon'] = $this->session->data['coupon'];
+			} else {
+				$data['coupon'] = '';
+			}
+			
+			if (isset($this->request->post['coupon_value'])) {
+				$data['coupon_value'] = $this->request->post['coupon_value'];			
+			} elseif (isset($this->session->data['coupon_value'])) {
+				$data['coupon_value'] = $this->session->data['coupon_value'];
+			} else {
+				$data['coupon_value'] = '';
+			}
+			if(isset($this->session->data['coupon'])){
+				$data['removeIcon']='1';
+            }else{
+                $data['removeIcon']='0';
+            }
+			
 			// Gift Voucher
 			$data['vouchers'] = array();
 
@@ -282,6 +426,7 @@ class ControllerCheckoutCart extends Controller {
 	}
 
 	public function add() {
+//echo '<pre>'; print_r($this->request->post); die();
 		$this->load->language('checkout/cart');
 
 		$json = array();
@@ -302,7 +447,6 @@ class ControllerCheckoutCart extends Controller {
 			} else {
 				$quantity = $product_info['minimum'] ? $product_info['minimum'] : 1;
 			}
-
 			if (isset($this->request->post['option'])) {
 				$option = array_filter($this->request->post['option']);
 			} else {
@@ -339,9 +483,16 @@ class ControllerCheckoutCart extends Controller {
 
 			if (!$json) {
 				$this->cart->add($this->request->post['product_id'], $quantity, $option, $recurring_id);
+				/*
+				 // BOF - Betaout Opencart mod
+                $this->load->model('tool/betaout');
+                                //$this->model_tool_betaout->track();
+                $this->model_tool_betaout->trackEcommerceCartUpdate();
+                // EOF - Betaout Opencart mod
+				*/
 
 				$json['success'] = sprintf($this->language->get('text_success'), $this->url->link('product/product', 'product_id=' . $this->request->post['product_id']), $product_info['name'], $this->url->link('checkout/cart'));
-
+$this->register_abandonedCarts();
 				// Unset all shipping and payment methods
 				unset($this->session->data['shipping_method']);
 				unset($this->session->data['shipping_methods']);
@@ -411,6 +562,13 @@ class ControllerCheckoutCart extends Controller {
 		if (!empty($this->request->post['quantity'])) {
 			foreach ($this->request->post['quantity'] as $key => $value) {
 				$this->cart->update($key, $value);
+				/*
+				// BOF - Betaout Opencart mod
+                            $this->load->model('tool/betaout');
+                            $this->model_tool_betaout->track();
+            // EOF - Betaout Opencart mod
+			
+			*/
 			}
 
 			$this->session->data['success'] = $this->language->get('text_remove');
@@ -420,6 +578,7 @@ class ControllerCheckoutCart extends Controller {
 			unset($this->session->data['payment_method']);
 			unset($this->session->data['payment_methods']);
 			unset($this->session->data['reward']);
+			$this->update_abandonedCarts();
 
 			$this->response->redirect($this->url->link('checkout/cart'));
 		}
@@ -436,6 +595,14 @@ class ControllerCheckoutCart extends Controller {
 		// Remove
 		if (isset($this->request->post['key'])) {
 			$this->cart->remove($this->request->post['key']);
+			
+			/*
+			 // BOF - Betaout Opencart mod
+            $this->load->model('tool/betaout');
+            $this->model_tool_betaout->trackEcommerceCartUpdate();
+            // EOF - Betaout Opencart mod
+			*/
+			$this->update_abandonedCarts();
 
 			unset($this->session->data['vouchers'][$this->request->post['key']]);
 

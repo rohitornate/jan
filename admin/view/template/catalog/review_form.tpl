@@ -106,6 +106,112 @@
               <?php } ?>
             </div>
           </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-name"><?php echo $entry_rating; ?></label>
+            <div class="col-sm-10">
+              <label class="radio-inline">
+                <?php if ($rating_quality == 1) { ?>
+                <input type="radio" name="rating_quality" value="1" checked="checked" />
+                1
+                <?php } else { ?>
+                <input type="radio" name="rating_quality" value="1" />
+                1
+                <?php } ?>
+              </label>
+              <label class="radio-inline">
+                <?php if ($rating_quality == 2) { ?>
+                <input type="radio" name="rating_quality" value="2" checked="checked" />
+                2
+                <?php } else { ?>
+                <input type="radio" name="rating_quality" value="2" />
+                2
+                <?php } ?>
+              </label>
+              <label class="radio-inline">
+                <?php if ($rating_quality == 3) { ?>
+                <input type="radio" name="rating_quality" value="3" checked="checked" />
+                3
+                <?php } else { ?>
+                <input type="radio" name="rating_quality" value="3" />
+                3
+                <?php } ?>
+              </label>
+              <label class="radio-inline">
+                <?php if ($rating_quality == 4) { ?>
+                <input type="radio" name="rating_quality" value="4" checked="checked" />
+                4
+                <?php } else { ?>
+                <input type="radio" name="rating_quality" value="4" />
+                4
+                <?php } ?>
+              </label>
+              <label class="radio-inline">
+                <?php if ($rating_quality == 5) { ?>
+                <input type="radio" name="rating_quality" value="5" checked="checked" />
+                5
+                <?php } else { ?>
+                <input type="radio" name="rating_quality" value="5" />
+                5
+                <?php } ?>
+              </label>
+              <?php if ($error_rating) { ?>
+              <div class="text-danger"><?php echo $error_rating; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-name"><?php echo $entry_rating; ?></label>
+            <div class="col-sm-10">
+              <label class="radio-inline">
+                <?php if ($rating_price == 1) { ?>
+                <input type="radio" name="rating_price" value="1" checked="checked" />
+                1
+                <?php } else { ?>
+                <input type="radio" name="rating_price" value="1" />
+                1
+                <?php } ?>
+              </label>
+              <label class="radio-inline">
+                <?php if ($rating_price == 2) { ?>
+                <input type="radio" name="rating_price" value="2" checked="checked" />
+                2
+                <?php } else { ?>
+                <input type="radio" name="rating_price" value="2" />
+                2
+                <?php } ?>
+              </label>
+              <label class="radio-inline">
+                <?php if ($rating_price == 3) { ?>
+                <input type="radio" name="rating_price" value="3" checked="checked" />
+                3
+                <?php } else { ?>
+                <input type="radio" name="rating_price" value="3" />
+                3
+                <?php } ?>
+              </label>
+              <label class="radio-inline">
+                <?php if ($rating_price == 4) { ?>
+                <input type="radio" name="rating_price" value="4" checked="checked" />
+                4
+                <?php } else { ?>
+                <input type="radio" name="rating_price" value="4" />
+                4
+                <?php } ?>
+              </label>
+              <label class="radio-inline">
+                <?php if ($rating_price == 5) { ?>
+                <input type="radio" name="rating_price" value="5" checked="checked" />
+                5
+                <?php } else { ?>
+                <input type="radio" name="rating_price" value="5" />
+                5
+                <?php } ?>
+              </label>
+              <?php if ($error_rating) { ?>
+              <div class="text-danger"><?php echo $error_rating; ?></div>
+              <?php } ?>
+            </div>
+          </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-date-added"><?php echo $entry_date_added; ?></label>
             <div class="col-sm-3">

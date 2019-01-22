@@ -1,0 +1,46 @@
+@media #{$breakpoint-md}{
+    .container{width: 738px;} 
+    //float:none & width:auto
+    .md-flwinone{float: none; width: auto;}
+    //font sizes
+    .md-font25{@include font-size(25px);}
+    //Product Category Pages
+    @import "responsive/md/_category.scss";
+    //Product Detail
+    @import "responsive/md/_product-detail.scss";
+    //Cart
+    @import "responsive/md/_shopping-cart.scss";
+    //Checkout
+    @import "responsive/md/_Checkout.scss";
+    //header
+    header{
+        .login{padding-left: $space0; width: 485px; margin-left: 20px;}
+        .search-header{width: 560px;}
+        .logo{width: 320px; margin-top: $space5+1;}
+        .search-header{width: 485px; margin-left: 20px; padding-left: 0;}
+        .menu{
+            > ul{
+                > li{
+                    > a{padding: 15px 22px; text-transform: capitalize;}
+                }
+            }
+        }
+    }
+    //Home
+    .service{
+        li{padding: $space0; @include font-size(14px); line-height: $space20; padding: $space0 $space10; text-align: center;
+            &:before{position: inherit; display: block; margin: 0 auto;}
+        }
+    }
+    .wrapper{
+        section{ 
+            article{padding: 0 0 10px; float: none; width: auto; text-align: center;}
+            figure{@extend .md-flwinone;}
+        }
+        .one-half{
+            article{position: relative;
+                    h3{@extend .md-font25;}
+            }
+        }
+    }
+}

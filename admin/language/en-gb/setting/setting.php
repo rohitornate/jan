@@ -33,6 +33,38 @@ $_['text_security']                = 'Security';
 $_['text_upload']                  = 'Uploads';
 $_['text_error']                   = 'Error Handling';
 
+
+//analytics
+$_['text_classic']    		= 'Classic';
+		$_['text_universal']    	= 'Universal';
+		$_['text_enabled']    		= 'Enabled';
+		$_['text_disabled']    		= 'Disabled';
+		$_['text_exclude']    		= 'Exclude';
+		$_['text_include']    		= 'Include';
+		$_['text_no_track']    		= 'Do Not Track';
+		$_['text_track']    		= 'Track';
+
+
+$_['help_ga_exclude_admin']		       = 'Choose if you want front-end site activity being sent to Google Analytics when logged in to the back-end as admin. This covers all data sent to GA.';
+$_['help_ga_tracking_type']		       = 'You must check and select the correct type of tracking for your account or no data will be collected!';
+$_['help_ga_conversion_id']		       = 'If using AdWords, you can get this from the conversion code for the conversion you have set up in your adwords account';
+$_['help_ga_remarketing']		       = 'Set to Enabled if you have Remarketing campaigns enabled in a Google AdWords account that is linked to your Google Analytics account that you wish to track, or if you wish to take advantage of Demographics and Interests reporting.';
+$_['help_ga_cookie']		       	   = 'Set to Enabled if you are in the EU and wish to meet the requirements of the EU Cookie Law, which was enforced on 26th May 2012.';
+$_['help_ga_adwords']		       	   = 'Set to Enabled if you use Google Adwords and would like to track conversion data for your account';
+$_['help_ga_label']		      		   = 'If using AdWords, you can get this from the conversion code for the conversion you have set up in your adwords account';
+$_['help_ua_tracking']		       	   = 'Your unique analytics property ID. Example: UA-12345678-1';
+
+$_['error_ga_conversion_id']    = 'You have enabled AdWords conversion tracking but have not entered Conversion ID details!';
+$_['error_ga_label']            = 'You have enabled AdWords conversion tracking but have not entered Conversion Label details!';
+
+
+
+
+
+
+
+
+
 // Entry
 $_['entry_meta_title']             = 'Meta Title';
 $_['entry_meta_description']       = 'Meta Tag Description';

@@ -1,0 +1,248 @@
+
+
+.banner{ text-align:center;  position:relative; max-width:1448px; margin:$space10+2 auto $space0;
+ .flexslider{ box-shadow:none; margin:0;}
+ .flex-direction-nav{
+     a{ opacity:1; margin:-50px 0 0; 
+    
+     }
+  .flex-prev{ left:0; @include size(49px,103px);  background:$white url(../images/direction-left.png) no-repeat center;
+ 
+  }
+  .flex-next{ right:0; background:$white url(../images/direction-right.png) no-repeat center;  @include size(49px,103px);}
+ }
+ 
+
+}
+
+.service{
+    ul{ margin:$space20 auto $space15;
+        li{ 
+           color:$black; @include font-size($font20); display:inline-block; width:23%; border-right:1px solid #d2d3da; padding-left:$space60+5; line-height:$space25+1; position:relative; margin-left:$space20;
+        &:before{ position:absolute ; left:0; top:0px; content:''; @include size(53px,53px); @include my-icons-sprite(certficate);}
+        &:nth-child(2){
+            &:before{ @include my-icons-sprite(money-back);}
+            
+        }
+          &:nth-child(3){
+            &:before{ @include my-icons-sprite(shipping);}
+            
+        }
+          &:nth-child(4){
+            &:before{ @include my-icons-sprite(pricing);}
+            
+        }
+        &:last-child{ border-right:0;}
+        }
+        
+    } 
+    
+}
+
+
+.wrapper{
+    background:$bg-pink-light; padding-top:$space40; padding-bottom:$space40+30;
+    
+    .page-head{ 
+ 
+          h2{span { background:$bg-pink-light; } }
+ 
+    
+    
+    
+}
+
+.one-half-main{ display:flex; justify-content:space-between;}
+
+.one-half{  width:49%; padding:$space25 $space30;  background:$white; border:1px solid #cccccc; margin-bottom:$space30+2;
+  article{ float:left; width:40%; padding-top:$space25;
+    h3{ @include font-size($font30); color:$grey; font-family:$ubuntulight; text-transform:uppercase; margin-bottom:$space15;
+     span{ font-family:$ubunturegular; display:inline-block; margin-top:$space5+2;}
+    }
+   a{ border:$grey-border; color:$grey-regular;  @include font-size($font14+1); @include border-radius(3px); padding:$space5+4 $space10+3 ; display:inline-block; 
+   &:hover{ background:$pink; color:$white; border:1px solid $pink;}
+   } 
+   
+   }
+     figure{ float:left; width:60%; margin:0; text-align:center;
+      &.space-top{ margin-top:-20px;}
+     }
+&.handmade{ padding:$space0;
+ img{width:100%; vertical-align:bottom; }
+
+}
+
+
+}
+
+
+.one-third-main{ display:flex; justify-content:space-between;}
+
+.one-third{  width:32%;  background:$white; border:1px solid #cccccc; margin-bottom:$space30+2;
+  article{ 
+    h3{ @include font-size($font30); color:$grey; font-family:$ubuntulight; text-transform:uppercase; margin-bottom:$space0;
+     span{ font-family:$ubunturegular; display:block; margin-top:$space5+2;}
+    }
+   a{ border:$grey-border; color:$grey-regular;  @include font-size($font14+1); @include border-radius(3px); padding:$space5+4 $space10+3 ; display:inline-block; 
+   &:hover{ background:$pink; color:$white; border:1px solid $pink;}
+   } 
+   &.collection{margin-top:$space0 - 16;padding-left:$space10+2;}
+   &.deals{ padding:$space30;
+            h3{
+                span{ display:inline-block;}
+            }
+      p{ font-family:$ubuntulight; line-height:$space25+1; color:$grey; @include font-size($font16);}      
+   }
+   }
+     figure{ margin:0; text-align:center; img{ vertical-align:top;} }
+     &.stories{
+         img{ width:100%;vertical-align:bottom;}
+     }
+}
+
+
+section{background:$white; border:1px solid #cccccc; padding:$space30 $space30 $space0; margin-bottom:$space30+2;
+   article{ float:left; width:40%; padding-top:$space50;
+    h3{ @include font-size($font30); color:$grey; font-family:$ubuntulight; text-transform:uppercase; margin-bottom:$space15;
+     span{ font-family:$ubunturegular; display:inline-block;}
+    }
+   a{ border:$grey-border; color:$grey-regular;  @include font-size($font14+1); @include border-radius(3px); padding:$space5+4 $space10+3 ; display:inline-block; 
+   &:hover{ background:$pink; color:$white; border:1px solid $pink;}
+   } 
+    p{ font-family:$ubuntulight; line-height:$space25+1; color:$grey; @include font-size($font16);}
+   }
+   figure{ float:left; width:60%; margin:0; text-align:center;}
+  &.hearts-jewellry{ padding:$space0 $space30 $space20+5;}
+}
+
+.blog-box{display:flex; justify-content:space-between; flex-wrap:wrap; padding-bottom:$space25+5;
+          
+figcaption{ padding:$space25;
+    position:absolute; bottom:80px; left:0; @include border-radius(0 10px 10px 0);background-color: #fff; @include box-shadow(1px 1px 6px rgba(121,121,121,.22));
+   h4{ @include font-size($font22); text-transform:uppercase; 
+   span{ color:$pink;}
+   }
+   p{ @include font-size($font16); color:$black; font-family:$ubuntulight; line-height:$space25;}
+}
+
+} 
+
+.ring-blog{ width:776px; background:$white; border:1px solid #cccccc; position:relative;
+ img{ vertical-align:bottom;}
+}
+
+.brightstone-blog{ width:362px; background:$white; border:1px solid #cccccc; position:relative;
+    img{ vertical-align:bottom;}
+    figcaption{ padding-left:$space35;
+         h4{span{ display:block; padding-top:$space5+2;} }
+ }
+  
+}
+
+
+
+
+
+.blog-common{ width:49%; background:$white; border:1px solid #cccccc; position:relative; margin-top:$space30+2;
+    figcaption{ padding-left:$space35;
+         h4{span{ display:block; padding-top:$space5+2;} }
+ }
+  img{ vertical-align:bottom; width:100%;}
+}
+
+
+.customer-box{display:flex; justify-content:space-between; flex-wrap:wrap; position:relative;  padding:$space0 $space40+4; 
+           .flex-direction-nav{
+     a{ opacity:1; margin:-50px 0 0; 
+    
+     }
+  .flex-prev{ left:0; @include size(15px,103px);  background:url(../images/direction-left-black.png) no-repeat center; outline:none;
+ 
+  }
+  .flex-next{ right:0; background:url(../images/direction-right-black.png) no-repeat center;  @include size(15px,103px); outline:none;}
+ }
+ 
+
+} 
+
+.customer{ background:$white; margin-bottom:$space20+5;
+     figure{ position:relative;
+             img{ width:100%;}
+      figcaption{ background:$white; border:1px solid #cccccc; @include border-radius(25px); padding:$space5 $space10; @include size(165px,32px); text-align:center; text-transform:uppercase; @include font-size($font10+1); position:absolute; bottom:-15px; left:50%; @include transform(translate(-50%, 0px));  
+       i{@include my-icons-sprite(customer); display:inline-block; @include size(21px,21px); vertical-align:middle; margin-bottom:$space5+2; margin-right:$space5+2;}
+      }
+     
+     }
+     article{ padding:$space30 $space25 $space35;
+              .detail{ display:inline-block;  
+                  strong{ font-family:$ubuntumedium; @include font-size($font14+1); color:$common;}
+                  small{font-family:$ubuntulight; @include font-size($font12); display:block; padding-top:$space5+2;}
+            
+              }
+              .city{ font-size:$font12+1; font-family:$ubuntumedium; color:$black; float:right; position:relative; padding-left:$space15;
+              &:before{ @include my-icons-sprite(location); @include size(10px,14px); position:absolute; left:0; top:0; content:''; }
+              
+              }
+                   
+     p{ @include font-size($font12+1); color:$common; line-height:$space20+2; padding-top:$space10+3; position:relative; 
+       &:after{ @include my-icons-sprite(quoto); @include size(24px,19px); position:absolute; right:0; bottom:-24px; content:'';}
+     }
+     
+     
+     }  
+     
+}
+
+.news-box{display:flex; justify-content:space-between; flex-wrap:wrap; position:relative;
+          .flexslider{ box-shadow:none; margin:0;}
+         .flex-direction-nav{ a{ opacity:1; margin:-62px 0 0; }
+  .flex-prev{ left:10px; @include size(15px,125px);  background:url(../images/direction-left-small.png) no-repeat center; outline:none;}
+  .flex-next{ right:10px; background:url(../images/direction-right-small.png) no-repeat center;  @include size(15px,125px); outline:none;}
+         }
+          
+          
+    .one-half{ background:$white; width:48%; border:none; margin:0; text-align:center; padding:$space30 $space0; text-align:center;
+     &:last-child{
+               img{ padding-right:$space20;
+                    &:last-child{
+                         padding-right:$space0;
+                    }
+               }
+     }
+     img{ max-width:100%; width:auto; display:inline-block;}
+    }
+}
+
+
+
+
+
+}
+
+
+.folllow-us{ text-align:center; display:flex; justify-content:space-between; flex-wrap:wrap; padding:$space5; margin-bottom:$space25; 
+
+ 
+             
+             
+      .social-col{ width:48.5%;  
+          .title{ font-size:$font20; color:$black; display:block; padding-bottom:$space5 - 3;  @include all-my-icons-sprites; 
+           i{ @include size(34px,32px); display:inline-block; vertical-align:middle; margin-bottom:$space10; }
+           .facebook{@include size(20px,32px);}
+           
+          }
+          figure{background-color:#fff;@include box-shadow(0 0 5px rgba(0,0,0,.12)); padding:$space5; }
+      }
+
+}
+
+        .page-head{ text-align:center; padding:$space45 $space0; width:100%; 
+ 
+          h2{border-bottom:1px solid #fb6f6f; line-height:0;  @include font-size($font30); color:$grey-dark; font-family:$ubuntulight;  margin-bottom:$space0 - 15;
+          strong{ font-family:$ubuntumedium; color:$grey} span { background:$white;  padding:$space0 $space15; }
+          }
+ 
+     p{ @include font-size($font12+1); color:$darkblue; font-family:$ubuntulight; line-height:$space20+2; margin-top:$space50;}
+    
+    
+}  

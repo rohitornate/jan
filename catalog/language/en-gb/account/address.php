@@ -3,6 +3,7 @@
 $_['heading_title']        = 'Address Book';
 
 // Text
+$_['text_home']            = 'Home';
 $_['text_account']         = 'Account';
 $_['text_address_book']    = 'Address Book Entries';
 $_['text_edit_address']    = 'Edit Address';

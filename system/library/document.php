@@ -6,11 +6,19 @@ class Document {
 	private $links = array();
 	private $styles = array();
 	private $scripts = array();
-
+private $ogmetas = array();
 	public function setTitle($title) {
 		$this->title = $title;
 	}
-
+public function addOGMeta($meta_name, $content) {
+		            $this->ogmetas[] = array(
+		        	'meta_name'  => $meta_name,
+	        		'content'   => $content
+	            	);
+            	}
+				public function getOGMeta() {
+            		return $this->ogmetas;
+            	}
 	public function getTitle() {
 		return $this->title;
 	}
@@ -18,7 +26,13 @@ class Document {
 	public function setDescription($description) {
 		$this->description = $description;
 	}
+	public function isMobile() {
+		return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+	}
 
+	
+	
+	
 	public function getDescription() {
 		return $this->description;
 	}

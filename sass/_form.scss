@@ -1,0 +1,47 @@
+
+    
+    .form-control{outline: 0; @include size(100%,36px); padding:$space0 $space10; @include border-radius(3px); border:1px solid #dadada; @include font-size($font12+1); color:$black; @include input-placeholder{ color:#7c7c7c}; } 
+     
+    .btn-default{
+          background:$bg-btn; @include font-size($font14+1); color:$black; padding:$space10+1 $space10; display:block; border:none; cursor:pointer; width:100%; text-transform:uppercase;   
+        
+    }
+    
+     .btn-yellow{
+          background:$yellow; @include font-size($font18); color:$white; padding:$space10; display:block; border:none; cursor:pointer; width:100%; text-transform:uppercase; @include all-my-icons-sprites; 
+        i{ display:inline-block;  @include size(22px,18px); margin-left:$space10; margin-bottom:$space0 - 3;}  
+        &:hover{background:darken($yellow,5%);}
+    }
+    
+    .btn-yellow-small{ width:165px!important;  
+                      i{ margin-left:$space0; margin-right:$space10;}
+    }
+
+//Ceckbox & Radio
+.checkbox-inline, .radio-inline {
+    position: relative;
+    display: inline-block;
+    padding-right: 10px;
+    margin-bottom: 0;
+    font-weight: 400;
+    vertical-align: middle;
+    cursor: pointer;
+}
+//Others
+.text-danger{color: #a94442; padding-top: 8px; @include font-size(13px);}
+
+
+.text-right {
+    text-align: right;
+}
+
+.btn{@include font-size($font14+1); padding:$space10+1 $space10; display: inline-block;}
+.btn-danger {
+    color: #ffffff;
+    background-color: #da4f49;
+}
+.btn-info {color: #fff; background-color: #5bc0de;}
+
+.buttons {
+    margin: 16px 0;
+}

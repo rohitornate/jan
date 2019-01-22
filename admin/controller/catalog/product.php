@@ -20,6 +20,31 @@ class ControllerCatalogProduct extends Controller {
 		$this->load->model('catalog/product');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+			
+		$productName = null;
+			foreach ($this->request->post['product_description'] as $language_id => $value) {
+				$productName = $value['name'];
+				break;
+			}
+			$productName = trim($productName);
+			
+			$productName = trim($productName);
+			if($this->model_catalog_product->isProductWithNameExists($this->db->escape($productName))) {
+				$this->error['name'][1] = $this->language->get('error_duplicateName');
+				$this->getForm();
+				return ;
+			}
+			if($this->model_catalog_product->isProductWithModelExists($this->db->escape($this->request->post['model']))) {
+				$this->error['model'] = $this->language->get('error_duplicateModel');
+				$this->getForm();
+				return ;
+			}
+			if($this->model_catalog_product->isProductWithSkuExists($this->db->escape($this->request->post['sku']))) {
+				$this->error['sku'][1] = $this->language->get('error_duplicateSku');
+				$this->getForm();
+				return ;
+			}
+
 			$this->model_catalog_product->addProduct($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -44,6 +69,9 @@ class ControllerCatalogProduct extends Controller {
 
 			if (isset($this->request->get['filter_status'])) {
 				$url .= '&filter_status=' . $this->request->get['filter_status'];
+			}
+			if (isset($this->request->get['filter_category'])) {
+				$url .= '&filter_category=' . $this->request->get['filter_category'];
 			}
 
 			if (isset($this->request->get['sort'])) {
@@ -96,6 +124,10 @@ class ControllerCatalogProduct extends Controller {
 
 			if (isset($this->request->get['filter_status'])) {
 				$url .= '&filter_status=' . $this->request->get['filter_status'];
+			}
+			
+			if (isset($this->request->get['filter_category'])) {
+				$url .= '&filter_category=' . $this->request->get['filter_category'];
 			}
 
 			if (isset($this->request->get['sort'])) {
@@ -150,6 +182,9 @@ class ControllerCatalogProduct extends Controller {
 
 			if (isset($this->request->get['filter_status'])) {
 				$url .= '&filter_status=' . $this->request->get['filter_status'];
+			}
+			if (isset($this->request->get['filter_category'])) {
+				$url .= '&filter_category=' . $this->request->get['filter_category'];
 			}
 
 			if (isset($this->request->get['sort'])) {
@@ -248,7 +283,17 @@ class ControllerCatalogProduct extends Controller {
 		} else {
 			$filter_quantity = null;
 		}
-
+		if (isset($this->request->get['filter_date_added'])) {
+			$filter_date_added = $this->request->get['filter_date_added'];
+		} else {
+			$filter_date_added = null;
+		}
+		
+		if (isset($this->request->get['filter_date_modified'])) {
+			$filter_date_modified = $this->request->get['filter_date_modified'];
+		} else {
+			$filter_date_modified = null;
+		}
 		if (isset($this->request->get['filter_status'])) {
 			$filter_status = $this->request->get['filter_status'];
 		} else {
@@ -260,17 +305,22 @@ class ControllerCatalogProduct extends Controller {
 		} else {
 			$filter_image = null;
 		}
+		if (isset($this->request->get['filter_category'])) {
+			$filter_category = $this->request->get['filter_category'];
+		} else {
+			$filter_category = null;
+		}
 
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'pd.name';
+			$sort = 'p.product_id';
 		}
 
 		if (isset($this->request->get['order'])) {
 			$order = $this->request->get['order'];
 		} else {
-			$order = 'ASC';
+			$order = 'DESC';
 		}
 
 		if (isset($this->request->get['page'])) {
@@ -303,6 +353,16 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->get['filter_image'])) {
 			$url .= '&filter_image=' . $this->request->get['filter_image'];
+		}
+		if (isset($this->request->get['filter_category'])) {
+			$url .= '&filter_category=' . $this->request->get['filter_category'];
+		}
+		if (isset($this->request->get['filter_date_added'])) {
+			$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
+		}
+		
+		if (isset($this->request->get['filter_date_modified'])) {
+			$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
 		}
 
 		if (isset($this->request->get['sort'])) {
@@ -342,6 +402,9 @@ class ControllerCatalogProduct extends Controller {
 			'filter_quantity' => $filter_quantity,
 			'filter_status'   => $filter_status,
 			'filter_image'    => $filter_image,
+			'filter_category'    => $filter_category,
+			'filter_date_added'    => $filter_date_added,
+			'filter_date_modified' => $filter_date_modified,
 			'sort'            => $sort,
 			'order'           => $order,
 			'start'           => ($page - 1) * $this->config->get('config_limit_admin'),
@@ -354,6 +417,12 @@ class ControllerCatalogProduct extends Controller {
 
 		$results = $this->model_catalog_product->getProducts($filter_data);
 
+		//filter category start 5//
+		$this->load->model('catalog/category');
+		$data['categories'] = $this->model_catalog_category->getCategories(0);
+		//filter category end//
+		
+		
 		foreach ($results as $result) {
 			if (is_file(DIR_IMAGE . $result['image'])) {
 				$image = $this->model_tool_image->resize($result['image'], 40, 40);
@@ -361,6 +430,10 @@ class ControllerCatalogProduct extends Controller {
 				$image = $this->model_tool_image->resize('no_image.png', 40, 40);
 			}
 
+			//filter category start 6//
+			$category =  $this->model_catalog_product->getProductCategories($result['product_id']);
+			//filter category end//
+			
 			$special = false;
 
 			$product_specials = $this->model_catalog_product->getProductSpecials($result['product_id']);
@@ -379,7 +452,10 @@ class ControllerCatalogProduct extends Controller {
 				'name'       => $result['name'],
 				'model'      => $result['model'],
 				'price'      => $result['price'],
+				'date_added'    => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+				'date_modified' => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
 				'special'    => $special,
+				'category'   => $category,
 				'quantity'   => $result['quantity'],
 				'status'     => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'edit'       => $this->url->link('catalog/product/edit', 'token=' . $this->session->data['token'] . '&product_id=' . $result['product_id'] . $url, true)
@@ -401,6 +477,9 @@ class ControllerCatalogProduct extends Controller {
 		$data['column_quantity'] = $this->language->get('column_quantity');
 		$data['column_status'] = $this->language->get('column_status');
 		$data['column_action'] = $this->language->get('column_action');
+		$data['column_date_added'] = $this->language->get('column_date_added');
+		$data['entry_date_added'] = $this->language->get('entry_date_added');
+		$data['entry_date_modified'] = $this->language->get('entry_date_modified');
 
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_model'] = $this->language->get('entry_model');
@@ -458,11 +537,14 @@ class ControllerCatalogProduct extends Controller {
 		if (isset($this->request->get['filter_status'])) {
 			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
-
+		
+		if (isset($this->request->get['filter_category'])) {
+			$url .= '&filter_category=' . $this->request->get['filter_category'];
+		}
 		if (isset($this->request->get['filter_image'])) {
 			$url .= '&filter_image=' . $this->request->get['filter_image'];
 		}
-
+		
 		if ($order == 'ASC') {
 			$url .= '&order=DESC';
 		} else {
@@ -472,14 +554,17 @@ class ControllerCatalogProduct extends Controller {
 		if (isset($this->request->get['page'])) {
 			$url .= '&page=' . $this->request->get['page'];
 		}
-
+		$data['sort_id'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.product_id' . $url, true);
+		
 		$data['sort_name'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=pd.name' . $url, true);
 		$data['sort_model'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.model' . $url, true);
 		$data['sort_price'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.price' . $url, true);
 		$data['sort_quantity'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.quantity' . $url, true);
 		$data['sort_status'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.status' . $url, true);
 		$data['sort_order'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.sort_order' . $url, true);
-
+		$data['sort_date_added'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.date_added' . $url, true);
+		$data['sort_date_modified'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.date_modified' . $url, true);
+		
 		$url = '';
 
 		if (isset($this->request->get['filter_name'])) {
@@ -505,13 +590,23 @@ class ControllerCatalogProduct extends Controller {
 		if (isset($this->request->get['filter_image'])) {
 			$url .= '&filter_image=' . $this->request->get['filter_image'];
 		}
-
+		
+		if (isset($this->request->get['filter_category'])) {
+			$url .= '&filter_category=' . $this->request->get['filter_category'];
+		}
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
 		}
 
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
+		}
+		if (isset($this->request->get['filter_date_added'])) {
+			$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
+		}
+		
+		if (isset($this->request->get['filter_date_modified'])) {
+			$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
 		}
 
 		$pagination = new Pagination();
@@ -529,8 +624,10 @@ class ControllerCatalogProduct extends Controller {
 		$data['filter_price'] = $filter_price;
 		$data['filter_quantity'] = $filter_quantity;
 		$data['filter_status'] = $filter_status;
+		$data['filter_category'] = $filter_category;
 		$data['filter_image'] = $filter_image;
-
+		$data['filter_date_added'] = $filter_date_added;
+		$data['filter_date_modified'] = $filter_date_modified;
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 
@@ -573,6 +670,8 @@ class ControllerCatalogProduct extends Controller {
 		$data['entry_isbn'] = $this->language->get('entry_isbn');
 		$data['entry_mpn'] = $this->language->get('entry_mpn');
 		$data['entry_location'] = $this->language->get('entry_location');
+		$data['entry_no_follow'] = $this->language->get('entry_no_follow');
+		$data['entry_alt'] = $this->language->get('entry_alt');
 		$data['entry_minimum'] = $this->language->get('entry_minimum');
 		$data['entry_shipping'] = $this->language->get('entry_shipping');
 		$data['entry_date_available'] = $this->language->get('entry_date_available');
@@ -684,6 +783,11 @@ class ControllerCatalogProduct extends Controller {
 		} else {
 			$data['error_keyword'] = '';
 		}
+		if (isset($this->error['special'])) {
+			$data['error_special'] = $this->error['special'];
+		} else {
+			$data['error_special'] = '';
+		}
 
 		$url = '';
 
@@ -705,6 +809,9 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->get['filter_status'])) {
 			$url .= '&filter_status=' . $this->request->get['filter_status'];
+		}
+		if (isset($this->request->get['filter_category'])) {
+			$url .= '&filter_category=' . $this->request->get['filter_category'];
 		}
 
 		if (isset($this->request->get['sort'])) {
@@ -820,6 +927,20 @@ class ControllerCatalogProduct extends Controller {
 		} else {
 			$data['location'] = '';
 		}
+		if (isset($this->request->post['alt'])) {
+			$data['alt'] = $this->request->post['alt'];
+		} elseif (!empty($product_info)) {
+			$data['alt'] = $product_info['alt'];
+		} else {
+			$data['alt'] = '';
+		}
+		if (isset($this->request->post['no_follow'])) {
+			$data['no_follow'] = $this->request->post['no_follow'];
+		} elseif (!empty($product_info)) {
+			$data['no_follow'] = $product_info['no_follow'];
+		} else {
+			$data['no_follow'] = '';
+		}
 
 		$this->load->model('setting/store');
 
@@ -840,6 +961,14 @@ class ControllerCatalogProduct extends Controller {
 		} else {
 			$data['keyword'] = '';
 		}
+		if (isset($this->request->post['video_url'])) {
+			$data['video_url'] = $this->request->post['video_url'];
+		} elseif (!empty($product_info)) {
+			$data['video_url'] = $product_info['video_url'];
+		} else {
+			$data['video_url'] = '';
+		}
+
 
 		if (isset($this->request->post['shipping'])) {
 			$data['shipping'] = $this->request->post['shipping'];
@@ -1237,7 +1366,8 @@ class ControllerCatalogProduct extends Controller {
 			$data['product_images'][] = array(
 				'image'      => $image,
 				'thumb'      => $this->model_tool_image->resize($thumb, 100, 100),
-				'sort_order' => $product_image['sort_order']
+				'sort_order' => $product_image['sort_order'],
+				'image_alt' => $product_image['image_alt']
 			);
 		}
 
@@ -1339,6 +1469,12 @@ class ControllerCatalogProduct extends Controller {
 		if ((utf8_strlen($this->request->post['model']) < 1) || (utf8_strlen($this->request->post['model']) > 64)) {
 			$this->error['model'] = $this->language->get('error_model');
 		}
+		foreach ($this->request->post['product_special'] as $special => $data) {
+			//print_r($data['price']);
+		if (($this->request->post['price']) < ($data['price']) ) {
+			$this->error['special'] = $this->language->get('error_special');
+		}
+		}
 
 		if (utf8_strlen($this->request->post['keyword']) > 0) {
 			$this->load->model('catalog/url_alias');
@@ -1399,7 +1535,7 @@ class ControllerCatalogProduct extends Controller {
 			if (isset($this->request->get['limit'])) {
 				$limit = $this->request->get['limit'];
 			} else {
-				$limit = 5;
+				$limit = 15;
 			}
 
 			$filter_data = array(

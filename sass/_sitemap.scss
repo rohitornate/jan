@@ -1,0 +1,14 @@
+.sitemap{
+    a{color: #545454;}
+    article{ display: flex; padding: 30px 0; border-bottom: $border1 #e4e8ec;
+    @include last(1){border-bottom: 0;}
+    }
+    ul{width: 16.66%; padding-right: $space10;}
+    li{padding: $space10 $space0;
+        &:first-child{
+            a{@include font-size(17px); @extend .font-medium; color: #000;
+              &:after{display: inline-block; font-family: 'FontAwesome'; color: #c2c2c2; content: '\f0da'; margin-left: 6px;}
+            }
+        }
+    }
+}

@@ -70,6 +70,7 @@ class ControllerAccountOrder extends Controller {
 				'order_id'   => $result['order_id'],
 				'name'       => $result['firstname'] . ' ' . $result['lastname'],
 				'status'     => $result['status'],
+				'tracking_code'     => $result['tracking_code'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'products'   => ($product_total + $voucher_total),
 				'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
@@ -117,7 +118,7 @@ class ControllerAccountOrder extends Controller {
 		$this->load->model('account/order');
 
 		$order_info = $this->model_account_order->getOrder($order_id);
-
+		
 		if ($order_info) {
 			$this->document->setTitle($this->language->get('text_order'));
 
@@ -175,6 +176,7 @@ class ControllerAccountOrder extends Controller {
 
 			$data['button_reorder'] = $this->language->get('button_reorder');
 			$data['button_return'] = $this->language->get('button_return');
+			$data['button_close'] = $this->language->get('button_close');
 			$data['button_continue'] = $this->language->get('button_continue');
 
 			if (isset($this->session->data['error'])) {
@@ -198,6 +200,18 @@ class ControllerAccountOrder extends Controller {
 			} else {
 				$data['invoice_no'] = '';
 			}
+			
+			if ($order_info['order_status_id']) {
+				$data['order_status_id'] = $order_info['order_status_id'];
+			} else {
+				$data['order_status_id'] = '';
+			}
+			
+			if ($order_info['invoice_no']) {
+				$data['invoice_num'] = $order_info['invoice_no'];
+			} else {
+				$data['invoice_num'] = '';
+			}
 
 			$data['order_id'] = $this->request->get['order_id'];
 			$data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
@@ -207,6 +221,8 @@ class ControllerAccountOrder extends Controller {
 			} else {
 				$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
 			}
+			
+			  
 
 			$find = array(
 				'{firstname}',
@@ -276,15 +292,24 @@ class ControllerAccountOrder extends Controller {
 
 			$this->load->model('catalog/product');
 			$this->load->model('tool/upload');
+			$this->load->model('tool/image');
 
 			// Products
 			$data['products'] = array();
 
 			$products = $this->model_account_order->getOrderProducts($this->request->get['order_id']);
-
+			
 			foreach ($products as $product) {
 				$option_data = array();
 
+				if ($product['image']) {
+					$image = $this->model_tool_image->resize($product['image'], 100, 100);
+				} else {
+					$image = '';
+				}
+				// calcel id fatch in cancel order table 
+                $data['cancel_id'] = $this->model_account_order->getCancel($this->request->get['order_id'],$product['product_id']);
+				
 				$options = $this->model_account_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']);
 
 				foreach ($options as $option) {
@@ -317,12 +342,15 @@ class ControllerAccountOrder extends Controller {
 				$data['products'][] = array(
 					'name'     => $product['name'],
 					'model'    => $product['model'],
+					'invoice_num'    => $data['invoice_num'],
+					'thumb'     => $image,
 					'option'   => $option_data,
 					'quantity' => $product['quantity'],
 					'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
 					'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
 					'reorder'  => $reorder,
-					'return'   => $this->url->link('account/return/add', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], true)
+					'return'   => $this->url->link('account/return/add', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], true),
+					'close'   => $this->url->link('account/return/cancel', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], true)
 				);
 			}
 

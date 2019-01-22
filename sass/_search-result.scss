@@ -1,0 +1,8 @@
+.search-result{
+    .heading-bg{text-transform: inherit; text-transform: capitalize;}
+    h2{font-size: 15px; color: #545454;text-transform: initial; font-family: $ubunturegular; padding-top: 8px;}
+    .sebox{width: 20%; float: left; margin:10px 20px 30px 0;
+           label{display: block; padding-bottom: $space5;}
+    }
+    select{background:#fff url(../images/drop-quantity.png) no-repeat right center; @include appearance(none); cursor: pointer;}
+}

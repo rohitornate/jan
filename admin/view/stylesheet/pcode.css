@@ -1,0 +1,117 @@
+.box > .heading {
+  background: white;
+}
+.box > .heading h1 {
+color: rgb(115, 115, 115);
+}
+.heading a.button {
+text-decoration: none;
+color: white;
+display: inline-block;
+padding: 5px 15px 5px 15px;
+background: #6B6B6B;
+-webkit-border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-khtml-border-radius: 10px 10px 10px 10px;
+border-radius: 10px 10px 10px 10px;
+}
+.navigation {
+  margin-bottom: 15px;
+background: dimgrey;
+height: 38px;
+padding-left: 7px;
+padding-right: 7px;
+border: 1px solid #DBDBDB;
+border-radius: 7px 7px 0px 0px;
+display: block;
+}
+.box > .navigation .buttons {
+float: right;
+padding-top: 7px;
+margin-right: 5px;
+}
+
+.box > .navigation .buttons .button {
+margin-left: 5px;
+}
+.navigation a.button {
+text-decoration: none;
+color: #470C0C;
+display: inline-block;
+padding: 5px 15px 5px 15px;
+background: #E6E6E6;
+-webkit-border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-khtml-border-radius: 10px 10px 10px 10px;
+border-radius: 10px 10px 10px 10px;
+}
+
+tr td {
+  background-color: #F5F5F5;
+}
+
+
+table { border-collapse: collapse; text-align: left; width: 100%; }
+table td, .datagrid table th { padding: 3px 10px; }
+table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');background-color:#006699; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 1px solid #0070A8; } 
+table thead th:first-child { border: none; }
+table tbody td { color: #00496B; border-left: 1px solid #E1EEF4;font-size: 12px;font-weight: normal; }
+table tbody tr:nth-child(2n) { background: #E1EEF4; color: #00496B; }
+table tbody td:first-child { border-left: none; }
+table tbody tr:last-child td { border-bottom: none; }
+
+.box > .heading h1 img {
+margin-top: -5px;
+}
+.others{text-align:right;margin-top:6px;margin-bottom:6px}.others a{float:right;clear:both}
+
+.headerinfo {
+	font-size: large;
+	font-style: italic;
+	color:darkslategrey;
+}
+.postcode-panel{
+	    box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+	border:none;
+}
+.postcode-panel .panel-heading{
+	    color: #fff;
+    border-color: unset;
+    background: #000;
+}
+.postcode-panel tbody > tr > td,.table-bordered > thead > tr > td{
+	    border: 1px solid #eee;
+		background: #fff;
+		border-bottom-width:1px;
+}
+.postcode-panel tr > td a,.postcode-panel .table thead td span[data-toggle="tooltip"]:after,.postcode-panel label.control-label span:after{
+	color: #000;
+}
+.postcode-panel .form-control:focus{
+	    border-color: #000;
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(0, 0, 0, .5);
+}
+.postcode-btn,.postcode-btn i{
+	color: #fff;
+    background-color: #000;
+    border-color: #000;
+    font-size: 15px;
+}
+.postcode-btn:hover{
+	color: #fff;
+}
+.postcode-panel .well{
+    background-color: #fff;	
+}
+.postcode-btn:focus,.postcode-btn:active:focus,.postcode-alt-btn:focus,.postcode-alt-btn:focus ,.postcode-alt-btn:active:focus {
+	outline:5px auto #000;
+}
+.postcode-panel input[type="checkbox"]:focus{
+	border-color:#000;
+}
+.postcode-alt-btn{
+	color: #000;
+	background-color: #fff;
+    border-color: #000;
+}

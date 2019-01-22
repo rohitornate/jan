@@ -1,0 +1,31 @@
+user-agent: *
+Disallow: /*&limit
+Disallow: /*?limit
+Disallow: /*&sort
+Disallow: /*&filter
+Disallow: /*?route=checkout/
+Disallow: /*?route=account/
+Disallow: /*?route=product/search
+Disallow: /*?route=product/product
+Disallow: /*?route=affiliate/
+Disallow: /*?page
+Disallow: /page*
+Disallow: /*page
+Disallow: /*?pages
+Disallow: /*?route
+Disallow: /*?sort
+Disallow: /*?filter
+Disallow: /*?option_value
+Disallow: /login
+Disallow: /specials
+Disallow: /directory*
+Disallow: /ornate/*
+Disallow: /specials*
+Disallow: /login*
+Disallow: /*page/{page}
+Disallow: /*page/*{page}
+
+
+
+Sitemap: https://www.ornatejewels.com/sitemap.xml
+Sitemap: https://www.ornatejewels.com/image-sitemap.xml

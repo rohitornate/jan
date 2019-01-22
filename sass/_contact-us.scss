@@ -1,0 +1,25 @@
+.contactus{background: #f5f5f5 url("#{$images-path}/map.png") no-repeat center bottom; text-align: center; padding: 60px $space0 150px;
+           .heading{@include font-size(30px); @extend .font-medium; line-height: normal; padding-bottom: 5px;}
+p{@include font-size(15px);}
+}
+.cous-inqury{margin: 50px 0 80px; @include all-my-icons-sprites;
+             a{background: $white; @include box-shadow(0 0 3px rgba(0,0,0,.1)); display: block; width: 32%; padding: 20px 0 40px; @include font-size(16px); @extend .font-light;}
+    i{@include size(58px); display: block; margin: auto;}
+    strong{@extend .font-medium; @include font-size(18px); display: block; padding: $space20 $space0 $space10;}
+}
+.cous-form{width: 820px; margin: auto; @include box-shadow(0 0 10px rgba(0,0,0,.1)); background: $white; padding: 20px 30px; text-align: left; display:none; position: relative;
+          p{@extend .font-light; @include font-size(22px); line-height: normal; padding-bottom: 10px; width: 100%;}
+          .box{width:48%;}
+          .form-control{ border:0; border-bottom:1px solid #e3e8eb; @include border-radius(0); padding: 0; height: 40px; margin-top: $space20; @include font-size(14px); font-family: $ubunturegular;
+                         @include input-placeholder{ color: #787878; @include font-size(14px); font-family: $ubuntulight; color: #787878;}
+                         &:focus{border-color: darken(#e3e8eb,10%)}
+          }
+          textarea{
+              &.form-control{height: 97px;}
+          }
+          .captcha{position: relative;}
+          .code,.reload{position: absolute; right: 30px; top: 22px;}
+          .reload{ right: 3px; top: 32px;}
+          .btn-yellow{margin-top: 35px; display: inline-block; width: auto; @include font-size(16px); @extend .font-medium; @include border-radius(3px); padding: 8px 30px;}
+          .close{@include size(28px); background: #f5f5f5; @include border-radius(50%); @include font-size(13px); @extend .font-medium; position: absolute; top: 10px; right: 10px; line-height: 30px; text-align: center; cursor: pointer;}
+}

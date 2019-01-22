@@ -1,4 +1,80 @@
 <?php
+
+class getDomain {
+	public function domain($url)
+	{
+		global $subtlds;
+		$slds = "";
+		$url = strtolower(preg_replace("(https?://)", "", $url));
+
+		$host = parse_url('http://'.$url,PHP_URL_HOST);
+
+		preg_match("/[^\.\/]+\.[^\.\/]+$/", $host, $matches);
+		foreach($subtlds as $sub){
+			if (preg_match('/\.'.preg_quote($sub).'$/', $host, $xyz)){
+				preg_match("/[^\.\/]+\.[^\.\/]+\.[^\.\/]+$/", $host, $matches);
+			}
+		}
+
+		return @$matches[0];
+	}
+
+	public function get_tlds(){
+		global $subtlds;
+		//$address = 'http://mxr.mozilla.org/mozilla-central/source/netwerk/dns/effective_tld_names.dat?raw=1';
+		$address = 'https://publicsuffix.org/list/effective_tld_names.dat';
+
+
+		if (extension_loaded('curl')) {
+
+			$ch = curl_init();
+			$timeout = 5;
+			curl_setopt($ch, CURLOPT_URL, $address); //set url
+			curl_setopt($ch, CURLOPT_HEADER, true); //get header
+			curl_setopt($ch, CURLOPT_NOBODY, true); //do not include response body
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); //do not show in browser the response
+			//curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); //follow any redirects
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout); //follow any timeout
+			curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+			//$file_contents = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL); //extract the url from the header response
+			$file_contents = curl_exec($ch);
+			curl_close($ch);
+			$content = array();
+			$content = explode("\n", $file_contents);
+
+		} else {
+			$content = file($address);
+		}
+
+		foreach($content as $num => $line){
+			$line = trim($line);
+			if($line == '') continue;
+			if(@substr($line[0], 0, 2) == '/') continue;
+			$line = @preg_replace("/[^a-zA-Z0-9\.]/", '', $line);
+			if($line == '') continue;  //$line = '.'.$line;
+			if(@$line[0] == '.') $line = substr($line, 1);
+			if(!strstr($line, '.')) continue;
+			$subtlds[] = $line;
+			//echo "{$num}: '{$line}'"; echo "<br>";
+		}
+
+		$subtlds = (isset($subtlds) && is_array($subtlds)) ? $subtlds : array(); // initialize if necessary
+
+		$subtlds = array_merge(array(
+				'co.uk', 'me.uk', 'net.uk', 'org.uk', 'sch.uk', 'ac.uk',
+				'gov.uk', 'nhs.uk', 'police.uk', 'mod.uk', 'asn.au', 'com.au',  'com.br', 'com.tr',
+				'net.au', 'id.au', 'org.au', 'edu.au', 'gov.au', 'csiro.au', 'co.nz', 'co.za'
+		),$subtlds);
+
+		$subtlds = array_unique($subtlds);
+
+		return $subtlds;
+	}
+}
+
+$subtlds = new getDomain();
+
+
 class ControllerSettingSetting extends Controller {
 	private $error = array();
 
@@ -212,6 +288,46 @@ class ControllerSettingSetting extends Controller {
 		$data['help_password'] = $this->language->get('help_password');
 		$data['help_encryption'] = $this->language->get('help_encryption');
 		$data['help_compression'] = $this->language->get('help_compression');
+		
+		
+		
+		
+		
+		
+		$data['help_ga_exclude_admin'] = $this->language->get('help_ga_exclude_admin');
+		$data['help_ga_tracking_type'] = $this->language->get('help_ga_tracking_type');
+		$data['help_ga_conversion_id'] = $this->language->get('help_ga_conversion_id');
+		$data['help_ga_remarketing'] = $this->language->get('help_ga_remarketing');
+		$data['help_ga_cookie'] = $this->language->get('help_ga_cookie');
+		$data['help_ga_adwords'] = $this->language->get('help_ga_adwords');
+		$data['help_ga_label'] = $this->language->get('help_ga_label');
+		$data['help_ua_tracking'] = $this->language->get('help_ua_tracking');
+		
+		$this->load->language('setting/setting');
+		$data['entry_gae_version'] = $this->language->get('entry_gae_version');
+		$data['entry_ga_exclude_admin'] = $this->language->get('entry_ga_exclude_admin');
+		$data['entry_ga_tracking_type'] = $this->language->get('entry_ga_tracking_type');
+		$data['entry_ga_conversion_id'] = $this->language->get('entry_ga_conversion_id');
+		$data['entry_ga_remarketing'] = $this->language->get('entry_ga_remarketing');
+		$data['entry_ga_cookie'] = $this->language->get('entry_ga_cookie');
+		$data['entry_ga_adwords'] = $this->language->get('entry_ga_adwords');
+		$data['entry_ga_label'] = $this->language->get('entry_ga_label');
+		$data['entry_ua_tracking'] = $this->language->get('entry_ua_tracking');
+		$data['entry_google_analytics'] = $this->language->get('entry_google_analytics');
+			
+		
+		$this->load->language('setting/setting');
+		$data['text_classic'] = $this->language->get('text_classic');
+		$data['text_universal'] = $this->language->get('text_universal');
+		$data['text_enabled'] = $this->language->get('text_enabled');
+		$data['text_disabled'] = $this->language->get('text_disabled');
+		$data['text_exclude'] = $this->language->get('text_exclude');
+		$data['text_include'] = $this->language->get('text_include');
+		$data['text_no_track'] = $this->language->get('text_no_track');
+		$data['text_track'] = $this->language->get('text_track');
+		
+		
+		
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -225,7 +341,21 @@ class ControllerSettingSetting extends Controller {
 		$data['tab_mail'] = $this->language->get('tab_mail');
 		$data['tab_server'] = $this->language->get('tab_server');
 
-		if (isset($this->error['warning'])) {
+		
+		if (isset($this->error['ga_conversion_id'])) {
+			$data['error_ga_conversion_id'] = $this->error['ga_conversion_id'];
+		} else {
+			$data['error_ga_conversion_id'] = '';
+		}
+		
+		if (isset($this->error['ga_label'])) {
+			$data['error_ga_label'] = $this->error['ga_label'];
+		} else {
+			$data['error_ga_label'] = '';
+		}
+		
+		
+				if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
 			$data['error_warning'] = '';
@@ -418,6 +548,68 @@ class ControllerSettingSetting extends Controller {
 			$data['store_url'] = HTTP_CATALOG;
 		}
 
+		if (isset($this->request->post['config_ga_exclude_admin'])) {
+			$data['config_ga_exclude_admin'] = $this->request->post['config_ga_exclude_admin'];
+		} else {
+			$data['config_ga_exclude_admin'] =$this->config->get('config_ga_exclude_admin');
+		} 
+			
+		if (isset($this->request->post['config_ga_tracking_type'])) {
+			$data['config_ga_tracking_type'] = $this->request->post['config_ga_tracking_type'];
+		}else{
+			$data['config_ga_tracking_type'] = $this->config->get('config_ga_tracking_type');
+		} 
+			
+		if (isset($this->request->post['config_ga_conversion_id'])) {
+			$data['config_ga_conversion_id'] = $this->request->post['config_ga_conversion_id'];
+		} else {
+			$data['config_ga_conversion_id'] = $this->config->get('config_ga_tracking_type');
+		} 
+			
+		if (isset($this->request->post['config_ga_remarketing'])) {
+			$data['config_ga_remarketing'] = $this->request->post['config_ga_remarketing'];
+		} else {
+			$data['config_ga_remarketing'] = $this->config->get('config_ga_remarketing');
+		} 
+			
+		if (isset($this->request->post['config_ga_cookie'])) {
+			$data['config_ga_cookie'] = $this->request->post['config_ga_cookie'];
+		} else{
+			$data['config_ga_cookie'] = $this->config->get('config_ga_cookie');
+		} 
+			
+		if (isset($this->request->post['config_ga_adwords'])) {
+			$data['config_ga_adwords'] = $this->request->post['config_ga_adwords'];
+		} else{
+			$data['config_ga_adwords'] = $this->config->get('config_ga_adwords');
+		} 
+		if (isset($this->request->post['config_ga_domain'])) {
+			$data['config_ga_domain'] = $this->request->post['config_ga_domain'];
+		} else{
+			$data['config_ga_domain'] = $this->config->get('config_ga_domain');
+		}
+		
+		//if (isset($this->request->get['store_id'])) {
+			//$store = $this->model_setting_store->getStore($this->request->get['store_id']);
+			//$domainurl = new getDomain();
+			//$data['domainurl'] = $domainurl->domain($store['url']);
+		//	$data['config_ga_domain'] = $data['domainurl'];
+	//	}
+		if (isset($this->request->post['config_ga_label'])) {
+			$data['config_ga_label'] = $this->request->post['config_ga_label'];
+		} else {
+			$data['config_ga_label'] = $this->config->get('config_ga_label');
+		} 
+			
+		if (isset($this->request->post['config_ua_tracking'])) {
+			$data['config_ua_tracking'] = $this->request->post['config_ua_tracking'];
+		} else {
+			$data['config_ua_tracking'] = $this->config->get('config_ua_tracking');
+		} 
+		
+		
+		
+		
 		$data['themes'] = array();
 
 		$this->load->model('extension/extension');
@@ -490,6 +682,11 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$data['config_image'] = $this->config->get('config_image');
 		}
+		if (isset($this->request->post['config_cat_strip'])) {
+			$data['config_cat_strip'] = $this->request->post['config_cat_strip'];
+		} else {
+			$data['config_cat_strip'] = $this->config->get('config_cat_strip');
+		}
 
 		$this->load->model('tool/image');
 
@@ -499,6 +696,13 @@ class ControllerSettingSetting extends Controller {
 			$data['thumb'] = $this->model_tool_image->resize($this->config->get('config_image'), 100, 100);
 		} else {
 			$data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+		}
+		if (isset($this->request->post['config_cat_strip']) && is_file(DIR_IMAGE . $this->request->post['config_cat_strip'])) {
+			$data['categorystrip'] = $this->model_tool_image->resize($this->request->post['config_cat_strip'], 100, 100);
+		} elseif ($this->config->get('config_cat_strip') && is_file(DIR_IMAGE . $this->config->get('config_cat_strip'))) {
+			$data['categorystrip'] = $this->model_tool_image->resize($this->config->get('config_cat_strip'), 100, 100);
+		} else {
+			$data['categorystrip'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 		}
 
 		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
@@ -599,6 +803,11 @@ class ControllerSettingSetting extends Controller {
 			$data['config_limit_admin'] = $this->request->post['config_limit_admin'];
 		} else {
 			$data['config_limit_admin'] = $this->config->get('config_limit_admin');
+		}
+		if (isset($this->request->post['config_timer_status'])) {
+			$data['config_timer_status'] = $this->request->post['config_timer_status'];
+		} else {
+			$data['config_timer_status'] = $this->config->get('config_timer_status');
 		}
 
 		if (isset($this->request->post['config_product_count'])) {
@@ -1135,7 +1344,7 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$data['config_error_filename'] = $this->config->get('config_error_filename');
 		}
-
+//print_r($data);//exit;		
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');

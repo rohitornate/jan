@@ -1,0 +1,14 @@
+---------- Date: 2018-12-29 13:00:16 ~ IP : 182.48.243.161 ----------
+REQUEST URI : /admin/index.php?route=common/filemanager&token=5iy5HZIhSA1R1PzUh2GYAMhYSqLxy0Ht&target=input-image&thumb=thumb-image
+MOD DETAILS:
+   modFile   : /var/www/html/ornatenew/vqmod/xml/image_crusher.xml
+   id        : Image Crusher
+   version   : 2.0.2
+   vqmver    : 2.5.1
+   author    : paddysherry.com
+
+File Name    : admin/controller/common/filemanager.php(1)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): move_uploaded_file($this->request->files['file']['tmp_name'], $directory . '/' . $filename);
+----------------------------------------------------------------------
+
+

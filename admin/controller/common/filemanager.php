@@ -59,11 +59,12 @@ class ControllerCommonFileManager extends Controller {
 		$image_total = count($images);
 
 		// Split the array based on current page number and max number of items per page of 10
-		$images = array_splice($images, ($page - 1) * 16, 16);
+		//$images = array_splice($images, ($page - 1) * 16, 16);
 
 		foreach ($images as $image) {
+			//$name = str_split(basename($image), 14);
 			$name = str_split(basename($image), 14);
-
+				
 			if (is_dir($image)) {
 				$url = '';
 
@@ -191,7 +192,7 @@ class ControllerCommonFileManager extends Controller {
 		if (isset($this->request->get['thumb'])) {
 			$url .= '&thumb=' . $this->request->get['thumb'];
 		}
-
+/*
 		$pagination = new Pagination();
 		$pagination->total = $image_total;
 		$pagination->page = $page;
@@ -199,7 +200,7 @@ class ControllerCommonFileManager extends Controller {
 		$pagination->url = $this->url->link('common/filemanager', 'token=' . $this->session->data['token'] . $url . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
-
+*/
 		$this->response->setOutput($this->load->view('common/filemanager', $data));
 	}
 

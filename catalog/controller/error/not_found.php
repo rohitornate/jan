@@ -1,6 +1,17 @@
 <?php
 class ControllerErrorNotFound extends Controller {
 	public function index() {
+		
+		//Header( "HTTP/1.1 301 Moved Permanently" );
+		//Header( "Location: https://www.ornatejewels.com/" );
+		//header("Location: index.php",TRUE,301);
+		$this->response->redirect($this->url->link('common/home'),'301');
+
+
+		//$this->response-> ($this->url->link('common/home', '', true));
+		
+        /*    $link_array = explode('/',$_SERVER['QUERY_STRING']);
+                $data['end'] = end($link_array); */
 		$this->load->language('error/not_found');
 
 		$this->document->setTitle($this->language->get('heading_title'));

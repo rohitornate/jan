@@ -1,0 +1,16 @@
+.commontext{border-top: $border1 #e5e5e5; padding: $space35 $space0;
+            .heading{@include font-size(20px); @extend .font-medium; border-bottom: $border1 #e5e5e5; text-transform: uppercase; display: block; padding-bottom: $space10+2; margin-bottom: $space10+2;}
+           aside{width:percentage(275px / 1170px);
+                 li{@include font-size(15px); padding: $space10+2 $space0;}
+                 a{
+                     &:hover{color: $yellow;}
+                 }
+           }
+           section{width:percentage(855px / 1170px);
+                   .heading{@include font-size(35px); border-bottom: 0; margin: $space0;}
+                   a{@extend .font-medium;}
+           }
+           p{@include font-size(15px); color: #2d2d2d; line-height: 28px; padding: $space10 $space0;}
+           .title{@include font-size(25px); @extend .font-medium; padding: $space10 $space0;}
+           article{padding: $space10 $space0;}
+}

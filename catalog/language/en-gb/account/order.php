@@ -3,6 +3,7 @@
 $_['heading_title']         = 'Order History';
 
 // Text
+$_['text_home']            = 'Home';
 $_['text_account']          = 'Account';
 $_['text_order']            = 'Order Information';
 $_['text_order_detail']     = 'Order Details';
@@ -35,3 +36,7 @@ $_['column_comment']        = 'Comment';
 
 // Error
 $_['error_reorder']         = '%s is not currently available to be reordered.';
+
+// Button
+$_['button_return']       = 'Return';
+$_['button_close']       = 'Cancel';

@@ -5,6 +5,13 @@
     <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
     <?php } ?>
   </ul>
+  
+   <div class="row">
+			<div class="col-md-12 col-sm-12">
+				<div class="my-account-header">My Account</div>
+			</div>
+	</div>
+  
   <div class="row"><?php echo $column_left; ?>
     <?php if ($column_left && $column_right) { ?>
     <?php $class = 'col-sm-6'; ?>
@@ -14,7 +21,10 @@
     <?php $class = 'col-sm-12'; ?>
     <?php } ?>
     <div id="content" class="<?php echo $class; ?>"><?php echo $content_top; ?>
-      <h2><?php echo $heading_title; ?></h2>
+      <!--<h2><?php echo $heading_title; ?></h2>-->
+	  <div class="my-account__header addr">
+        <h1 class="title">Product Returns</h1>
+		</div>
       <div class="table-responsive">
         <table class="table table-bordered table-hover">
           <thead>

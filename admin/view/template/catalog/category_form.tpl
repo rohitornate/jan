@@ -49,10 +49,25 @@
                       <?php } ?>
                     </div>
                   </div>
+                  <div class="form-group ">
+                    <label class="col-sm-2 control-label" for="input-meta-title<?php echo $language['language_id']; ?>"><?php echo $entry_h1; ?></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="category_description[<?php echo $language['language_id']; ?>][hone]" value="<?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['hone'] : ''; ?>" placeholder="h1" id="input-meta-title<?php echo $language['language_id']; ?>" class="form-control" />
+                      <!--<?php if (isset($error_meta_title[$language['language_id']])) { ?>
+                      <div class="text-danger"><?php echo $error_meta_title[$language['language_id']]; ?></div>
+                      <?php } ?>-->
+                    </div>
+                  </div>
                   <div class="form-group">
                     <label class="col-sm-2 control-label" for="input-description<?php echo $language['language_id']; ?>"><?php echo $entry_description; ?></label>
                     <div class="col-sm-10">
                       <textarea name="category_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control summernote"><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['description'] : ''; ?></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input-long-description<?php echo $language['language_id']; ?>">Category Long Description</label>
+                    <div class="col-sm-10">
+                      <textarea name="category_description[<?php echo $language['language_id']; ?>][long_description]" placeholder="Category Long Description" id="input-long-description<?php echo $language['language_id']; ?>" class="form-control summernote"><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['long_description'] : ''; ?></textarea>
                     </div>
                   </div>
                   <div class="form-group required">
@@ -150,6 +165,26 @@
                   <input type="hidden" name="image" value="<?php echo $image; ?>" id="input-image" />
                 </div>
               </div>
+			  
+			  <div class="form-group">
+                <label class="col-sm-2 control-label"><?php echo 'Strip'; ?></label>
+                <div class="col-sm-10"><a href="" id="thumb-strip" data-toggle="image" class="img-thumbnail"><img src="<?php echo $thumb1; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
+                  <input type="hidden" name="strip" value="<?php echo $strip; ?>" id="input-strip" />
+                </div>
+              </div>
+			  <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-column"><?php echo 'Strip Alt'; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="strip_alt" value="<?php echo $strip_alt; ?>" placeholder="<?php echo 'Strip Alt'; ?>" id="input-column" class="form-control" />
+                </div>
+              </div>
+			   <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-column"><?php echo 'Strip URL'; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="url" value="<?php echo $url; ?>" placeholder="<?php echo 'Strip URL'; ?>" id="input-column" class="form-control" />
+                </div>
+              </div>
+			  
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-top"><span data-toggle="tooltip" title="<?php echo $help_top; ?>"><?php echo $entry_top; ?></span></label>
                 <div class="col-sm-10">
@@ -159,6 +194,20 @@
                       <input type="checkbox" name="top" value="1" checked="checked" id="input-top" />
                       <?php } else { ?>
                       <input type="checkbox" name="top" value="1" id="input-top" />
+                      <?php } ?>
+                      &nbsp; </label>
+                  </div>
+                </div>
+              </div>
+			  <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-top"><span data-toggle="tooltip" title="<?php echo $help_top; ?>"><?php echo 'Category Filter'; ?></span></label>
+                <div class="col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <?php if ($filter_enable) { ?>
+                      <input type="checkbox" name="filter_enable" value="1" checked="checked" id="input-top" />
+                      <?php } else { ?>
+                      <input type="checkbox" name="filter_enable" value="1" id="input-top" />
                       <?php } ?>
                       &nbsp; </label>
                   </div>

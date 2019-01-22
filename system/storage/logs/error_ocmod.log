@@ -1,0 +1,95 @@
+2018-10-17 9:44:01 - 
+ERROR: CODE NOT FOUND!
+FILE: catalog/controller/product/amp_product.php
+CODE: $this->model_catalog_product->getProducts($filter_data)
+MOD: Brainy Filter
+
+ERROR: CODE NOT FOUND!
+FILE: catalog/controller/product/compare.php
+CODE: $this->model_catalog_product->getProducts($filter_data)
+MOD: Brainy Filter
+
+ERROR: CODE NOT FOUND!
+FILE: catalog/controller/product/live_search.php
+CODE: $this->model_catalog_product->getProducts($filter_data)
+MOD: Brainy Filter
+
+ERROR: CODE NOT FOUND!
+FILE: catalog/controller/product/notifyme.php
+CODE: $this->model_catalog_product->getProducts($filter_data)
+MOD: Brainy Filter
+
+ERROR: CODE NOT FOUND!
+FILE: catalog/controller/product/product.php
+CODE: $this->model_catalog_product->getProducts($filter_data)
+MOD: Brainy Filter
+
+ERROR: CODE NOT FOUND!
+FILE: catalog/controller/product/product_24_jul.php
+CODE: $this->model_catalog_product->getProducts($filter_data)
+MOD: Brainy Filter
+
+ERROR: CODE NOT FOUND!
+FILE: catalog/controller/product/product_3_aug.php
+CODE: $this->model_catalog_product->getProducts($filter_data)
+MOD: Brainy Filter
+
+ERROR: CODE NOT FOUND!
+FILE: catalog/controller/product/search.php
+CODE: $this->model_catalog_product->getProducts($filter_data)
+MOD: Brainy Filter
+
+ERROR: CODE NOT FOUND!
+FILE: catalog/controller/product/special.php
+CODE: $this->model_catalog_product->getProducts($filter_data)
+MOD: Brainy Filter
+
+ERROR: FILE NOT FOUND!
+FILE: /var/www/html/ornatenew/admin/view/template/common/filemanager.twig
+MOD: d_opencart_patch
+
+ERROR: FILE NOT FOUND!
+FILE: /var/www/html/ornatenew/admin/view/template/common/header.twig
+MOD: d_opencart_patch
+
+ERROR: FILE NOT FOUND!
+FILE: /var/www/html/ornatenew/admin/controller/common/menu.php
+MOD: Facebook Ads Extension
+
+ERROR: FILE NOT FOUND!
+FILE: /var/www/html/ornatenew/admin/view/template/common/menu.tpl
+MOD: Facebook Ads Extension
+
+ERROR: CODE NOT FOUND!
+FILE: catalog/controller/api/order.php
+CODE: $this->model_checkout_order->addOrderHistory($json['order_id'], $order_status_id);
+MOD: Facebook Ads Extension
+
+ERROR: CODE NOT FOUND!
+FILE: catalog/controller/product/search.php
+CODE: $results = $this->model_catalog_product->getProducts($filter_data);
+MOD: Facebook Ads Extension
+
+ERROR: CODE NOT FOUND!
+FILE: catalog/view/theme/default/template/product/product.tpl
+CODE: <?php echo $column_left; ?>
+MOD: GiftTeaser by iSenseLabs
+
+ERROR: CODE NOT FOUND!
+FILE: catalog/view/theme/default/template/product/product.tpl
+CODE: <div class="right">
+MOD: GiftTeaser by iSenseLabs
+
+ERROR: FILE NOT FOUND!
+FILE: /var/www/html/ornatenew/system/library/currency.php
+MOD: OCMOD Google Remarketing Feed
+
+ERROR: CODE NOT FOUND!
+FILE: catalog/controller/account/address.php
+CODE: public function add()     {
+MOD: Xtensions-Best Checkout and Customer FrameWork
+
+ERROR: CODE NOT FOUND!
+FILE: catalog/controller/account/register.php
+CODE: public function index() {
+MOD: Xtensions-Best Checkout and Customer FrameWork

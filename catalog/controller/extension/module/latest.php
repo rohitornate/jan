@@ -42,7 +42,13 @@ class ControllerExtensionModuleLatest extends Controller {
 
 				if ((float)$result['special']) {
 					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                                         $discount_price = $result['price'] - $result['special'];
+                                        $discount_percent = (($result['price'] - $result['special'])/$result['price'])*100;
 				} else {
+					
+                        	$discount_percent=false;
+                        	$discount_price=false;
+                        
 					$special = false;
 				}
 
@@ -65,6 +71,8 @@ class ControllerExtensionModuleLatest extends Controller {
 					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')) . '..',
 					'price'       => $price,
 					'special'     => $special,
+                                        'discount_price'=> $this->currency->format($this->tax->calculate($discount_price, $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']),
+                                        'discount_persent'=>round($discount_percent),
 					'tax'         => $tax,
 					'rating'      => $rating,
 					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])

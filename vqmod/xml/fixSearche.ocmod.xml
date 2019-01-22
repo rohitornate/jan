@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name><![CDATA[Fix searche  OP 2.3.0.2]]></name>
+    <version>1(only OP 2.3.0.x)</version>
+    <author><![CDATA[&nbsp;------Koond------<br>(Email:f.t.m@bk.ru)]]></author>
+    <code>fix searche in image manager only OP 2.3.0.x</code>
+
+<file path="admin/controller/common/filemanager.php">
+
+<operation info="fix ">
+  <search ><![CDATA[if (substr(str_replace('\\', '/', realpath]]></search>
+  <add position="replace" ><![CDATA[if (substr(str_replace('\\', '/', ]]></add>
+</operation>
+
+</file>
+
+</modification>

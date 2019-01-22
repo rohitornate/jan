@@ -23,6 +23,7 @@ class ControllerExtensionModuleAccount extends Controller {
 		$data['text_recurring'] = $this->language->get('text_recurring');
 
 		$data['logged'] = $this->customer->isLogged();
+		$data['first_name']=$this->customer->getFirstName();
 		$data['register'] = $this->url->link('account/register', '', true);
 		$data['login'] = $this->url->link('account/login', '', true);
 		$data['logout'] = $this->url->link('account/logout', '', true);

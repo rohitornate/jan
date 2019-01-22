@@ -207,10 +207,32 @@ class ControllerSaleOrder extends Controller {
 
 		$results = $this->model_sale_order->getOrders($filter_data);
 
+		if($this->config->get('shipway_login')){
+				$this->load->model('shipway/courier_tracking');
+				$data['couriers'] = $this->model_shipway_courier_tracking->getCourierList(true);
+				$data['all_couriers'] = $this->model_shipway_courier_tracking->getCourierList();
+				$data['hasShipWayAccount'] = true;
+				$results = $this->model_shipway_courier_tracking->getOrderShipwayFields($results);
+			}
+		
+		
 		foreach ($results as $result) {
-			$data['orders'][] = array(
+			
+			if ($result['invoice_no']) {
+				$result['invoice_no'] = $result['invoice_prefix'] . $result['invoice_no'];
+			} else {
+				$result['invoice_no'] = '';
+			}
+			$order_product=$this->model_sale_order->get_Order_Products($result['order_id']);
+//print_r($order_product);	
+	$data['orders'][] = array(
 				'order_id'      => $result['order_id'],
 				'customer'      => $result['customer'],
+				'invoice'       => $result['invoice_no'],
+				'order_product' => $order_product,
+				'payment_method'=> $result['payment_method'],
+				'courier_id'      => ($this->config->get('shipway_login'))?$result['courier_id']:'',
+				'awbno'  		  => ($this->config->get('shipway_login'))?$result['awbno']:'',		
 				'order_status'  => $result['order_status'] ? $result['order_status'] : $this->language->get('text_missing'),
 				'total'         => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
 				'date_added'    => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
@@ -535,7 +557,7 @@ class ControllerSaleOrder extends Controller {
 			$data['account_custom_field'] = $order_info['custom_field'];
 
 			$this->load->model('customer/customer');
-
+			$this->load->model('tool/image');
 			$data['addresses'] = $this->model_customer_customer->getAddresses($order_info['customer_id']);
 
 			$data['payment_firstname'] = $order_info['payment_firstname'];
@@ -570,9 +592,18 @@ class ControllerSaleOrder extends Controller {
 			$products = $this->model_sale_order->getOrderProducts($this->request->get['order_id']);
 
 			foreach ($products as $product) {
+				
+				   if ($product['image']) {
+                	$image = $this->model_tool_image->resize($product['image'], $this->config->get($this->config->get('config_theme') . '_image_cart_width'), $this->config->get($this->config->get('config_theme') . '_image_cart_height'));
+                } else {
+                	$image = '';
+                }
+				
+				
 				$data['order_products'][] = array(
 					'product_id' => $product['product_id'],
 					'name'       => $product['name'],
+					'thumb'               => $image,
 					'model'      => $product['model'],
 					'option'     => $this->model_sale_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']),
 					'quantity'   => $product['quantity'],
@@ -767,7 +798,7 @@ class ControllerSaleOrder extends Controller {
 		}
 
 		$order_info = $this->model_sale_order->getOrder($order_id);
-
+//print_r($order_info);
 		if ($order_info) {
 			$this->load->language('sale/order');
 
@@ -907,7 +938,12 @@ class ControllerSaleOrder extends Controller {
 			} else {
 				$data['invoice_no'] = '';
 			}
-
+			if ($order_info['tracking_code']) {
+				$data['tracking_code'] = $order_info['tracking_code'];
+			} else {
+				$data['tracking_code'] = '';
+			}
+		
 			$data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
 
 			$data['firstname'] = $order_info['firstname'];
@@ -1007,14 +1043,19 @@ class ControllerSaleOrder extends Controller {
 
 			// Uploaded files
 			$this->load->model('tool/upload');
+			$this->load->model('tool/image');
 
 			$data['products'] = array();
 
 			$products = $this->model_sale_order->getOrderProducts($this->request->get['order_id']);
 
-			foreach ($products as $product) {
+			foreach ($products as $product) { //print_r($product);
 				$option_data = array();
-
+				if ($product['image']) {
+					$image = $this->model_tool_image->resize($product['image'], 100, 100);
+					} else {
+					$image = '';
+				}
 				$options = $this->model_sale_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']);
 
 				foreach ($options as $option) {
@@ -1042,9 +1083,12 @@ class ControllerSaleOrder extends Controller {
 					'order_product_id' => $product['order_product_id'],
 					'product_id'       => $product['product_id'],
 					'name'    	 	   => $product['name'],
+					'thumb'    	 	   => $image,
 					'model'    		   => $product['model'],
 					'option'   		   => $option_data,
 					'quantity'		   => $product['quantity'],
+					'mrp'    		   => $this->currency->format($product['mrp'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+
 					'price'    		   => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
 					'total'    		   => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
 					'href'     		   => $this->url->link('catalog/product/edit', 'token=' . $this->session->data['token'] . '&product_id=' . $product['product_id'], true)
@@ -1276,7 +1320,12 @@ class ControllerSaleOrder extends Controller {
 					}
 				}
 			}
+//print_r($data);
 
+			if($this->config->get('shipway_login')){
+				$this->load->model('shipway/courier_tracking');
+				$data['couriers'] = $this->model_shipway_courier_tracking->getCourierList(true);
+			}
 			$data['ip'] = $order_info['ip'];
 			$data['forwarded_ip'] = $order_info['forwarded_ip'];
 			$data['user_agent'] = $order_info['user_agent'];
@@ -1344,7 +1393,11 @@ class ControllerSaleOrder extends Controller {
 			$data['header'] = $this->load->controller('common/header');
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['footer'] = $this->load->controller('common/footer');
-
+			if($this->config->get('shipway_login')){
+				$this->load->model('shipway/courier_tracking');
+				$data['couriers'] = $this->model_shipway_courier_tracking->getCourierList(true);
+				//$this->data['trackingshipment_orderid'] = $order_id;
+			}	
 			$this->response->setOutput($this->load->view('sale/order_info', $data));
 		} else {
 			return new Action('error/not_found');
@@ -1358,7 +1411,37 @@ class ControllerSaleOrder extends Controller {
 
 		return !$this->error;
 	}
-	
+	public function createtraking(){
+		
+		//print_r($this->request->get['track_no']);
+		//print_r($this->request->get['order_id']);exit;
+		$this->load->language('sale/order');
+		
+		$json = array();
+		
+		if (!$this->user->hasPermission('modify', 'sale/order')) {
+			$json['error'] = $this->language->get('error_permission');
+		} elseif (isset($this->request->get['order_id'])) {
+			if (isset($this->request->get['order_id'])) {
+				$order_id = $this->request->get['order_id'];
+			} else {
+				$order_id = 0;
+			}
+		
+			$this->load->model('sale/order');
+		
+			$tracking_no = $this->model_sale_order->createTrackingNo($order_id,$this->request->get['track_no']);
+		
+			if ($tracking_no) {
+				$json['tracking_no'] = $tracking_no;
+			} else {
+				$json['error'] = $this->language->get('error_action');
+			}
+		}
+		
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
+	}
 	public function createInvoiceNo() {
 		$this->load->language('sale/order');
 
@@ -1547,6 +1630,8 @@ class ControllerSaleOrder extends Controller {
 				'notify'     => $result['notify'] ? $this->language->get('text_yes') : $this->language->get('text_no'),
 				'status'     => $result['status'],
 				'comment'    => nl2br($result['comment']),
+				'admin_comment'    => nl2br($result['admin_comment']),
+
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
 			);
 		}
@@ -1579,7 +1664,7 @@ class ControllerSaleOrder extends Controller {
 
 		$data['direction'] = $this->language->get('direction');
 		$data['lang'] = $this->language->get('code');
-
+        $data ['logo'] = HTTPS_CATALOG . 'image/' . $this->config->get ( 'config_logo' );
 		$data['text_invoice'] = $this->language->get('text_invoice');
 		$data['text_order_detail'] = $this->language->get('text_order_detail');
 		$data['text_order_id'] = $this->language->get('text_order_id');
@@ -1618,7 +1703,7 @@ class ControllerSaleOrder extends Controller {
 
 		foreach ($orders as $order_id) {
 			$order_info = $this->model_sale_order->getOrder($order_id);
-
+	//	print_r($order_info);
 			if ($order_info) {
 				$store_info = $this->model_setting_setting->getSetting('config', $order_info['store_id']);
 
@@ -1638,6 +1723,11 @@ class ControllerSaleOrder extends Controller {
 					$invoice_no = $order_info['invoice_prefix'] . $order_info['invoice_no'];
 				} else {
 					$invoice_no = '';
+				}
+				if ($order_info['tracking_code']) {
+					$tracking_code =  $order_info['tracking_code'];
+				} else {
+					$tracking_code = '';
 				}
 
 				if ($order_info['payment_address_format']) {
@@ -1709,6 +1799,7 @@ class ControllerSaleOrder extends Controller {
 				$shipping_address = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
 
 				$this->load->model('tool/upload');
+				$this->load->model('tool/image');
 
 				$product_data = array();
 
@@ -1716,7 +1807,11 @@ class ControllerSaleOrder extends Controller {
 
 				foreach ($products as $product) {
 					$option_data = array();
-
+						if ($product['image']) {
+							$image = $this->model_tool_image->resize($product['image'], 100, 100);
+							} else {
+							$image = '';
+						}
 					$options = $this->model_sale_order->getOrderOptions($order_id, $product['order_product_id']);
 
 					foreach ($options as $option) {
@@ -1741,6 +1836,8 @@ class ControllerSaleOrder extends Controller {
 					$product_data[] = array(
 						'name'     => $product['name'],
 						'model'    => $product['model'],
+						'mrp'    => $this->currency->format($product['mrp'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+						'thumb'    => $image,
 						'option'   => $option_data,
 						'quantity' => $product['quantity'],
 						'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
@@ -1773,6 +1870,7 @@ class ControllerSaleOrder extends Controller {
 				$data['orders'][] = array(
 					'order_id'	       => $order_id,
 					'invoice_no'       => $invoice_no,
+					'tracking_code'    => $tracking_code,
 					'date_added'       => date($this->language->get('date_format_short'), strtotime($order_info['date_added'])),
 					'store_name'       => $order_info['store_name'],
 					'store_url'        => rtrim($order_info['store_url'], '/'),
@@ -1810,7 +1908,7 @@ class ControllerSaleOrder extends Controller {
 
 		$data['direction'] = $this->language->get('direction');
 		$data['lang'] = $this->language->get('code');
-
+		$data ['logo'] = HTTPS_CATALOG . 'image/' . $this->config->get ( 'config_logo' );
 		$data['text_shipping'] = $this->language->get('text_shipping');
 		$data['text_picklist'] = $this->language->get('text_picklist');
 		$data['text_order_detail'] = $this->language->get('text_order_detail');
@@ -1858,7 +1956,7 @@ class ControllerSaleOrder extends Controller {
 
 		foreach ($orders as $order_id) {
 			$order_info = $this->model_sale_order->getOrder($order_id);
-
+		//print_r($order_info);
 			// Make sure there is a shipping method
 			if ($order_info && $order_info['shipping_code']) {
 				$store_info = $this->model_setting_setting->getSetting('config', $order_info['store_id']);

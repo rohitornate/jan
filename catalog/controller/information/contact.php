@@ -73,6 +73,11 @@ class ControllerInformationContact extends Controller {
 		} else {
 			$data['error_enquiry'] = '';
 		}
+		if (isset($this->error['phone'])) {
+			$data['error_phone'] = $this->error['phone'];
+		} else {
+			$data['error_phone'] = '';
+		}
 
 		$data['button_submit'] = $this->language->get('button_submit');
 

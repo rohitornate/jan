@@ -1,0 +1,187 @@
+@media #{$breakpoint-sm}{
+    //hide
+    .sm-hide{display: none;}
+    //padding
+    .sm-paddin0{padding: $space0;}
+    .sm-paddin10{padding: $space10;}
+    .sm-paddin-t15{padding-top: $space15;}
+    .sm-paddin-b15{padding-bottom: $space15;}
+    //padding = 10
+    .sm-paddin-l10{padding-left: $space10;}
+    .sm-paddin-tb10{padding: $space10 $space0;}
+    //margin
+    .sm-margin-b15{margin-bottom: $space15;}
+    .sm-margin-b10{margin-bottom: $space10;}
+    //Font Size
+    .sm-font11{@include font-size(11px);}
+    .sm-font12{@include font-size(12px);}
+    .sm-font14{@include font-size(14px);} 
+    .sm-font15{@include font-size(15px);} 
+    .sm-font16{@include font-size(16px);} 
+    .sm-font22{@include font-size(22px);} 
+    //width
+    .sm-width-auto{width:auto;}
+    .sm-width-full{width:100%;}
+    //float none =  width auto
+    .sm-flno-wiau{float: none; width: auto;}
+    //down arrow
+    .sm-down-arrow{content: '\f107'; font-family: 'FontAwesome'; float: right;  font-size: 1.0625rem;}
+    
+    
+    .container{width: auto; padding: $space0 $space15;}
+    .banner{@extend .sm-hide;}
+    .top-bar{@extend .sm-hide;}
+    
+    //Product Category
+    @import "responsive/sm/_category.scss";
+    //Product Detail
+    @import "responsive/sm/_product-detail.scss";
+    //Cart
+    @import "responsive/sm/_shopping-cart.scss";
+    //Checkout
+    @import "responsive/sm/_Checkout.scss";
+    //write a review
+    @import "responsive/sm/_write-review.scss";
+    //header
+    header{@include box-shadow(0 0 0);
+    .search-header{width: auto; float: none; background: #fff; margin: 0; border-top: 2px solid #d9d9d9; padding: 0 15px;}
+    .login{width: auto; margin: 0; float: none; padding: 0;
+           span{
+               a{font-size: 0; padding: 0;}
+           }
+    }
+    .logo{width: 140px; left: 55px; margin: $space0; position: absolute; top:13px;}
+    .bottom-header{@extend .sm-paddin0;
+        > .container{height: 55px;}
+    }
+    .login{position: absolute; top: 19px; right: 38px;
+           #cart{
+               a{margin: 0; padding: 0;
+                   &:before{left: 0;}
+                   
+               }
+           }
+    }
+    .login-account{margin-right: 30px;}
+    .hecall{ font-size: 0; background: url(../images/call.svg) no-repeat 0 0; @include size(20px); @include center(false,true); right: 82px;}
+    .search-header{padding: 10px 15px 0;
+                   button{right: 15px; font-size: 0; top: 10px; width: 55px; height: 35px;
+                          i{font-size: 15px;}
+                          }
+                          .form-control{border:1px solid #d9d9d9; height: 35px;}
+    }
+    .dropdown{position: inherit; animation: none !important;
+              .imgbox{@extend .sm-hide;}
+    }
+    .dropdown-title{
+        &:after{@extend .sm-down-arrow; transition:all 0.5s ease;}
+        &.active{
+            &:after{transform: rotate(-180deg);}
+        }
+    }
+    }
+    .m-menu{margin-top: 17px; display: block;}
+    //home  
+    .service{
+        li{width: 50%; padding: 10px;
+           @include first(2){border-bottom: $border1 #d2d3da;}
+           @include from-end(3){ border-right: 0;}
+        }
+    }
+    .wrapper{padding: 0 0 15px;
+    .customer{margin: 0 0 15px;
+              article{padding: 30px 10px 35px;}
+    }
+    .news-box{display: inherit;
+              .one-half{@extend .sm-width-auto; margin-top: 15px; padding: 15px 0;}
+              .one-half-mawo{width: 100%; display: inline-block;}
+    }
+    }
+    .page-head{padding: 33px 0px 20px;
+        h2{@extend .sm-font22;}
+        p{margin-top: $space35;}
+    }
+    .home-shopcat{
+        a{@extend .sm-margin-b15;}
+        .group{display: inherit;
+               a{width: 100%;}
+        }
+    }
+    .blog-box{
+        section{display: inherit;}
+        a{ margin: 15px 0 0; display: block;}
+        .top{
+            a{@extend .sm-width-auto;
+              @include last(1){@extend .sm-width-auto;}
+            }
+        }
+        .bottom{
+            a{@extend .sm-width-auto;}
+        }
+    }
+    .go-top{display: none !important;}
+    .folllow-us{
+        .social-col{@extend .sm-width-auto; margin-top: $space15;}
+    }
+    //Footer
+    footer{@extend .sm-paddin-t15;
+           .brand-list{@extend .sm-margin-b15;
+               li{display: block; width: auto; border-right: 0; text-align: left; border-bottom: $border1 #dadada; padding: $space10 $space0;
+                  @include last(1){border-bottom: 0;}
+               }
+           }
+    }
+    footer{
+        nav{@extend .sm-flno-wiau;
+            ul{@extend .sm-paddin-l10; @extend .sm-hide;
+                li{
+                    a{@extend .sm-paddin-b15;}
+                }
+            }
+            .title{@extend .sm-margin-b10; background: #f5f5f5; padding: 8px 10px; @include font-size(15px);
+        &:after{@extend .sm-hide;}
+        &:before{@extend .sm-down-arrow; transition: all 0.5s ease;}
+        &.active{background: darken(#f5f5f5,5%);
+            &:before{transform: rotate(-180deg);}
+        }
+        }
+        }
+        .newsletter{@extend .sm-flno-wiau; margin-top: $space25;
+                    i{@extend .sm-hide;}
+                    h5{margin-bottom: 10px;}
+        }
+        .social-list{
+            li{@extend .sm-flno-wiau;
+                @include first(2){@extend .sm-hide;}
+            }
+            .text-right{text-align: center !important;
+                        span{padding-right: 0;}
+            }
+        }
+    }
+    //Menu
+    .menu{display: none; position: fixed !important; z-index: 11; margin: 0; @include size(272px,100%); overflow: auto; background: #fff; margin: 0; top: 45px !important; border: 0;
+          .container{padding: 0;}
+          .disflex-spbetween{ display: block;}
+    }  
+    .menu-overlay{opacity: 0; transition: all .4s ease;
+        &.active{background: rgba(0,0,0,0.8); position: fixed; @include size(100%); z-index: 11; top: 57px; opacity: 1;}
+    }
+    header{
+        .menu{
+           > ul{
+                 > li{display: block;
+                      &.sm-opened{
+                          a{border-color: #f9f3f3;}
+                      }
+                 }
+             }
+        }
+        .dropdown{
+            .box{ border-bottom: 1px solid #ccc; padding: 5px 0;
+                  @include last(1){padding: 5px 0;}
+            }
+        }
+    }
+    .bohidden{overflow: hidden !important; }
+}

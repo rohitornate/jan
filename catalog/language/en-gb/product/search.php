@@ -4,6 +4,7 @@ $_['heading_title']     = 'Search';
 $_['heading_tag']		= 'Tag - ';
 
 // Text
+$_['text_home']        = 'Home';
 $_['text_search']       = 'Products meeting the search criteria';
 $_['text_keyword']      = 'Keywords';
 $_['text_category']     = 'All Categories';
@@ -32,3 +33,4 @@ $_['text_limit']        = 'Show:';
 // Entry
 $_['entry_search']      = 'Search Criteria';
 $_['entry_description'] = 'Search in product descriptions';
+$_['text_home']        = 'Home';

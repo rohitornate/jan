@@ -1,0 +1,18 @@
+.categories-main{
+    .c-box{width: 100%; margin:0 0 20px;
+           @include every(3){margin-right: 0;}
+    }
+    .wholesale{@extend .sm-hide;}
+    //fliter
+    .filter{@extend .sm-paddin-tb10;
+           
+    }
+}
+.filter-option{float: none;
+                label{display: block; text-align: center; padding: 0 0 5px;}
+              .box{display: block;}
+              .title{width: 100%; margin: -1px 0 0 0;}
+              ul{position: initial; width: 100%;
+                 label{text-align: left;}
+              }
+}

@@ -1,0 +1,36 @@
+.cart-footer{
+    background:$bg-pink-light; border:none; padding-top:$space25+3;
+    .brand-list{ margin-bottom:$space5;
+        li{ text-align:left; float:left; width:auto;
+        
+           &:first-child{ border-right:0;}
+        }
+        
+       
+    }
+    
+    
+    .payement-service{ float:left; width:46%;
+        small{ display:block; padding-bottom:$space10;}
+    }
+    
+    .payement-col{ float:right; width:27%; @include all-my-icons-sprites; border-right:0; padding-left:$space30 ; padding-top:$space5;
+             i{ display:inline-block; vertical-align:middle; @include size(50px,50px);}
+        .content{ display:inline-block; vertical-align:middle; @include font-size($font18); font-family:$ubuntumedium; text-transform:capitalize; text-align:left; padding-left:$space5+2;
+         small{ display:block; @include font-size($font14); color:#545454; padding-top:$space5+2; font-family:$ubuntulight;  }
+        }
+        
+        &:last-child{
+            border-right:1px solid #e5e5e5;
+        }
+    
+    }
+    
+    .copyright{ background:none; @include font-size($font12+1); color:#666666; border-top:1px solid #ebe5e5; padding-top:$space15+3; padding-bottom:$space10+2;}
+    
+ 
+    
+    
+    
+
+}

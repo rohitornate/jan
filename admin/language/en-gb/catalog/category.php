@@ -16,6 +16,7 @@ $_['column_action']          = 'Action';
 
 // Entry
 $_['entry_name']             = 'Category Name';
+$_['entry_h1']             = 'H1';
 $_['entry_description']      = 'Description';
 $_['entry_meta_title'] 	     = 'Meta Tag Title';
 $_['entry_meta_keyword']     = 'Meta Tag Keywords';

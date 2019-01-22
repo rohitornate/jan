@@ -14,6 +14,7 @@ class ControllerAccountForgotten extends Controller {
 		$this->load->model('account/customer');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+			//echo "test";exit;
 			$this->load->language('mail/forgotten');
 
 			$code = token(40);
@@ -106,6 +107,7 @@ class ControllerAccountForgotten extends Controller {
 		} else {
 			$data['email'] = '';
 		}
+		
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
@@ -118,6 +120,10 @@ class ControllerAccountForgotten extends Controller {
 	}
 
 	protected function validate() {
+// 		/echo "validate";exit;
+		if (!isset($this->request->post['email']) ||$this->request->post['email'] == '') {
+			$this->error['warning'] = $this->language->get('error_enter_email');
+		}
 		if (!isset($this->request->post['email'])) {
 			$this->error['warning'] = $this->language->get('error_email');
 		} elseif (!$this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
@@ -129,7 +135,7 @@ class ControllerAccountForgotten extends Controller {
 		if ($customer_info && !$customer_info['approved']) {
 			$this->error['warning'] = $this->language->get('error_approved');
 		}
-
+//print_r($this->error);exit;
 		return !$this->error;
 	}
 }

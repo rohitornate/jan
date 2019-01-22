@@ -3,6 +3,7 @@
 $_['heading_title']  = 'Reset your password';
 
 // Text
+$_['text_home']            = 'Home';
 $_['text_account']   = 'Account';
 $_['text_password']  = 'Enter the new password you wish to use.';
 $_['text_success']   = 'Success: Your password has been successfully updated.';

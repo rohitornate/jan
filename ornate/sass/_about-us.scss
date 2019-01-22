@@ -1,0 +1,14 @@
+// About Us
+.aboutus{
+    p{@include font-size(15px); @extend .font-light; line-height: 28px; padding: $space10 $space0;}
+}
+.abusceo{padding: $space45 $space0; border-bottom: $border2 #bbbbbb; margin-bottom: 45px;
+    .title{@include font-size(35px);}
+    span{@include font-size(25px); @extend .font-light; display: block; padding: 8px 0 12px;}
+    article{float: right; width: 48%; padding-top: $space40;}
+}
+.abus-look{ align-items: center; margin-bottom: 62px;
+    article{margin-right: -82px; z-index: 1; text-align: center; padding-left: $space30+2;}
+    p{background: $white;}
+    strong{@include font-size(25px); @extend .font-medium; line-height: normal; padding-bottom: $space10 - 2; display: block;}
+}

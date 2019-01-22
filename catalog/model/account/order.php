@@ -2,7 +2,7 @@
 class ModelAccountOrder extends Model {
 	public function getOrder($order_id) {
 		$order_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order` WHERE order_id = '" . (int)$order_id . "' AND customer_id = '" . (int)$this->customer->getId() . "' AND order_status_id > '0'");
-
+//print_r($order_query->row);exit;
 		if ($order_query->num_rows) {
 			$country_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE country_id = '" . (int)$order_query->row['payment_country_id'] . "'");
 
@@ -44,6 +44,7 @@ class ModelAccountOrder extends Model {
 				'order_id'                => $order_query->row['order_id'],
 				'invoice_no'              => $order_query->row['invoice_no'],
 				'invoice_prefix'          => $order_query->row['invoice_prefix'],
+			//	'tracking_code'          => $order_query->row['tracking_code'],
 				'store_id'                => $order_query->row['store_id'],
 				'store_name'              => $order_query->row['store_name'],
 				'store_url'               => $order_query->row['store_url'],
@@ -110,8 +111,8 @@ class ModelAccountOrder extends Model {
 			$limit = 1;
 		}
 
-		$query = $this->db->query("SELECT o.order_id, o.firstname, o.lastname, os.name as status, o.date_added, o.total, o.currency_code, o.currency_value FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE o.customer_id = '" . (int)$this->customer->getId() . "' AND o.order_status_id > '0' AND o.store_id = '" . (int)$this->config->get('config_store_id') . "' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY o.order_id DESC LIMIT " . (int)$start . "," . (int)$limit);
-
+		$query = $this->db->query("SELECT o.order_id, o.firstname, o.lastname, o.tracking_code,os.name as status, o.date_added, o.total, o.currency_code, o.currency_value FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "order_status os ON (o.order_status_id = os.order_status_id) WHERE o.customer_id = '" . (int)$this->customer->getId() . "' AND o.order_status_id > '0' AND o.store_id = '" . (int)$this->config->get('config_store_id') . "' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY o.order_id DESC LIMIT " . (int)$start . "," . (int)$limit);
+//print_r($query);
 		return $query->rows;
 	}
 
@@ -168,4 +169,35 @@ class ModelAccountOrder extends Model {
 
 		return $query->row['total'];
 	}
+	
+	public  function addCredit($calc_total,$order_id){
+		
+		$this->load->language('extension/total/credit');
+		
+	//$query = $this->db->query("INSERT INTO into  `" . DB_PREFIX . "customer_transaction` SET customer_id='" .(int)$this->customer->getId(). "' , order_id = '". $order_id."', amount ='" .$calc_total. "' , description=' Order ID: #".$order_id." Cash back' ");	
+	$this->db->query("INSERT INTO " . DB_PREFIX . "customer_transaction SET customer_id = '" . (int)$this->customer->getId() . "', order_id = '" . (int)$order_id . "', description = '" . $this->db->escape(sprintf($this->language->get('text_order_id'), (int)$order_id )). "', amount = '" . (float)$calc_total . "', date_added = NOW()");
+	
+	//return $query->row['total'];
+	}
+	
+	public function getCreditDetails($customer_id){
+	$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_transaction` WHERE customer_id = '" . (int)$customer_id . "'");
+
+		if ($query->num_rows) {
+			return true;
+		}else{
+		return false;
+		}
+	}
+	
+	public function getCancel($order_id,$product_id) {
+		$query = $this->db->query("SELECT cancel_id FROM " . DB_PREFIX . "cancel WHERE order_id = '" . $order_id . "' AND product_id = '" . $product_id . "'");
+        if ($query->num_rows) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+	
+	
 }

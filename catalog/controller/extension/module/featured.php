@@ -24,6 +24,7 @@ class ControllerExtensionModuleFeatured extends Controller {
 		if (!empty($setting['product'])) {
 			$products = array_slice($setting['product'], 0, (int)$setting['limit']);
 
+			$data['lazy_load_width_height'] = 'width="' . $setting['width'] . '" height="' . $setting['height'] . '"';
 			foreach ($products as $product_id) {
 				$product_info = $this->model_catalog_product->getProduct($product_id);
 
@@ -45,6 +46,16 @@ class ControllerExtensionModuleFeatured extends Controller {
 					} else {
 						$special = false;
 					}
+					if($product_info['special']){
+                        $discount_price = $product_info['price'] - $product_info['special'];
+                        $discount_price = $this->currency->format($this->tax->calculate($discount_price, $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                                        $discount_per = (($product_info['price'] - $product_info['special'])/$product_info['price'])*100;
+                        $discount_percent = round($discount_per);
+                        }
+						else{
+                        	$discount_percent=false;
+                        	$discount_price=false;
+                        }
 
 					if ($this->config->get('config_tax')) {
 						$tax = $this->currency->format((float)$product_info['special'] ? $product_info['special'] : $product_info['price'], $this->session->data['currency']);
@@ -65,6 +76,12 @@ class ControllerExtensionModuleFeatured extends Controller {
 						'description' => utf8_substr(strip_tags(html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')) . '..',
 						'price'       => $price,
 						'special'     => $special,
+					//	'special1'       => $special1,
+					'price'       => $price,
+					//'special'     => $special,
+					//'category_id' => $parent_category,
+                                        'discount_price'=> $this->currency->format($this->tax->calculate($discount_price, $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']),
+                                        'discount_persent'=>round($discount_percent),
 						'tax'         => $tax,
 						'rating'      => $rating,
 						'href'        => $this->url->link('product/product', 'product_id=' . $product_info['product_id'])

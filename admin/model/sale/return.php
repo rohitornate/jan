@@ -235,4 +235,14 @@ class ModelSaleReturn extends Model {
 
 		return $query->row['total'];
 	}
+	public function getProductData($product_id,$order_id){
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE product_id = '" . (int)$product_id . "' AND order_id='".$order_id."'");
+		
+		return $query->row;
+	}
+	public function getCouponInfo($order_id){
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "coupon_history WHERE order_id = '" . (int)$order_id . "'");
+		
+		return $query->row;
+	}
 }

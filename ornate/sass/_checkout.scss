@@ -1,0 +1,87 @@
+.checkout-main{ padding-bottom:$space60;
+         .step-list{ padding-top:$space25; 
+              li{ display:inline-block; border-bottom:1px solid #eeeeee; width:31%; margin-right:$space25; color:$black; @include font-size($font18); padding-bottom:$space10;
+              .number{ @include size(39px,39px); border:2px solid #cdcdcd; display:inline-block; @include border-radius(100%); @include font-size($font18); color:$black; font-family:$ubuntumedium; text-align:center; line-height:$space30+5; margin-right:$space10+2; }
+              
+              &.active{ border-bottom-color:$yellow; 
+               .number{ background:$yellow; border-color:$yellow; }
+              }
+              }
+               
+         }
+       
+#msform { height:740px;  position: relative; overflow:hidden; }
+#msform fieldset {position: relative; width:100%;}
+#msform fieldset:not(:first-of-type) {display: none;}
+
+
+    
+         .step-info{ display:flex; flex-wrap:wrap; justify-content:space-between; padding-bottom:$space20;  padding-top:$space45; margin:$space0 $space5 - 4; 
+                           .title{ margin-bottom:$space20;
+                @include font-size($font20); color:$black; position:relative; padding-bottom:$space5+2;
+                &:after{ position:absolute; left:0; bottom:0; @include size(61px,1px); background:$black; content:'';}
+                 
+             }   
+             p{ font-family:$ubuntulight; @include font-size($font12+1); color:#545454; padding-top:$space5; padding-bottom:$space20;}
+         }
+         
+         .step-name{background:$bg-common; padding:$space20 $space35; width:50%;}
+         
+    
+     
+         .form-group{ margin-bottom:$space15;}
+            label{ display:inline-block; vertical-align:middle; width:125px; vertical-align:middle; @include font-size($font12+1);}
+         .form-control{ width:75%; display:inline-block; vertical-align:middle;
+                        &.select{ background:#fff url(../images/drop-small.png) no-repeat right center; @include appearance(none);}
+       
+         &.textarea{ height:55px;}
+         }
+         
+         .radio-group{ color:$black; @include font-size($font14); width:100%;
+                       input[type="radio"]{ margin-right:$space10; margin-left:$space0; margin-top:$space0;}
+         }
+         
+         .step-detail{
+             background-color:$white; @include box-shadow(0 0 3px rgba(0,0,0,.2)); padding:$space20 $space35; width:46%;
+               .title{ text-align:center;
+                a{color:$yellow; @include font-size($font12); text-transform:uppercase; padding-left:$space5+2; text-decoration:underline;} 
+                &:after{ left: 50%; @include transform(translate(-50%,0px))}
+               }
+               
+               
+         .in{ border-bottom:1px solid #eeeeee; padding-bottom:$space20; margin-bottom:$space35; padding-top:$space25;}
+                      
+                      
+         }
+         
+            .step-product{ width:70%; float:left;
+             p{@include font-size($font12+1); color:$grey-medium; padding-top:$space25;}
+            }
+          .price{ width:30%; float:right; text-align:right; padding-top:$space30+4; @include font-size($font16); color:$black;
+           strike{ @include font-size($font14); color:$grey-medium; display:block; padding-bottom:$space5;}
+         }
+          
+         .step-descraption{
+                  @include font-size($font14); color:$grey-medium; padding-bottom:$space15+3;
+              .pull-right{  color:$black;  @include font-size($font14+1); float:right;}
+              &:last-child{ font-family:$ubuntumedium;  @include font-size($font14+1);
+              
+              }
+         }  
+   
+    
+    .btn-yellow{ color:$black; font-family:$ubuntumedium; @include font-size($font16+1); width:245px; @include border-radius(3px); padding:$space10+5 $space0; text-transform:capitalize;  text-align:center;}
+    .btn-yellow-small{ text-align:center;
+       i{ margin-left:$space10; margin-right:$space5;}
+    }
+   
+    .summary{@include font-size($font14); color:$black; display:block; padding-bottom:$space15;
+     &:nth-child(6){ padding-bottom:$space20;}
+      &:nth-child(4){ padding-bottom:$space25;}
+             
+    }
+    
+    
+    
+
+} 

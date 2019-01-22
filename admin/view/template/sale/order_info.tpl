@@ -2,7 +2,21 @@
 <div id="content">
   <div class="page-header">
     <div class="container-fluid">
-      <div class="pull-right"><a href="<?php echo $invoice; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_invoice_print; ?>" class="btn btn-info"><i class="fa fa-print"></i></a> <a href="<?php echo $shipping; ?>" target="_blank" data-toggle="tooltip" title="<?php echo $button_shipping_print; ?>" class="btn btn-info"><i class="fa fa-truck"></i></a> <a href="<?php echo $edit; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a> <a href="<?php echo $cancel; ?>" data-toggle="tooltip" title="<?php echo $button_cancel; ?>" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <div class="pull-right">
+	  
+	  	  <?php if ($invoice_no) { ?>
+	  
+	  <a href="<?php echo $invoice; ?>"  target="_blank" data-toggle="tooltip" title="<?php echo $button_invoice_print; ?>" class="btn btn-info"><i class="fa fa-print"></i></a>
+			<?php } else { ?>
+
+
+ <a href="<?php echo $invoice; ?>" disabled="disabled" target="_blank" data-toggle="tooltip" title="<?php echo $button_invoice_print; ?>" class="btn btn-info"><i class="fa fa-print"></i></a>
+			<?php } ?>			
+
+	  <a href="<?php echo $shipping; ?>"  target="_blank" data-toggle="tooltip" title="<?php echo $button_shipping_print; ?>" class="btn btn-info"><i class="fa fa-truck"></i></a> 
+	
+	  
+	  <a href="<?php echo $edit; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a> <a href="<?php echo $cancel; ?>" data-toggle="tooltip" title="<?php echo $button_cancel; ?>" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
       <h1><?php echo $heading_title; ?></h1>
       <ul class="breadcrumb">
         <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -80,13 +94,59 @@
             <tbody>
               <tr>
                 <td><?php echo $text_invoice; ?></td>
+                
                 <td id="invoice" class="text-right"><?php echo $invoice_no; ?></td>
-                <td style="width: 1%;" class="text-center"><?php if (!$invoice_no) { ?>
+                <td style="width: 1%;" class="text-center">
+                <?php //echo $order_status_id; exit;?>
+                <?php if($order_status_id!=0){  ?>
+                <?php if (!$invoice_no) { ?>
                   <button id="button-invoice" data-loading-text="<?php echo $text_loading; ?>" data-toggle="tooltip" title="<?php echo $button_generate; ?>" class="btn btn-success btn-xs"><i class="fa fa-cog"></i></button>
                   <?php } else { ?>
                   <button disabled="disabled" class="btn btn-success btn-xs"><i class="fa fa-refresh"></i></button>
                   <?php } ?></td>
+                  
+                  <?php }else { ?>
+                  <button disabled="disabled" class="btn btn-success btn-xs"><i class="fa fa-refresh"></i></button>
+                  <?php } ?>
               </tr>
+              <?php if($order_status_id!=0){  ?>
+              <tr>
+                <!--<td class="text-right"><?php echo 'Order Traking No:'; ?></td>
+                
+                <td style=" class="text-center">
+                <?php if (!$tracking_code) { ?>
+                <input type="text" name="traking_no" >
+                <button id="button-traking" data-loading-text="<?php echo $text_loading; ?>" data-toggle="tooltip" title="<?php echo $button_generate; ?>" class="btn btn-success btn-xs"><i class="fa fa-cog"></i></button>
+                
+                <?php } else{ ?>
+                
+                <?php echo $tracking_code; ?>
+                <button disabled="disabled" class="btn btn-success btn-xs"><i class="fa fa-refresh"></i></button>
+                <?php } ?>-->
+                
+                <td><?php echo 'Order Traking No:'; ?></td>
+                <td id="invoice" class="text-right"><?php if($tracking_code) { ?>   
+				 <a href="https://ecomexpress.in/tracking/?awb_field=<?php echo $tracking_code; ?>" target="_blank" data-loading-text="<?php echo $text_loading; ?>" data-toggle="tooltip" title="TRACK " class="btn btn-success btn-xs"> <i class="fa fa-truck"></i></a>
+				
+				<?php echo $tracking_code; }else{ ?><input type="text" name="traking_no" class="text-center"> <?php }?></td>
+                <td style="width: 1%;" class="text-center"><?php if (!$tracking_code) { ?>
+				<!--<input type="text" name="traking_no" class="text-center">-->
+				
+                <button id="button-traking" data-loading-text="<?php echo $text_loading; ?>" data-toggle="tooltip" title="<?php echo 'Add Tracking Code'; ?>" class="btn btn-success btn-xs"><i class="fa fa-cog"></i></button>
+                
+
+
+                  <?php } else { ?>
+                  <button disabled="disabled" class="btn btn-success btn-xs"><i class="fa fa-refresh"></i></button>
+                  <?php } ?></td>
+                
+                
+                </td>
+                
+                
+                
+              </tr>  
+              <?php } ?>
               <tr>
                 <td><?php echo $text_reward; ?></td>
                 <td class="text-right"><?php echo $reward; ?></td>
@@ -147,16 +207,19 @@
         <table class="table table-bordered">
           <thead>
             <tr>
+				<td class=""><?php echo 'Image'; ?></td>
               <td class="text-left"><?php echo $column_product; ?></td>
               <td class="text-left"><?php echo $column_model; ?></td>
               <td class="text-right"><?php echo $column_quantity; ?></td>
+			  <td class="text-right">MRP</td>
               <td class="text-right"><?php echo $column_price; ?></td>
               <td class="text-right"><?php echo $column_total; ?></td>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($products as $product) { ?>
+            <?php foreach ($products as $product) { //print_r($product);?>
             <tr>
+				<td class="" style="width:100px"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" class="img-thumbnail" /></td>
               <td class="text-left"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
                 <?php foreach ($product['option'] as $option) { ?>
                 <br />
@@ -168,6 +231,7 @@
                 <?php } ?></td>
               <td class="text-left"><?php echo $product['model']; ?></td>
               <td class="text-right"><?php echo $product['quantity']; ?></td>
+			  <td class="text-right"><?php echo $product['mrp']; ?></td>
               <td class="text-right"><?php echo $product['price']; ?></td>
               <td class="text-right"><?php echo $product['total']; ?></td>
             </tr>
@@ -183,7 +247,7 @@
             <?php } ?>
             <?php foreach ($totals as $total) { ?>
             <tr>
-              <td colspan="4" class="text-right"><?php echo $total['title']; ?></td>
+              <td colspan="6" class="text-right"><?php echo $total['title']; ?></td>
               <td class="text-right"><?php echo $total['text']; ?></td>
             </tr>
             <?php } ?>
@@ -227,15 +291,38 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="input-order-status"><?php echo $entry_order_status; ?></label>
                   <div class="col-sm-10">
-                    <select name="order_status_id" id="input-order-status" class="form-control">
+                   
+				<?php 	if($order_status_id!=0){ ?>
+				
+				   <select name="order_status_id" id="input-order-status" class="form-control">
+				
                       <?php foreach ($order_statuses as $order_statuses) { ?>
                       <?php if ($order_statuses['order_status_id'] == $order_status_id) { ?>
+					  
                       <option value="<?php echo $order_statuses['order_status_id']; ?>" selected="selected"><?php echo $order_statuses['name']; ?></option>
-                      <?php } else { ?>
+                      <?php }  else {  ?>
+					 
                       <option value="<?php echo $order_statuses['order_status_id']; ?>"><?php echo $order_statuses['name']; ?></option>
                       <?php } ?>
-                      <?php } ?>
+					  
+					  
+					  <?php } ?>
+					
                     </select>
+					<?php }else { ?>
+					<select name="order_status_id" id="input-order-status" class="form-control">
+				
+                      
+					 
+                      <option value="0">Missing Orders</option>
+                      
+					
+                    </select>
+					
+					
+					<?php } ?>
+					
+					
                   </div>
                 </div>
                 <div class="form-group">
@@ -250,10 +337,17 @@
                     <input type="checkbox" name="notify" value="1" id="input-notify" />
                   </div>
                 </div>
-                <div class="form-group">
+
+				<div class="form-group">
                   <label class="col-sm-2 control-label" for="input-comment"><?php echo $entry_comment; ?></label>
                   <div class="col-sm-10">
                     <textarea name="comment" rows="8" id="input-comment" class="form-control"></textarea>
+                  </div>
+                </div>
+				<div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-comment">Admin Commet</label>
+                  <div class="col-sm-10">
+                    <textarea name="admin_comment" rows="8" id="input-comment" class="form-control"></textarea>
                   </div>
                 </div>
               </form>
@@ -415,6 +509,44 @@ $(document).delegate('#button-invoice', 'click', function() {
 		}
 	});
 });
+
+$(document).delegate('#button-traking', 'click', function() {
+	
+	
+	var track_no=$('input[name=\'traking_no\']').val();
+	//alert(track_no);return false;
+	$.ajax({
+		url: 'index.php?route=sale/order/createtraking&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>&track_no='+track_no,
+		dataType: 'json',
+		type: 'post',
+		//data: 'track=track_no',
+
+		beforeSend: function() {
+			$('#button-invoice').button('loading');
+		},
+		complete: function() {
+			$('#button-invoice').button('reset');
+		},
+		success: function(json) {
+			$('.alert').remove();
+
+			if (json['error']) {
+				$('#content > .container-fluid').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+			}
+
+			if (json['invoice_no']) {
+				$('#invoice').html(json['invoice_no']);
+
+				$('#button-invoice').replaceWith('<button disabled="disabled" class="btn btn-success btn-xs"><i class="fa fa-cog"></i></button>');
+			}
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+
 
 $(document).delegate('#button-reward-add', 'click', function() {
 	$.ajax({
@@ -591,7 +723,8 @@ $('#button-history').on('click', function() {
 		url: '<?php echo $catalog; ?>index.php?route=api/order/history&token=' + token + '&store_id=<?php echo $store_id; ?>&order_id=<?php echo $order_id; ?>',
 		type: 'post',
 		dataType: 'json',
-		data: 'order_status_id=' + encodeURIComponent($('select[name=\'order_status_id\']').val()) + '&notify=' + ($('input[name=\'notify\']').prop('checked') ? 1 : 0) + '&override=' + ($('input[name=\'override\']').prop('checked') ? 1 : 0) + '&append=' + ($('input[name=\'append\']').prop('checked') ? 1 : 0) + '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val()),
+		data: 'order_status_id=' + encodeURIComponent($('select[name=\'order_status_id\']').val()) + '&notify=' + ($('input[name=\'notify\']').prop('checked') ? 1 : 0) + '&override=' + ($('input[name=\'override\']').prop('checked') ? 1 : 0) + '&append=' + ($('input[name=\'append\']').prop('checked') ? 1 : 0) + '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val()) + '&admin_comment=' + encodeURIComponent($('textarea[name=\'admin_comment\']').val()),
+
 		beforeSend: function() {
 			$('#button-history').button('loading');
 		},

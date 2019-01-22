@@ -50,6 +50,11 @@
                   <?php } ?>
                 </select>
               </div>
+			  <div class="form-group">
+                <label class="control-label" for="input-model"><?php echo $entry_model; ?></label>
+                <input type="text" name="filter_model" value="<?php echo $filter_model; ?>" placeholder="MODEL" id="input-model" class="form-control" />
+              </div>
+			  
               <button type="button" id="button-filter" class="btn btn-primary pull-right"><i class="fa fa-filter"></i> <?php echo $button_filter; ?></button>
             </div>
           </div>
@@ -60,7 +65,11 @@
               <tr>
                 <td class="text-left"><?php echo $column_name; ?></td>
                 <td class="text-left"><?php echo $column_model; ?></td>
-                <td class="text-right"><?php echo $column_quantity; ?></td>
+                <td class="text-right"><?php if ($sort == 'p.quantity') { ?>
+                    <a href="<?php echo $sort_quantity; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_quantity; ?></a>
+                    <?php } else { ?>
+                    <a href="<?php echo $sort_quantity; ?>"><?php echo $column_quantity; ?></a>
+                    <?php } ?></td>
                 <td class="text-right"><?php echo $column_total; ?></td>
               </tr>
             </thead>
@@ -104,6 +113,11 @@ $('#button-filter').on('click', function() {
 	if (filter_date_end) {
 		url += '&filter_date_end=' + encodeURIComponent(filter_date_end);
 	}
+		var filter_model = $('input[name=\'filter_model\']').val();
+
+	if (filter_model) {
+		url += '&filter_model=' + encodeURIComponent(filter_model);
+	}
 	
 	var filter_order_status_id = $('select[name=\'filter_order_status_id\']').val();
 	
@@ -113,6 +127,28 @@ $('#button-filter').on('click', function() {
 
 	location = url;
 });
+
+
+$('input[name=\'filter_model\']').autocomplete({
+	'source': function(request, response) {
+		$.ajax({
+			url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>&filter_model=' +  encodeURIComponent(request),
+			dataType: 'json',
+			success: function(json) {
+				response($.map(json, function(item) {
+					return {
+						label: item['model'],
+						value: item['product_id']
+					}
+				}));
+			}
+		});
+	},
+	'select': function(item) {
+		$('input[name=\'filter_model\']').val(item['label']);
+	}
+});
+
 //--></script> 
   <script type="text/javascript"><!--
 $('.date').datetimepicker({

@@ -1,0 +1,542 @@
+@charset "UTF-8";html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video{margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline}
+html{line-height:1}
+ol,
+ul{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+caption,
+th,
+td{text-align:left;font-weight:normal;vertical-align:middle}
+q,
+blockquote{quotes:none}
+q:before,
+q:after,
+blockquote:before,
+blockquote:after{content:"";content:none}
+a img{border:0}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary{display:block}
+img{max-width:100%;}
+.hecall{line-height:2}
+#account-image{display:none;}
+.account{display:none;}
+.my-icons-sprite, header .top-bar .my-icons-add-cart, header .top-bar .my-icons-arrow-left, header .top-bar .my-icons-arrow-right, header .top-bar .my-icons-btn-arrow, header .top-bar .my-icons-call-contact, header .top-bar .my-icons-call-icon, header .top-bar .my-icons-call, header .top-bar .my-icons-cart-shoping, header .top-bar .my-icons-cart, header .top-bar .my-icons-certficate, header .top-bar .my-icons-coupon-cart, header .top-bar .my-icons-customer, header .top-bar .my-icons-facebook, header .top-bar .my-icons-guranted-long, header .top-bar .my-icons-guranted, header .top-bar .my-icons-help, header .top-bar .my-icons-inquriry, header .top-bar .my-icons-instgrame, header .top-bar .my-icons-location, header .top-bar .my-icons-money-back, header .top-bar .my-icons-payement, header .top-bar .my-icons-pdf, header .top-bar .my-icons-pricing, header .top-bar .my-icons-protection, header .top-bar .my-icons-quoto, header .top-bar .my-icons-rating, header .top-bar .my-icons-refresh, header .top-bar .my-icons-share-divider, header .top-bar .my-icons-shipping, header .top-bar .my-icons-support, header .top-bar .my-icons-truck, header .top-bar .my-icons-user, header .login span a:before, header .login #cart a:before, footer .brand-list li .my-icons-add-cart, footer .brand-list li .my-icons-arrow-left, footer .brand-list li .my-icons-arrow-right, footer .brand-list li .my-icons-btn-arrow, footer .brand-list li .my-icons-call-contact, footer .brand-list li .my-icons-call-icon, footer .brand-list li .my-icons-call, footer .brand-list li .my-icons-cart-shoping, footer .brand-list li .my-icons-cart, footer .brand-list li .my-icons-certficate, footer .brand-list li .my-icons-coupon-cart, footer .brand-list li .my-icons-customer, footer .brand-list li .my-icons-facebook, footer .brand-list li .my-icons-guranted-long, footer .brand-list li .my-icons-guranted, footer .brand-list li .my-icons-help, footer .brand-list li .my-icons-inquriry, footer .brand-list li .my-icons-instgrame, footer .brand-list li .my-icons-location, footer .brand-list li .my-icons-money-back, footer .brand-list li .my-icons-payement, footer .brand-list li .my-icons-pdf, footer .brand-list li .my-icons-pricing, footer .brand-list li .my-icons-protection, footer .brand-list li .my-icons-quoto, footer .brand-list li .my-icons-rating, footer .brand-list li .my-icons-refresh, footer .brand-list li .my-icons-share-divider, footer .brand-list li .my-icons-shipping, footer .brand-list li .my-icons-support, footer .brand-list li .my-icons-truck, footer .brand-list li .my-icons-user, footer .newsletter .my-icons-add-cart, footer .newsletter .my-icons-arrow-left, footer .newsletter .my-icons-arrow-right, footer .newsletter .my-icons-btn-arrow, footer .newsletter .my-icons-call-contact, footer .newsletter .my-icons-call-icon, footer .newsletter .my-icons-call, footer .newsletter .my-icons-cart-shoping, footer .newsletter .my-icons-cart, footer .newsletter .my-icons-certficate, footer .newsletter .my-icons-coupon-cart, footer .newsletter .my-icons-customer, footer .newsletter .my-icons-facebook, footer .newsletter .my-icons-guranted-long, footer .newsletter .my-icons-guranted, footer .newsletter .my-icons-help, footer .newsletter .my-icons-inquriry, footer .newsletter .my-icons-instgrame, footer .newsletter .my-icons-location, footer .newsletter .my-icons-money-back, footer .newsletter .my-icons-payement, footer .newsletter .my-icons-pdf, footer .newsletter .my-icons-pricing, footer .newsletter .my-icons-protection, footer .newsletter .my-icons-quoto, footer .newsletter .my-icons-rating, footer .newsletter .my-icons-refresh, footer .newsletter .my-icons-share-divider, footer .newsletter .my-icons-shipping, footer .newsletter .my-icons-support, footer .newsletter .my-icons-truck, footer .newsletter .my-icons-user, footer .newsletter .form-group button:after, .btn-yellow .my-icons-add-cart, .btn-yellow .my-icons-arrow-left, .btn-yellow .my-icons-arrow-right, .btn-yellow .my-icons-btn-arrow, .btn-yellow .my-icons-call-contact, .btn-yellow .my-icons-call-icon, .btn-yellow .my-icons-call, .btn-yellow .my-icons-cart-shoping, .btn-yellow .my-icons-cart, .btn-yellow .my-icons-certficate, .btn-yellow .my-icons-coupon-cart, .btn-yellow .my-icons-customer, .btn-yellow .my-icons-facebook, .btn-yellow .my-icons-guranted-long, .btn-yellow .my-icons-guranted, .btn-yellow .my-icons-help, .btn-yellow .my-icons-inquriry, .btn-yellow .my-icons-instgrame, .btn-yellow .my-icons-location, .btn-yellow .my-icons-money-back, .btn-yellow .my-icons-payement, .btn-yellow .my-icons-pdf, .btn-yellow .my-icons-pricing, .btn-yellow .my-icons-protection, .btn-yellow .my-icons-quoto, .btn-yellow .my-icons-rating, .btn-yellow .my-icons-refresh, .btn-yellow .my-icons-share-divider, .btn-yellow .my-icons-shipping, .btn-yellow .my-icons-support, .btn-yellow .my-icons-truck, .btn-yellow .my-icons-user, .service li:before, .service li:nth-child(2):before, .service li:nth-child(3):before, .service li:nth-child(4):before, .wrapper .customer figure figcaption i, .wrapper .customer article .city:before, .wrapper .customer article p:after, .folllow-us .social-col .title .my-icons-add-cart, .folllow-us .social-col .title .my-icons-arrow-left, .folllow-us .social-col .title .my-icons-arrow-right, .folllow-us .social-col .title .my-icons-btn-arrow, .folllow-us .social-col .title .my-icons-call-contact, .folllow-us .social-col .title .my-icons-call-icon, .folllow-us .social-col .title .my-icons-call, .folllow-us .social-col .title .my-icons-cart-shoping, .folllow-us .social-col .title .my-icons-cart, .folllow-us .social-col .title .my-icons-certficate, .folllow-us .social-col .title .my-icons-coupon-cart, .folllow-us .social-col .title .my-icons-customer, .folllow-us .social-col .title .my-icons-facebook, .folllow-us .social-col .title .my-icons-guranted-long, .folllow-us .social-col .title .my-icons-guranted, .folllow-us .social-col .title .my-icons-help, .folllow-us .social-col .title .my-icons-inquriry, .folllow-us .social-col .title .my-icons-instgrame, .folllow-us .social-col .title .my-icons-location, .folllow-us .social-col .title .my-icons-money-back, .folllow-us .social-col .title .my-icons-payement, .folllow-us .social-col .title .my-icons-pdf, .folllow-us .social-col .title .my-icons-pricing, .folllow-us .social-col .title .my-icons-protection, .folllow-us .social-col .title .my-icons-quoto, .folllow-us .social-col .title .my-icons-rating, .folllow-us .social-col .title .my-icons-refresh, .folllow-us .social-col .title .my-icons-share-divider, .folllow-us .social-col .title .my-icons-shipping, .folllow-us .social-col .title .my-icons-support, .folllow-us .social-col .title .my-icons-truck, .folllow-us .social-col .title .my-icons-user, .product-detail-main .product-detail .rating .my-icons-add-cart, .product-detail-main .product-detail .rating .my-icons-arrow-left, .product-detail-main .product-detail .rating .my-icons-arrow-right, .product-detail-main .product-detail .rating .my-icons-btn-arrow, .product-detail-main .product-detail .rating .my-icons-call-contact, .product-detail-main .product-detail .rating .my-icons-call-icon, .product-detail-main .product-detail .rating .my-icons-call, .product-detail-main .product-detail .rating .my-icons-cart-shoping, .product-detail-main .product-detail .rating .my-icons-cart, .product-detail-main .product-detail .rating .my-icons-certficate, .product-detail-main .product-detail .rating .my-icons-coupon-cart, .product-detail-main .product-detail .rating .my-icons-customer, .product-detail-main .product-detail .rating .my-icons-facebook, .product-detail-main .product-detail .rating .my-icons-guranted-long, .product-detail-main .product-detail .rating .my-icons-guranted, .product-detail-main .product-detail .rating .my-icons-help, .product-detail-main .product-detail .rating .my-icons-inquriry, .product-detail-main .product-detail .rating .my-icons-instgrame, .product-detail-main .product-detail .rating .my-icons-location, .product-detail-main .product-detail .rating .my-icons-money-back, .product-detail-main .product-detail .rating .my-icons-payement, .product-detail-main .product-detail .rating .my-icons-pdf, .product-detail-main .product-detail .rating .my-icons-pricing, .product-detail-main .product-detail .rating .my-icons-protection, .product-detail-main .product-detail .rating .my-icons-quoto, .product-detail-main .product-detail .rating .my-icons-rating, .product-detail-main .product-detail .rating .my-icons-refresh, .product-detail-main .product-detail .rating .my-icons-share-divider, .product-detail-main .product-detail .rating .my-icons-shipping, .product-detail-main .product-detail .rating .my-icons-support, .product-detail-main .product-detail .rating .my-icons-truck, .product-detail-main .product-detail .rating .my-icons-user, .product-detail-main .product-detail .form-group .size-file:before, .product-detail-main .product-detail .btn-default .my-icons-add-cart, .product-detail-main .product-detail .btn-default .my-icons-arrow-left, .product-detail-main .product-detail .btn-default .my-icons-arrow-right, .product-detail-main .product-detail .btn-default .my-icons-btn-arrow, .product-detail-main .product-detail .btn-default .my-icons-call-contact, .product-detail-main .product-detail .btn-default .my-icons-call-icon, .product-detail-main .product-detail .btn-default .my-icons-call, .product-detail-main .product-detail .btn-default .my-icons-cart-shoping, .product-detail-main .product-detail .btn-default .my-icons-cart, .product-detail-main .product-detail .btn-default .my-icons-certficate, .product-detail-main .product-detail .btn-default .my-icons-coupon-cart, .product-detail-main .product-detail .btn-default .my-icons-customer, .product-detail-main .product-detail .btn-default .my-icons-facebook, .product-detail-main .product-detail .btn-default .my-icons-guranted-long, .product-detail-main .product-detail .btn-default .my-icons-guranted, .product-detail-main .product-detail .btn-default .my-icons-help, .product-detail-main .product-detail .btn-default .my-icons-inquriry, .product-detail-main .product-detail .btn-default .my-icons-instgrame, .product-detail-main .product-detail .btn-default .my-icons-location, .product-detail-main .product-detail .btn-default .my-icons-money-back, .product-detail-main .product-detail .btn-default .my-icons-payement, .product-detail-main .product-detail .btn-default .my-icons-pdf, .product-detail-main .product-detail .btn-default .my-icons-pricing, .product-detail-main .product-detail .btn-default .my-icons-protection, .product-detail-main .product-detail .btn-default .my-icons-quoto, .product-detail-main .product-detail .btn-default .my-icons-rating, .product-detail-main .product-detail .btn-default .my-icons-refresh, .product-detail-main .product-detail .btn-default .my-icons-share-divider, .product-detail-main .product-detail .btn-default .my-icons-shipping, .product-detail-main .product-detail .btn-default .my-icons-support, .product-detail-main .product-detail .btn-default .my-icons-truck, .product-detail-main .product-detail .btn-default .my-icons-user, .product-detail-main .product-detail .delievrt-text .my-icons-add-cart, .product-detail-main .product-detail .delievrt-text .my-icons-arrow-left, .product-detail-main .product-detail .delievrt-text .my-icons-arrow-right, .product-detail-main .product-detail .delievrt-text .my-icons-btn-arrow, .product-detail-main .product-detail .delievrt-text .my-icons-call-contact, .product-detail-main .product-detail .delievrt-text .my-icons-call-icon, .product-detail-main .product-detail .delievrt-text .my-icons-call, .product-detail-main .product-detail .delievrt-text .my-icons-cart-shoping, .product-detail-main .product-detail .delievrt-text .my-icons-cart, .product-detail-main .product-detail .delievrt-text .my-icons-certficate, .product-detail-main .product-detail .delievrt-text .my-icons-coupon-cart, .product-detail-main .product-detail .delievrt-text .my-icons-customer, .product-detail-main .product-detail .delievrt-text .my-icons-facebook, .product-detail-main .product-detail .delievrt-text .my-icons-guranted-long, .product-detail-main .product-detail .delievrt-text .my-icons-guranted, .product-detail-main .product-detail .delievrt-text .my-icons-help, .product-detail-main .product-detail .delievrt-text .my-icons-inquriry, .product-detail-main .product-detail .delievrt-text .my-icons-instgrame, .product-detail-main .product-detail .delievrt-text .my-icons-location, .product-detail-main .product-detail .delievrt-text .my-icons-money-back, .product-detail-main .product-detail .delievrt-text .my-icons-payement, .product-detail-main .product-detail .delievrt-text .my-icons-pdf, .product-detail-main .product-detail .delievrt-text .my-icons-pricing, .product-detail-main .product-detail .delievrt-text .my-icons-protection, .product-detail-main .product-detail .delievrt-text .my-icons-quoto, .product-detail-main .product-detail .delievrt-text .my-icons-rating, .product-detail-main .product-detail .delievrt-text .my-icons-refresh, .product-detail-main .product-detail .delievrt-text .my-icons-share-divider, .product-detail-main .product-detail .delievrt-text .my-icons-shipping, .product-detail-main .product-detail .delievrt-text .my-icons-support, .product-detail .delievrt-text .my-icons-truck, .product-detail-main .product-detail .delievrt-text .my-icons-user, .share-list:before, .cart-main .cart-coupon label:before, .cart-header .cart-logo .my-icons-add-cart, .cart-header .cart-logo .my-icons-arrow-left, .cart-header .cart-logo .my-icons-arrow-right, .cart-header .cart-logo .my-icons-btn-arrow, .cart-header .cart-logo .my-icons-call-contact, .cart-header .cart-logo .my-icons-call-icon, .cart-header .cart-logo .my-icons-call, .cart-header .cart-logo .my-icons-cart-shoping, .cart-header .cart-logo .my-icons-cart, .cart-header .cart-logo .my-icons-certficate, .cart-header .cart-logo .my-icons-coupon-cart, .cart-header .cart-logo .my-icons-customer, .cart-header .cart-logo .my-icons-facebook, .cart-header .cart-logo .my-icons-guranted-long, .cart-header .cart-logo .my-icons-guranted, .cart-header .cart-logo .my-icons-help, .cart-header .cart-logo .my-icons-inquriry, .cart-header .cart-logo .my-icons-instgrame, .cart-header .cart-logo .my-icons-location, .cart-header .cart-logo .my-icons-money-back, .cart-header .cart-logo .my-icons-payement, .cart-header .cart-logo .my-icons-pdf, .cart-header .cart-logo .my-icons-pricing, .cart-header .cart-logo .my-icons-protection, .cart-header .cart-logo .my-icons-quoto, .cart-header .cart-logo .my-icons-rating, .cart-header .cart-logo .my-icons-refresh, .cart-header .cart-logo .my-icons-share-divider, .cart-header .cart-logo .my-icons-shipping, .cart-header .cart-logo .my-icons-support, .cart-header .cart-logo .my-icons-truck, .cart-header .cart-logo .my-icons-user, .cart-header .contact-us:before, .cart-footer .payement-col .my-icons-add-cart, .cart-footer .payement-col .my-icons-arrow-left, .cart-footer .payement-col .my-icons-arrow-right, .cart-footer .payement-col .my-icons-btn-arrow, .cart-footer .payement-col .my-icons-call-contact, .cart-footer .payement-col .my-icons-call-icon, .cart-footer .payement-col .my-icons-call, .cart-footer .payement-col .my-icons-cart-shoping, .cart-footer .payement-col .my-icons-cart, .cart-footer .payement-col .my-icons-certficate, .cart-footer .payement-col .my-icons-coupon-cart, .cart-footer .payement-col .my-icons-customer, .cart-footer .payement-col .my-icons-facebook, .cart-footer .payement-col .my-icons-guranted-long, .cart-footer .payement-col .my-icons-guranted, .cart-footer .payement-col .my-icons-help, .cart-footer .payement-col .my-icons-inquriry, .cart-footer .payement-col .my-icons-instgrame, .cart-footer .payement-col .my-icons-location, .cart-footer .payement-col .my-icons-money-back, .cart-footer .payement-col .my-icons-payement, .cart-footer .payement-col .my-icons-pdf, .cart-footer .payement-col .my-icons-pricing, .cart-footer .payement-col .my-icons-protection, .cart-footer .payement-col .my-icons-quoto, .cart-footer .payement-col .my-icons-rating, .cart-footer .payement-col .my-icons-refresh, .cart-footer .payement-col .my-icons-share-divider, .cart-footer .payement-col .my-icons-shipping, .cart-footer .payement-col .my-icons-support, .cart-footer .payement-col .my-icons-truck, .cart-footer .payement-col .my-icons-user, .popup .rating-box .my-icons-add-cart, .popup .rating-box .my-icons-arrow-left, .popup .rating-box .my-icons-arrow-right, .popup .rating-box .my-icons-btn-arrow, .popup .rating-box .my-icons-call-contact, .popup .rating-box .my-icons-call-icon, .popup .rating-box .my-icons-call, .popup .rating-box .my-icons-cart-shoping, .popup .rating-box .my-icons-cart, .popup .rating-box .my-icons-certficate, .popup .rating-box .my-icons-coupon-cart, .popup .rating-box .my-icons-customer, .popup .rating-box .my-icons-facebook, .popup .rating-box .my-icons-guranted-long, .popup .rating-box .my-icons-guranted, .popup .rating-box .my-icons-help, .popup .rating-box .my-icons-inquriry, .popup .rating-box .my-icons-instgrame, .popup .rating-box .my-icons-location, .popup .rating-box .my-icons-money-back, .popup .rating-box .my-icons-payement, .popup .rating-box .my-icons-pdf, .popup .rating-box .my-icons-pricing, .popup .rating-box .my-icons-protection, .popup .rating-box .my-icons-quoto, .popup .rating-box .my-icons-rating, .popup .rating-box .my-icons-refresh, .popup .rating-box .my-icons-share-divider, .popup .rating-box .my-icons-shipping, .popup .rating-box .my-icons-support, .popup .rating-box .my-icons-truck, .popup .rating-box .my-icons-user, .cous-inqury .my-icons-add-cart, .cous-inqury .my-icons-arrow-left, .cous-inqury .my-icons-arrow-right, .cous-inqury .my-icons-btn-arrow, .cous-inqury .my-icons-call-contact, .cous-inqury .my-icons-call-icon, .cous-inqury .my-icons-call, .cous-inqury .my-icons-cart-shoping, .cous-inqury .my-icons-cart, .cous-inqury .my-icons-certficate, .cous-inqury .my-icons-coupon-cart, .cous-inqury .my-icons-customer, .cous-inqury .my-icons-facebook, .cous-inqury .my-icons-guranted-long, .cous-inqury .my-icons-guranted, .cous-inqury .my-icons-help, .cous-inqury .my-icons-inquriry, .cous-inqury .my-icons-instgrame, .cous-inqury .my-icons-location, .cous-inqury .my-icons-money-back, .cous-inqury .my-icons-payement, .cous-inqury .my-icons-pdf, .cous-inqury .my-icons-pricing, .cous-inqury .my-icons-protection, .cous-inqury .my-icons-quoto, .cous-inqury .my-icons-rating, .cous-inqury .my-icons-refresh, .cous-inqury .my-icons-share-divider, .cous-inqury .my-icons-shipping, .cous-inqury .my-icons-support, .cous-inqury .my-icons-truck, .cous-inqury .my-icons-user, .success-text .my-icons-add-cart, .success-text .my-icons-arrow-left, .success-text .my-icons-arrow-right, .success-text .my-icons-btn-arrow, .success-text .my-icons-call-contact, .success-text .my-icons-call-icon, .success-text .my-icons-call, .success-text .my-icons-cart-shoping, .success-text .my-icons-cart, .success-text .my-icons-certficate, .success-text .my-icons-coupon-cart, .success-text .my-icons-customer, .success-text .my-icons-facebook, .success-text .my-icons-guranted-long, .success-text .my-icons-guranted, .success-text .my-icons-help, .success-text .my-icons-inquriry, .success-text .my-icons-instgrame, .success-text .my-icons-location, .success-text .my-icons-money-back, .success-text .my-icons-payement, .success-text .my-icons-pdf, .success-text .my-icons-pricing, .success-text .my-icons-protection, .success-text .my-icons-quoto, .success-text .my-icons-rating, .success-text .my-icons-refresh, .success-text .my-icons-share-divider, .success-text .my-icons-shipping, .success-text .my-icons-support, .success-text .my-icons-truck, .success-text .my-icons-user{background-image:url(../images/my-icons-sb9dc963115.png);background-repeat:no-repeat;}
+footer .brand-list li .my-icons-protection{background-position:0 0px;}
+.categories-main .content{background-color:#fff;-moz-box-shadow:0 0 3px rgba(0,0,0,0.2);-webkit-box-shadow:0 0 3px rgba(0,0,0,0.2);box-shadow:0 0 3px rgba(0,0,0,0.2);padding:40px 35px 10px;}
+.categories-main .content .title{color:#670067!important;font-size:1.0625rem;padding-bottom:12px}
+.categories-main .content p{font-size:.875rem;color:#565656;line-height:22px;padding-bottom:10px}
+.categories-main .content .title-small{color:#000;font-size:.9375rem;padding-bottom:10px}
+.categories-main .content .title-small:before{content:'-';display:inline-block;padding-right:10px}
+.categories-main h1{font-size:20px;color:#670067;}
+.categories-main .content h2{color:#4476b2;font-size:16px;line-height:22px;padding-bottom:6px;}
+.categories-main .content h3{color:#4476b2;font-size:14px;}
+.categories-main .content h4{color:#4476b2;font-size:14px;}
+.categories-main .content p{margin:0 0 10px;}
+.toptext{font-size:14px;letter-spacing:0px; color:#a6cfe8;font-weight:700;}
+
+.live-search{display:none;background:#ebf3f8;border:1px solid #dadada;position:absolute;right:42px;width:455px;z-index:1;max-height:400px;overflow:auto;padding:10px 35px;margin-top:2px;}
+.testimonial_subtitle{color:#0aaa7a;font-size:12px;}
+.testimonial_btn{background-color:#373d4b !important;color:#fff !important;}
+.seprator{height:2px;width:56px;background-color:#0aaa7a;margin:7px 0 10px 0;}
+.header-time{right:0;/}
+.header-time span{text-align:center;font-size:24px;font-weight:600;margin-right:0px;padding:6px;}
+.c-header .header-time em{font-style:normal;font-size:30px;margin-right:15px;}
+.right-links ul li span.p1[data-count]:after{position:absolute;right:12%;top:16%;content:attr(data-count);font-size:100%;padding:.2em;border-radius:50%;line-height:1em;color:white;background:rgba(255, 0, 0, .85);text-align:center;min-width:1.3em;}
+.right-links{width:100%;float:right;padding-left:466px;vertical-align:middle;display:inherit;margin-top:7px;}
+.right-links ul{padding:0;list-style:none;}
+.right-links ul li{display:inline-block;position:relative;line-height:21px;text-align:left;}
+.right-links ul li a{display:block;padding:0px 12px 0px 0px;color:#636381;text-decoration:none;padding-top:18px;font-size:16px;font-weight:650;}
+.right-links ul li a:hover{color:#000;}
+.right-links ul li ul.dropdown{min-width:100%;display:none;position:absolute;z-index:999;left:0;}
+.right-links ul li:hover ul.dropdown{display:block;}
+.right-links ul li ul.dropdown li{display:block;}
+.more{position:absolute;right:35px;bottom:18px;font-size:15px;}
+.breadcrumb{margin-top:160px;padding-top:10px;padding-bottom:10px;}
+.socialnewsletter .socialimg li{width:33%;}
+.blog-read{text-align:center;}
+.footview{height:35px;width:96px;background-color:#670067;text-align:center;margin-top:35px;color:#fff;}
+.viewbtn{padding-left:528px;}
+.viewbtn span{font-size:16px;}
+.para p{font-size:16px;text-align:left;line-height:2;}
+.social-icon{float:left;font-weight:700;font-size:18px;width:33.33%;}
+.btn-submit{margin:0px;height:40px;background-color:#3b3b3b;border-radius:0;width:109px;position:absolute;right:367px;text-transform:uppercase;color:#fff;}
+.cap{text-transform:capitalize;}
+.cap::after{content:"/";padding-left:3px;}
+.sub-taxonomy{padding-right:9px;font-weight:bold;font-size:15px;}
+.timerspecification{color:#ffffff;font-size:24px;font-weight:600;}
+.right-links ul li a .item-no{position:absolute;right:0%;top:10%;content:attr(data-count);font-size:100%;padding:.2em;border-radius:50%;line-height:1em;color:white;background:#670067;text-align:center;min-width:1.3em;}
+.header-notice{line-height:1.25;font-size:14px;position:relative;min-height:15px;z-index:9000;display:table;width:100%;}
+.header-notice>div{margin:0 auto;position:relative;}
+.header-notice .notice-text{width:calc(100% - 40px);width:-webkit-calc(100% - 40px);display:flex;align-items:center;}
+.header-notice .notice-text i{flex:0 0 auto;}
+.header-notice .notice-text span{flex-grow:1;}
+button.close-notice{cursor:pointer;padding:0 12px;height:100%;position:absolute;top:0;right:0;font-size:16px;transition:all 0.1s;border-radius:0 !important;font-weight:400;color:#333745;}
+button{border:none;background-color:transparent;padding:0;}
+.caption a{color:#565656;text-decoration:none !important;font-size:16px;font-weight:600;line-height:18.2px;}
+.prices{height:23px;}
+span.price.selling{font-size:15px;font-weight:bold;padding-right:5px;color:#d20000;width:50%;}
+.price-clr{color:#e23535;}
+span.discount{font-size:14pt;font-weight:bold;padding:10px 0px 10px 0px;color:#3b3b3b;}
+.usave{font-size:12pt;padding:10px 0px 10px 0px;color:#3b3b3b;}
+.discount-font{font-size:16px;font-weight:bold;}
+.imageInn img{display:block;margin-left:auto;margin-right:auto;}
+.label-outofstock{pointer-events:none;top:0;min-width:200px;-webkit-transform:translate(-28%, 100%) rotate(-45deg);transform:translate(-28%, 100%) rotate(-45deg);-webkit-transform-origin:53%;transform-origin:53%;font-size:15px;padding-top:.3em;padding-bottom:.4em;padding-left:4em;padding-right:4em;white-space:nowrap;background:#EA2E49;color:white;line-height:1}
+.label-outofstock
+b{font-weight:inherit}
+.outofstock{color:rgb(234, 35, 73);padding:5px;}
+.view{color: #fff;
+    padding:0px; 
+    margin-top: 10px;
+    text-decoration: none;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+footer nav ul {
+    list-style: none;
+    margin-left: 0px;
+    display: block;
+}
+
+.xzoom-source img,.xzoom-preview img,.xzoom-lens img{display:block;max-width:none;max-height:none}.xzoom-container{display:inline-block}.xzoom-thumbs{text-align:center;margin-bottom:10px}.xzoom{margin-bottom:15px}.xzoom2,.xzoom3,.xzoom4,.xzoom5{margin-bottom:15px}.xzoom-gallery,.xzoom-gallery2,.xzoom-gallery3,.xzoom-gallery4,.xzoom-gallery5{border:1px solid #cecece;margin-left:5px;margin-bottom:10px}.xzoom-source,.xzoom-hidden{display:block;position:static;float:none;clear:both}.xzoom-hidden{overflow:hidden}.xzoom-preview{border:1px solid #888;background:#2f4f4f;box-shadow:-0 -0 10px rgba(0,0,0,.50)}.xzoom-lens{border:1px solid #555;box-shadow:-0 -0 10px rgba(0,0,0,.50);cursor:crosshair}.xzoom-loading{background-position:center center;background-repeat:no-repeat;border-radius:100%;opacity:.7;background:url(https://www.ornatejewels.com/images/xloading.gif);width:48px;height:48px}.xactive{-webkit-box-shadow:0 0 3px 0 rgba(74,169,210,1);-moz-box-shadow:0 0 3px 0 rgba(74,169,210,1);box-shadow:0 0 3px 0 rgba(74,169,210,1);border:1px solid #4aaad2}.xzoom-caption{position:absolute;bottom:-43px;left:0;background:#000;width:100%;text-align:left}.xzoom-caption span{color:#fff;font-family:Arial,sans-serif;display:block;font-size:.75em;font-weight:bold;padding:10px}
+
+
+
+.retail{text-decoration:none;float:left;}
+.offer{color:#3b3b3b;}
+.price-box-main{width:100%;}
+.price_box{width:50%;float:left;padding:0 0 0 10px;}
+.savebox{width:50%;float:left;}
+.product-price{float:left;color:rgb(234, 35, 73);font-size:14px;font-weight:500;}
+.mainprice{font-size:16px;color:#cd283e;}
+.pdp-cat-name{font-size:18px;color:#232323;font-weight:500;padding-bottom:30px;}
+.currently{display:inline-block;padding:0 !important;}
+.btn-group, .btn-group-vertical{position:relative;display:-webkit-inline-box;vertical-align:middle;padding-bottom:24px !important;padding-top:20px !important;}
+.offerTag{position:absolute;top:1px;right:3px;height:85px;}
+.offerTag p.bold{text-transform:uppercase;margin-top:-45px;font-size:13px;}
+.offerTag p{font:16px/20px;color:#fff;text-align:center;}
+.panel-group{margin-top:20px;}
+hr{margin-top:10px !important;margin-bottom:10px !important;border:0;border-top:1px solid #e2e0e0;}
+.ribbon{position:absolute;top:50px;padding-left:51px;font-weight:700;letter-spacing:.08em}.ribbon .ribbon-background{position:absolute;top:0;right:0}
+.ribbon .theribbon{position:relative;padding:6px 10px 6px 20px;margin:30px -16px 10px -62px;color:#000;background-color:#fcc800;}
+.price-discount small{display:inline-block;color:#fb6f6f;font-size:.8125rem;display:inline-block;vertical-align:top;padding-left:7px;padding-top:2px;}
+.addcart{margin-left:50px;}
+.fa-stack{position:relative;display:inline-block;width:2em;height:4em !important;line-height:2em;vertical-align:middle;}
+.clearfix{display:block;}
+.product-slider-box .flex-control-thumbs{padding-top:0;width:95px;}
+.product-slider-box .flex-viewport{padding-top:0;}
+.product-slider-box .flex-viewport{float:right;}
+.product-slider-box .flex-viewport{width:555px;text-align:right;}
+.share-list{text-align:center;position:relative;padding-top:15px;}
+.share-list li a{display:block;width:28px;height:28px;border:1px solid #808080;-moz-border-radius:100%;-webkit-border-radius:100%;border-radius:100%;font-size:1rem;color:#686868;line-height:28px;}
+.share-list li.title{display:block;padding-bottom:8px;}
+.share-list li{display:inline-block;margin:0 2px;}
+.at300b, .at300bo, .at300bs, .at300m{cursor:pointer;}
+.flex-control-thumbs{margin:5px 0 0;position:static;overflow:hidden;}
+.flex-control-nav{position:absolute;text-align:center;width:100%;}
+.flex-control-thumbs li{padding:2px 2px;}
+.product-slider-box .flex-control-thumbs li{padding:2px 2px;}
+.product-slider-box .flex-control-thumbs li{margin-right:4px;margin-bottom:8px;border:1px solid #dadada;display:block;padding:4px 2px;float:none;width:auto;}
+.flex-control-thumbs li{float:left;margin:0;width:25%;}
+.flex-control-thumbs img{cursor:pointer;display:block;opacity:.7;width:100%;}
+.product-thumb .rating{min-height:33px;}
+.price-box .old-price .price{color:#a0a0a0;text-decoration:line-through;}
+.price-box{color:#a0a0a0;font-size:13px;margin:5px 0 7px 5px;}
+.products-grid .product-info, .product-info{padding-bottom:0px;width:100%;padding:4px 0px 0px 6px;display:block;overflow:hidden;text-align:center;}
+@media (max-width:478px){#cart .dropdown-menu{width:100%;}
+}
+#cart .dropdown-menu table{margin-bottom:10px;}
+#cart .dropdown-menu li > div{min-width:427px;padding:0 10px;}
+@media (max-width:478px){#cart .dropdown-menu li > div{min-width:100%;}
+}
+#cart .dropdown-menu li p{margin:20px 0;}
+#menu{background-color:#229ac8;background-image:linear-gradient(to bottom, #23a1d1, #1f90bb);background-repeat:repeat-x;border-color:#1f90bb #1f90bb #145e7a;min-height:40px;}
+#menu .nav > li > a{color:#fff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);padding:10px 15px 10px 15px;min-height:15px;background-color:transparent;}
+#menu .nav > li > a:hover, #menu .nav > li.open > a{background-color:rgba(0, 0, 0, 0.1);}
+#menu .dropdown-menu{padding-bottom:0;}
+#menu .dropdown-inner{display:table;}
+#menu .dropdown-inner ul{display:table-cell;}
+#menu .dropdown-inner a{min-width:160px;display:block;padding:3px 20px;clear:both;line-height:20px;color:#333333;font-size:12px;}
+#menu .dropdown-inner li a:hover{color:#FFFFFF;}
+#menu .see-all{display:block;margin-top:0.5em;border-top:1px solid #DDD;padding:3px 20px;-webkit-border-radius:0 0 4px 4px;-moz-border-radius:0 0 4px 4px;border-radius:0 0 3px 3px;font-size:12px;}
+#menu .see-all:hover, #menu .see-all:focus{text-decoration:none;color:#ffffff;background-color:#229ac8;background-image:linear-gradient(to bottom, #23a1d1, #1f90bb);background-repeat:repeat-x;}
+#menu #category{float:left;padding-left:15px;font-size:16px;font-weight:700;line-height:40px;color:#fff;text-shadow:0 1px 0 rgba(0, 0, 0, 0.2);}
+#menu .btn-navbar{font-size:15px;font-stretch:expanded;color:#FFF;padding:2px 18px;float:right;background-color:#229ac8;background-image:linear-gradient(to bottom, #23a1d1, #1f90bb);background-repeat:repeat-x;border-color:#1f90bb #1f90bb #145e7a;}
+#menu .btn-navbar:hover, #menu .btn-navbar:focus, #menu .btn-navbar:active, #menu .btn-navbar.disabled, #menu .btn-navbar[disabled]{color:#ffffff;background-color:#229ac8;}
+@media (min-width:768px){#menu .dropdown:hover .dropdown-menu{display:block;}
+}
+@media (max-width:767px){.right-links{width:100%;float:right;padding-left:155px;vertical-align:middle;display:inherit;margin-top:5px;}
+}
+#content{}
+.alert{padding:8px 14px 8px 14px;}
+.breadcrumb i{font-size:15px;}
+.breadcrumb > li{text-shadow:0 1px 0 #FFF;padding:0 0px;position:relative;white-space:nowrap;}
+.breadcrumb > li + li:before{content:'/';padding:0;}
+.pagination{margin:0;}
+.buttons{margin:1em 0;}
+.btn{padding:7.5px 12px;font-size:12px;border:1px solid #cccccc;border-radius:4px;box-shadow:inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);}
+.btn-xs{font-size:9px;}
+.btn-sm{font-size:10.2px;}
+.btn-lg{padding:10px 16px;font-size:15px;}
+.btn-group > .btn, .btn-group > .dropdown-menu, .btn-group > .popover{font-size:12px;}
+.btn-group > .btn-xs{font-size:9px;}
+.btn-group > .btn-sm{font-size:10.2px;}
+.btn-group > .btn-lg{font-size:15px;}
+.btn-default{color:#fff;text-shadow:0 1px 0 rgba(255, 255, 255, 0.5);background-color:#670067;background-repeat:repeat-x;border-color:#dddddd #dddddd #b3b3b3 #b7b7b7;}
+.btn-default:hover{color:#000;text-shadow:0 1px 0 rgba(255, 255, 255, 0.5);background:#f0f6fc none repeat scroll 0 0;}
+.btn-primary{color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background-color:#229ac8;background-image:linear-gradient(to bottom, #23a1d1, #1f90bb);background-repeat:repeat-x;border-color:#1f90bb #1f90bb #145e7a;}
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled]{background-color:#1f90bb;background-position:0 -15px;}
+.btn-warning{color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background-color:#faa732;background-image:linear-gradient(to bottom, #fbb450, #f89406);background-repeat:repeat-x;border-color:#f89406 #f89406 #ad6704;}
+.btn-warning:hover, .btn-warning:active, .btn-warning.active, .btn-warning.disabled, .btn-warning[disabled]{box-shadow:inset 0 1000px 0 rgba(0, 0, 0, 0.1);}
+.btn-danger{color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background-color:#da4f49;background-image:linear-gradient(to bottom, #ee5f5b, #bd362f);background-repeat:repeat-x;border-color:#bd362f #bd362f #802420;}
+.btn-danger:hover, .btn-danger:active, .btn-danger.active, .btn-danger.disabled, .btn-danger[disabled]{box-shadow:inset 0 1000px 0 rgba(0, 0, 0, 0.1);}
+.btn-success{color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background-color:#5bb75b;background-image:linear-gradient(to bottom, #62c462, #51a351);background-repeat:repeat-x;border-color:#51a351 #51a351 #387038;}
+.btn-success:hover, .btn-success:active, .btn-success.active, .btn-success.disabled, .btn-success[disabled]{box-shadow:inset 0 1000px 0 rgba(0, 0, 0, 0.1);}
+.btn-info:hover{background-color:#2f7ec0;}
+.btn-link{border-color:rgba(0, 0, 0, 0);cursor:pointer;color:#23A1D1;border-radius:0;}
+.btn-link, .btn-link:active, .btn-link[disabled]{background-color:rgba(0, 0, 0, 0);background-image:none;box-shadow:none;}
+.btn-inverse{color:#ffffff;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);background-color:#363636;background-image:linear-gradient(to bottom, #444444, #222222);background-repeat:repeat-x;border-color:#222222 #222222 #000000;}
+.btn-inverse:hover, .btn-inverse:active, .btn-inverse.active, .btn-inverse.disabled, .btn-inverse[disabled]{background-color:#222222;background-image:linear-gradient(to bottom, #333333, #111111);}
+.list-group a{border:1px solid #DDDDDD;color:#888888;padding:8px 12px;}
+.list-group a.active, .list-group a.active:hover, .list-group a:hover{color:#444444;background:#eeeeee;border:1px solid #DDDDDD;text-shadow:0 1px 0 #FFF;}
+.carousel-caption{color:#FFFFFF;text-shadow:0 1px 0 #000000;}
+.carousel-control .icon-prev:before{content:'\f053';font-family:FontAwesome;}
+.carousel-control .icon-next:before{content:'\f054';font-family:FontAwesome;}
+.product-thumb{margin-bottom:20px;overflow:auto;}
+.fullbox:hover{-webkit-box-shadow:0px 0px 13px 3px #DDDCDC;box-shadow:0px 0px 13px 3px #DDDCDC;}
+.product-thumb .image{text-align:center;}
+.product-thumb .image a{display:block;}
+.product-thumb .image a:hover{opacity:0.8;}
+.product-thumb .image img{margin-left:auto;margin-right:auto;}
+.product-grid .product-thumb .image{float:none;}
+@media (min-width:767px){.product-list .product-thumb .image{float:left;padding:0 15px;}
+}
+.product-thumb h4{font-weight:bold;}
+.product-thumb .caption{padding:0px 10px;text-align:center !important;}
+.product-list .product-thumb .caption{margin-left:230px;}
+@media (max-width:1200px){.product-grid .product-thumb .caption{min-height:210px;padding:0 10px;}
+}
+@media (max-width:767px){.product-list .product-thumb .caption{min-height:0px;margin-left:0;padding:0 10px;}
+.product-grid .product-thumb .caption{min-height:62px;}
+}
+.product-thumb .rating{}
+.rating .fa-stack{font-size:8px;}
+.rating .fa-star-o{color:#999;font-size:15px;}
+.rating .fa-star{color:#2f7ec0;font-size:15px;}
+.rating .fa-star + .fa-star-o{color:#E69500;}
+h2.price{margin:0;}
+.product-thumb .price{color:#ec524f;width:100%;font-weight:600;font-size:18px;}
+.product-thumb .price-new{font-weight:600;}
+.product-thumb .price-old{color:#999;text-decoration:line-through;margin-left:10px;}
+.product-thumb .price-tax{color:#999;font-size:12px;display:block;}
+.product-thumb .button-group{border-top:1px solid #ddd;background-color:#eee;overflow:auto;}
+.product-list .product-thumb .button-group{border-left:1px solid #ddd;}
+@media (max-width:768px){.product-list .product-thumb .button-group{border-left:none;}
+}
+.product-thumb .button-group button{width:100%;border:none;display:inline-block;float:left;background-color:#f4f4f4;color:#5a5a5a;line-height:38px;font-weight:bold;text-align:center;text-transform:uppercase;}
+.product-thumb .button-group button + button{width:20%;border-left:1px solid #ddd;}
+.product-thumb .button-group button:hover{color:#414141;background:#f0f6fc none repeat scroll 0 0;text-decoration:none;cursor:pointer;}
+@media (max-width:1200px){.product-thumb .button-group button, .product-thumb .button-group button + button{width:33.33%;}
+}
+@media (max-width:767px){.product-thumb .button-group button, .product-thumb .button-group button + button{width:33.33%;}
+}
+.thumbnails{overflow:auto;clear:both;list-style:none;padding:0;margin:0;}
+.thumbnails > li{margin-left:20px;}
+.thumbnails{margin-left:-20px;}
+.thumbnails > img{width:100%;}
+.image-additional a{margin-bottom:20px;padding:5px;display:block;border:1px solid #ddd;}
+.image-additional{max-width:78px;}
+.thumbnails .image-additional{float:left;margin-left:20px;}
+@media (min-width:1200px){#content .col-lg-2:nth-child(6n+1),
+#content .col-lg-2:nth-child(6n+1),
+#content .col-lg-3:nth-child(4n+1),
+#content .col-lg-4:nth-child(3n+1),
+#content .col-lg-6:nth-child(2n+1){}
+.modal-open[style]{padding-right:0px !important;}
+}
+@media (min-width:992px) and (max-width:1199px){#content .col-md-2:nth-child(6n+1),
+#content .col-md-2:nth-child(6n+1),
+#content .col-md-3:nth-child(4n+1),
+#content .col-md-4:nth-child(3n+1),
+#content .col-md-6:nth-child(2n+1){clear:left;}
+}
+@media (min-width:768px) and (max-width:991px){#content .col-sm-2:nth-child(6n+1),
+#content .col-sm-2:nth-child(6n+1),
+#content .col-sm-3:nth-child(4n+1),
+#content .col-sm-4:nth-child(3n+1),
+#content .col-sm-6:nth-child(2n+1){clear:left;}
+}
+@media (min-width:768px){#column-left .product-layout .col-md-3{width:100%;}
+#column-left + #content .product-layout .col-md-3{width:50%;}
+#column-left + #content + #column-right .product-layout .col-md-3{width:100%;}
+#content + #column-right .product-layout .col-md-3{width:100%;}
+}
+#column-left .product-layout, #column-right .product-layout{width:100%;}
+.input-group .form-control[name^=quantity]{min-width:50px;}
+.modal-open{padding-right:0px !important;}
+.product-thumb:hover{-webkit-box-shadow:5px 5px 62px -11px rgba(0,0,0,0.75);-moz-box-shadow:5px 5px 62px -11px rgba(0,0,0,0.75);box-shadow:2px 2px 30px -11px rgba(0,0,0,0.75);}
+.heading{font-size:1.0625rem;color:#474747;padding-bottom:10px;line-height:26px;text-transform:uppercase;font-weight:500;}
+.product-detail-main, .product-detail, .subhead{display:inline-block;color:#3c3c3c;font-size:.875rem;padding-bottom:20px;}
+.form-control{outline:0;width:100%;height:36px;padding:0 9px;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;font-size:.8125rem;color:#000;background-color:#ededed;border:0;}
+input[type="submit"], input[type="buton"], button, select, textarea{-webkit-appearance:none;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
+.my-btn-primary-new{background-color:#670067;width:100%;height:40px;position:relative;}
+.my-btn-new{color:#ffffff;border-radius:0px !important;text-transform:capitalize;display:inline-block;border:0 none;}
+.request-back{font-size:10pt;height:40px;width:98%;float:right;position:relative;outline:0;background:#f4f4f4;padding:14px 46px;text-align:center;}
+#prod_left_txt{padding:10px 20px;text-decoration:underline;}
+#cboxClose{cursor:pointer;right:15px;background-position:-100px -25px;background:url(../images/cross.webp) no-repeat center #fff;-moz-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;top:15px;}
+#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{border:0;padding:0;margin:0;overflow:visible;position:absolute;top:10px;width:23px;outline:0;height:23px;text-indent:-9999px;}
+.request-popup .popup .title{font-size:1.125rem;color:#000;display:inline-block;vertical-align:middle;padding-right:10px;}
+.request-popup .popup .in{margin-right:-20px;}
+.request-popup .popup .one-half{margin-right:20px;width:306px;}
+.request-popup .popup select{background:url(../images/drop-down.png) no-repeat right center;-webkit-appearance:none;-moz-appearance:none;appearance:none;}
+.request-popup .popup button{background:#670067;float:none;margin:0 auto;display:block;margin-top:10px;border:0;padding:10px 50px;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;font-size:14px;text-transform:uppercase;cursor:pointer;outline:0;}
+.popup{background:#fff;padding:15px 25px 20px;box-sizing:border-box;}
+.popup .title{font-size:1.25rem;color:#565656;text-transform:uppercase;display:block;}
+.popup .one-half{width:300px;float:left;margin-right:32px;position:relative;}
+.popup label{font-size:.8125rem;color:#545454;padding-bottom:5px;display:block;}
+.popup .form-control{width:100%;height:33px;font-size:.8125rem;color:#565656;margin-bottom:12px;}
+.popup .rating-box{background:#f5f5f5;padding:20px 55px 0 30px;width:300px;float:left;}
+.popup .rating-box span{font-size:.8125rem;color:#545454;padding-bottom:20px;display:inline-block;}
+.rating > input{display:none;}
+.rating > label{color:#9d9d9d;float:right!important;margin:0!important;}
+.rating > label::before{margin:0 3px;font-size:15px;font-family:FontAwesome;display:inline-block;content:"\f005";cursor:pointer;}
+.rating>input:checked ~ label, .rating:not(:checked)>label:hover, .rating:not(:checked)>label:hover ~ label{color:#670067;}
+.rating{border:0;}
+.popup .btncom{width:125px;height:36px;background:#670067;border:0;font-size:.875rem;color:#fff;text-transform:uppercase;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;margin-right:7px;float:right;cursor:pointer;}
+.popup textArea{height:80px!important;padding-top:10px;}
+.popup .bg-none{background:0;padding:0;}
+.popup .rating-box{background:#f5f5f5;width:300px;float:left;}
+.clearfix{display:block;}
+#cboxWrapper{max-width:none;}
+#cboxLoadedContent{margin-bottom:5px;box-sizing:content-box;}
+#cboxOverlay{position:fixed;width:100%;height:100%;background:rgba(0,0,0,0.8);opacity:.9;filter:alpha(opacity=90);}
+#colorbox{box-sizing:content-box;outline:0;}
+#colorbox, #cboxOverlay, #cboxWrapper{top:0;left:0;z-index:9999;}
+@media (max-width:767px){.right-links input{top:5px;right:50px;width:195px;}
+.sm-paddin10, .popup{padding:10px;}
+.popup .form-control{height:30px;}
+.popup .rating-box{float:none;width:auto;padding:10px 60px 0px 15px;margin-bottom:10px;}
+.popup .one-half{float:none;width:auto;margin:0;}
+.popup .btncom{margin-top:5px;}
+.popup .bg-none{padding:0;}
+}
+.request-back a{color:#000;font-weight:bold;}
+.text{font-size:.875rem;color:#000000;display:inline-block;width:100%;text-transform:uppercase;}
+.product_accordion{margin-top:20px;}
+.price-box{color:#a0a0a0;font-size:20px;margin:0 0 5px;}
+.old-price, .price-box .special-price{display:inline-block;}
+.price-box .old-price .price-label, .price-box .special-price .price-label{display:none;}
+.price-box .old-price .price{color:#a0a0a0;text-decoration:line-through;}
+.price-box .special-price{color:#000;padding-left:1em;}
+.panel-group .panel-heading{border-bottom:1px solid #eee;border-left:none;border-top:none;background:#f0f6fc none repeat scroll 0 0;}
+.panel-group .panel-heading:hover{color:#2f7ec0;border:1px solid #2f7ec0;background:#f0f6fc none repeat scroll 0 0;}
+.panel p{padding:10px 0;}
+.panel ul{list-style:disc;padding-left:10px;}
+.panel-title{text-align:left;}
+.panel-title a{color:#414141;cursor:pointer;padding:10px 0;width:100%;border:none;text-align:left;outline:none;transition:0.4s;font-weight:100;font-weight:700;font-size:14px;}
+.product-detail .delievrt-text .my-icons-truck{background-position:0 -1017px;}
+.product-detail-main .product-detail .delievrt-text .my-icons-truck{background-position:0 -1017px;}
+.delievrt-text{font-size:.8125rem;color:#5f139e !important;display:block;text-align:center;padding-top:15px;}
+.panel-body p{color:#5a5959;text-align:left;padding:10px 10px;}
+.product-detail-main .product-detail .delievrt-text{font-size:.8125rem;color:#5f139e !important;display:block;text-align:center;padding-top:15px;}
+.panel-body ul li{line-height:23px;text-align:left;}
+.icon-bar{width:100%;border:1px solid #e7e7e7;}
+.icon-bar a{float:left;width:20%;text-align:center;padding:12px 0;transition:all 0.3s ease;color:#663f7e;font-size:36px;}
+.icon-bar p{font-size:small;color:black;padding:10px;}
+.accordion925{margin-top:15px;font-size:15px;padding-left:10px;text-transform:uppercase;}
+img{max-width:100%;}
+.product-detail-main, .related-main{position:relative;}
+.flex-viewport{overflow:hidden;position:relative;}
+.slides{width:2600%;transition-duration:0s;transform:translate3d(-1170px, 0px, 0px);}
+.page-head{text-align:center;padding:45px 0;width:100%;}
+.page-head h2{border-bottom:1px solid #670067;line-height:0;font-size:1.875rem;color:#322f2f;font-family:"Bauer Bodoni Pro_1 W01 Roman";margin-bottom:-15px;}
+.page-head h2 span{background:#fff;padding:0 15px;}
+.product-detail-main, .related-coloum img{padding:45px 0;}
+a{text-decoration:none;color:#000;}
+.product-detail-main{background-color:#fff;-moz-box-shadow:0 0 3px rgba(0,0,0,0.2);-webkit-box-shadow:0 0 3px rgba(0,0,0,0.2);box-shadow:0 0 3px rgba(0,0,0,0.2);text-align:center;margin:5px;display:block;cursor:pointer;}
+.related-coloum{background-color:#fff;-moz-box-shadow:0 0 3px rgba(0,0,0,0.2);-webkit-box-shadow:0 0 3px rgba(0,0,0,0.2);box-shadow:0 0 3px rgba(0,0,0,0.2);text-align:center;margin:5px;display:block;cursor:pointer;}
+.product-detail-main, .related-coloum p{color:#565656;font-size:16px;margin-bottom:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 10px;font-weight:600;}
+.product-detail-main, .related-coloum p:hover{color:#2f7ec0;}
+.product-detail-main, .related-coloum, .price-discount{border-top:1px solid #eee;display:block;padding:15px 0;font-size:1.125rem;color:#414141;font-weight:600;}
+.flex-direction-nav{margin:0;padding:0;list-style:none;}
+.related-main .flex-direction-nav .flex-prev{left:-20px;width:15px;height:20px;background:url(../images/direction-left-small.webp) no-repeat center;outline:0;}
+.product-detail-main .related-main .flex-direction-nav a{opacity:1;margin:-7px 0 0;}
+.flex-direction-nav .flex-prev{left:-36px;}
+.flex-direction-nav a{background:url(../images/direction-left-small.webp) no-repeat 0 0;cursor:pointer;display:block;height:30px;margin:-20px 0 0;opacity:0;position:absolute;text-indent:-9999px;top:50%;-webkit-transition:all .3s ease;width:30px;z-index:10;}
+.flex-next{right:-20px;background:url(../images/direction-right-small.webp) no-repeat center;width:15px;height:20px;outline:0;}
+.flex-prev{left:-20px;width:15px;height:20px;background:url(../images/direction-left-small.webp) no-repeat center;outline:0;}
+.product-detail-main .related-coloum .price-discount small{display:inline-block;color:#ec524f;font-size:.8125rem;display:inline-block;vertical-align:top;padding-left:7px;padding-top:2px;}
+@media (max-width:992px){.product-detail-main .product-slider-box .flex-control-thumbs{float:none;width:auto;}
+.product-detail-main .product-detail-box{padding:25px 0 25px;}
+.product-slider-box .flex-control-thumbs{width:auto;}
+.product-slider-box .flex-control-thumbs li{padding:2px 2px;float:left;margin:0 2px;width:23%;margin-top:5px;}
+.product-detail-main .product-slider-box{width:48%;}
+.flex-control-thumbs{margin:5px 0 0;position:static;overflow:hidden;padding-left:10px;}
+}
+@media only screen and (max-width:1024px) and (min-width:768px){.slides li{margin-left:5px;}
+.product-detail{}
+header .top-bar{display:block;}
+}
+@media only screen and (max-width:767px) and (min-width:601px){.product-slider-box .flex-control-thumbs{width:auto;text-align:center;float:right;}
+.flex-direction-nav{display:none;}
+.heading{padding-top:15px;text-align:center;}
+.share-list{border-bottom:1px solid #e9e9e9;padding:10px 0;}
+.page-head h2{font-size:1.375rem;}
+.product-detail{float:left;width:100%;text-align:center;padding:10px;}
+.subhead{display:block;text-align:center;font-size:.75rem;}
+.panel p{text-align:left;}
+.panel ul{text-align:left;}
+.popup .form-control{height:30px;}
+.sm-paddin10, .popup{padding:10px;}
+}
+@media only screen and (max-width:600px) and (min-width:481px){.product-slider-box .flex-control-thumbs{width:auto;text-align:center;float:right;}
+.product-slider-box .flex-control-thumbs li{padding:2px 2px;float:left;margin:0 5px;width:23%;}
+.flex-direction-nav{display:none;}
+.flex-active-slide img{width:100%;}
+.product-detail-main, .product-detail, .subhead{text-align:center;display:block;}
+.heading{text-align:center;}
+.share-list{border-bottom:1px solid #e9e9e9;padding:10px 0;}
+.page-head h2{font-size:1.375rem;}
+}
+@media only screen and (max-width:480px) and (min-width:426px){.product-slider-box .flex-control-thumbs{width:auto;text-align:center;float:right;}
+.flex-direction-nav{display:none;}
+.flex-active-slide img{width:100%;}
+.product-detail-main, .product-detail, .subhead{text-align:center;display:block;}
+.heading{text-align:center;}
+.share-list{border-bottom:1px solid #e9e9e9;padding:10px 0;}
+.page-head h2{font-size:1.375rem;}
+}
+@media only screen and (max-width:360px) and (min-width:321px){.request-back{font-size:12px;}
+.product-detail-main, .product-detail, .subhead{text-align:center;}
+.heading{padding-top:15px;text-align:center;}
+.page-head h2{font-size:1.375rem;}
+}
+@media (max-width:320px){.request-back{font-size:12px;padding:14px 38px;}
+.product-slider-box .flex-control-thumbs{width:auto;}
+.product-detail-main, .product-detail, .subhead{text-align:center;}
+.share-list{border-bottom:1px solid #e9e9e9;padding:10px 0;}
+.logo{margin-top:7px;}
+.page-head{padding:20px 10px;}
+.heading{padding-top:15px;text-align:center;}
+.page-head h2{font-size:1.375rem;}
+}
+@media only screen and (max-width:375px) and (min-width:361px){.product-slider-box .flex-control-thumbs{width:auto;}
+.flex-direction-nav{display:none;}
+.product-detail-main, .product-detail, .subhead{text-align:center;display:block;}
+.share-list{border-bottom:1px solid #e9e9e9;padding:10px 0;}
+.heading{text-align:center;}
+.page-head h2{font-size:1.375rem;}
+}
+@media only screen and (max-width:400px) and (min-width:376px){.product-detail-main, .product-detail, .subhead{text-align:center;display:block;}
+.heading{text-align:center;}
+.page-head h2{font-size:1.375rem;}
+.share-list{border-bottom:1px solid #e9e9e9;padding:10px 0;}
+}
+@media only screen and (max-width:425px) and (min-width:401px){.product-detail-main, .product-detail, .subhead{display:block;text-align:center;}
+.heading{text-align:center;}
+.share-list{border-bottom:1px solid #e9e9e9;padding:10px 0;}
+.page-head h2{font-size:1.375rem;}
+}
+@media (max-width:1169px){.product-detail-main .product-slider-box .flex-viewport{width:430px;}
+}
+@media (max-width:992px){.product-slider-box .flex-viewport{width:auto;text-align:center;}}
+@media only screen and (max-width:1024px) and (min-width:768px){.product-slider-box .flex-viewport{width:auto;text-align:center;}}
+.panel-title {
+	text-align:left;
+	background: #f0f6fc none repeat scroll 0 0;
+	padding:10px;
+}
+@media only screen and (max-width: 400px){
+.footer-email-signup input[type="email"]{
+width:66%;
+}
+}
+

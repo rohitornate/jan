@@ -3,6 +3,7 @@
 $_['heading_title'] = 'My Wish List';
 
 // Text
+$_['text_home']            = 'Home';
 $_['text_account']  = 'Account';
 $_['text_instock']  = 'In Stock';
 $_['text_wishlist'] = 'Wish List (%s)';

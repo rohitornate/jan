@@ -1,11 +1,172 @@
 <?php echo $header; ?>
+
+  <style>
+  
+  .btn-default {
+    background: #670067 !important;
+	}
+  
+  
+  .my-account-header {
+    margin-bottom: .781rem;
+    font-size: 28px;
+    font-size: 1.75rem;
+    line-height: 2.125;
+    padding-bottom: .500rem;
+    letter-spacing: .1em;
+    border-bottom: .1rem solid #ccc;
+    text-transform: uppercase;
+    font-weight: 700;
+    
+	}
+	
+	.my-account-welcome__hello {
+    font-weight: 700;
+    padding: 0px;
+    font-size: 1.25rem;
+    padding-bottom:1.25em;
+    }
+	ul.my-account-welcome__links {
+    margin-left: 0px;
+	list-style:none;
+	font-size:1.1rem;
+	}
+	ul.my-account-nav-list {
+    margin-left: 0px;
+    
+	}
+	
+	.my-account-nav-list>li {
+    list-style: none;
+    position: relative;
+    padding:15px 0px;
+	}
+	.my-account-nav-list>li>a {
+      font-size:large;
+	  text-decoration:none;
+	}
+	.fa{
+	color: #360736;
+    padding-right:10px;
+	}
+	.fa:hover{
+	color: black;
+    
+	}
+    .my-account__header {
+    margin-bottom: 36px;
+    border-bottom: 5px solid #ccc;
+	}
+	.my-account__header.addr h1 {
+    font-weight: 600;
+    color: #474747;
+    line-height: 1;
+    font-size: 24px;
+    font-size: 1.375rem;
+    text-transform: uppercase;
+    margin-top: 0;
+	}
+	.my-account__header h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #474747;
+    padding: 0;
+    margin-top: 24px;
+    margin-bottom: 15px;
+	}
+	.myaccount .form-group {
+    
+    margin: 0 0 20px;
+	}
+	
+	
+	.form-group .form-control {
+    outline: 0;
+    width: 100%;
+    height: 36px;
+    padding: 0 10px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #4a4a4a;
+    font-size: .8125rem;
+    color: #000;
+    background-color: #ededed;
+    border: 0;
+}
+	
+	.btn--primary {
+    border: 0;
+    background-color: #670067;
+    color: #fff;
+}
+.btn-default {
+    background: #670067;
+    color:#fff;
+}
+.btn-primary{
+    background: #670067;
+    color:#fff;
+}
+
+
+.btn--primary, .btn--secondary, .btn--tertiary {
+    font-size: 15px;
+    font-size: .9375rem;
+    line-height: 1;
+    font-weight: 700;
+    border-radius: .250rem;
+    box-shadow: none;
+    letter-spacing: .15em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition: background-color .15s ease-in-out;
+    transition: background-color .15s ease-in-out;
+    display: block;
+    margin: 0 0 20px;
+   /* width: 100%;*/
+    padding: 18px 7.5px;
+    height: auto;
+    text-transform: uppercase;
+    text-align: center;
+   }
+   .remember{
+padding-bottom:20px;
+}
+   @media (max-width: 767px){
+	.my-account__header.addr h1{
+	font-size:unset;
+	}
+	.my-account__header.addr {
+	padding-top:10px;
+	}
+	
+	.col-md-9, .col-md-3, .col-sm-9, .col-sm-3, .col-md-12, .col-sm-12, .col-md-4 .col-sm-4{
+	padding-right: 0px !important;
+    padding-left: 0px !important;
+	}
+	}
+	
+  </style>
 <div class="container">
   <ul class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
     <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
     <?php } ?>
   </ul>
-  <div class="row"><?php echo $column_left; ?>
+  <div class="row">
+			<div class="col-md-12 col-sm-12">
+				<div class="my-account-header">My Account</div>
+			</div>
+	</div>
+  
+  <div class="row myaccount">
+  
+ <?php echo $column_left; ?>
+
+  
+  
+  
     <?php if ($column_left && $column_right) { ?>
     <?php $class = 'col-sm-6'; ?>
     <?php } elseif ($column_left || $column_right) { ?>
@@ -14,94 +175,131 @@
     <?php $class = 'col-sm-12'; ?>
     <?php } ?>
     <div id="content" class="<?php echo $class; ?>"> <?php echo $content_top; ?>
-      <h2><?php echo $text_edit_address; ?></h2>
+      <!--<h2 class="title"><?php echo $text_edit_address; ?></h2>-->
+	  <div class="my-account__header addr">
+										<h1><?php echo $text_edit_address; ?></h1>
+										<h2>Add and edit your addresses to save you time during your checkout.</h2>
+									</div>
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
-        <fieldset>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-firstname"><?php echo $entry_firstname; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="firstname" value="<?php echo $firstname; ?>" placeholder="<?php echo $entry_firstname; ?>" id="input-firstname" class="form-control" />
-              <?php if ($error_firstname) { ?>
-              <div class="text-danger"><?php echo $error_firstname; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-lastname"><?php echo $entry_lastname; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="lastname" value="<?php echo $lastname; ?>" placeholder="<?php echo $entry_lastname; ?>" id="input-lastname" class="form-control" />
-              <?php if ($error_lastname) { ?>
-              <div class="text-danger"><?php echo $error_lastname; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="form-group">
+        <div class="inset">
+          
+		  <div class="col-md-12 col-sm-12">	
+				<div class="col-sm-4 col-md-4">
+					<div class="form-group required">
+						<label class="col-sm-12 col-md-12 control-label" for="input-firstname">First Name </label>
+						<div class="col-sm-12 col-md-12">
+							<input type="text" name="firstname" value="<?php echo $firstname; ?>" placeholder="First Name" id="input-firstname" class="form-control">
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4 col-md-4">
+					<div class="form-group required">
+						<label class="col-sm-12 col-md-12 control-label" for="input-lastname">Last Name</label>
+						<div class="col-sm-12 col-md-12">
+							<input type="text" name="lastname" value="<?php echo $lastname; ?>" placeholder="Last Name" id="input-lastname" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--<div class="col-md-12 col-sm-12">
+				<div class="col-sm-4 col-md-4">
+					<div class="form-group required">
+						<label class="col-sm-12 col-md-12 control-label" for="input-email">E-Mail</label>
+							<div class="col-sm-12 col-md-12">
+								<input type="email" name="email" value="<?php echo $email; ?>" placeholder="E-Mail" id="input-email" class="form-control">
+							</div>
+					</div>
+				</div>
+				<div class="col-sm-4 col-md-4">
+					<div class="form-group required">
+						<label class="col-sm-12 col-md-12 control-label" for="input-telephone">Telephone</label>
+							<div class="col-sm-12 col-md-12">
+								<input type="tel" name="telephone" value="<?php echo $telephone; ?>" placeholder="10-digit mobile number without prefixes" id="input-telephone" class="form-control">
+							</div>
+					</div>
+				</div>
+			</div>	-->
+			<div class="col-md-12 col-sm-12">
+											<div class="col-md-8 col-sm-8">
+												<div class="form-group required">
+												<label class="col-sm-12 col-md-12 for="RQD_address1">Street Address:</label> 
+												<div class="col-sm-12 col-md-12">
+												<input type="text" placeholder="Flat / House No. / Floor / Building" name="address_1" required="" id="RQD_address1" value="<?php echo $address_1; ?>" class="form-control">
+												</div>
+												</div>
+											</div>
+										    </div>
+										    <div class="col-md-12 col-sm-12">
+											<div class="col-md-8 col-sm-8">
+												<div class="form-group required">
+												
+												<div class="col-sm-12 col-md-12">
+												<input type="text" placeholder="Colony / Street / Locality" name="address_2" id="address2" value="<?php echo $address_2; ?>" class="form-control">
+												</div>
+												</div>
+											</div>
+										    </div>
+										    <div class="col-md-8 col-sm-8">
+											<div class="col-md-4 col-sm-4">
+												<div class="form-group required">
+													<label class="col-sm-12 col-md-12">Pin Code:</label> 
+													<div class="col-sm-12 col-md-12">
+														<input type="text" placeholder="6 digits [0-9] pincode" name="postcode" required="" id="RQD_zipCode"   value="<?php echo $postcode; ?>" class="form-control">
+												   </div>
+												</div>
+											</div>
+											<select name="country_id" id="input-country" class="form-control" style="display:none">
+												<option value="99" selected="selected">India</option>
+														</select>
+											
+											
+											<div class="col-md-4 col-sm-4">
+												<div class="form-group required">
+													<label class="col-sm-12 col-md-12" for="txtCity">State</label>
+													<div class="col-sm-12 col-md-12">
+														
+														<select name="zone_id" id="input-zone" class="form-control">
+														</select>
+															
+															
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4 col-sm-4">
+												<div class="form-group required">
+													<label class="col-sm-12 col-md-12" for="txtCity">City</label>
+													<div class="col-sm-12 col-md-12">
+														
+														<input type="text" name="city" value="<?php echo $city; ?>" placeholder="<?php echo $entry_city; ?>" id="input-city" class="form-control" />
+														
+													</div>
+												</div>
+											</div>
+											</div>
+											<div class="col-md-12 col-sm-12">
+											
+											<div class="col-md-4 col-sm-4">
+												<div class="remember">
+													<input type="checkbox" name="rememberMe" value="true" tabindex="3" checked="checked" style="    position: relative;right: 9px;top: -2px;margin-left: 25px;"> 
+													Default Address
+												</div>
+											</div>
+											<div class="col-md-4 col-sm-4">
+												
+												<button type="submit"  class="btn--primary">Save Address</button>
+											</div>
+											</div>
+											
+		  
+		  
+          <div class="form-group" style="display:none">
             <label class="col-sm-2 control-label" for="input-company"><?php echo $entry_company; ?></label>
             <div class="col-sm-10">
               <input type="text" name="company" value="<?php echo $company; ?>" placeholder="<?php echo $entry_company; ?>" id="input-company" class="form-control" />
             </div>
           </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-address-1"><?php echo $entry_address_1; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="address_1" value="<?php echo $address_1; ?>" placeholder="<?php echo $entry_address_1; ?>" id="input-address-1" class="form-control" />
-              <?php if ($error_address_1) { ?>
-              <div class="text-danger"><?php echo $error_address_1; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-address-2"><?php echo $entry_address_2; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="address_2" value="<?php echo $address_2; ?>" placeholder="<?php echo $entry_address_2; ?>" id="input-address-2" class="form-control" />
-            </div>
-          </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-city"><?php echo $entry_city; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="city" value="<?php echo $city; ?>" placeholder="<?php echo $entry_city; ?>" id="input-city" class="form-control" />
-              <?php if ($error_city) { ?>
-              <div class="text-danger"><?php echo $error_city; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-postcode"><?php echo $entry_postcode; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="postcode" value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" id="input-postcode" class="form-control" />
-              <?php if ($error_postcode) { ?>
-              <div class="text-danger"><?php echo $error_postcode; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-country"><?php echo $entry_country; ?></label>
-            <div class="col-sm-10">
-              <select name="country_id" id="input-country" class="form-control">
-                <option value=""><?php echo $text_select; ?></option>
-                <?php foreach ($countries as $country) { ?>
-                <?php if ($country['country_id'] == $country_id) { ?>
-                <option value="<?php echo $country['country_id']; ?>" selected="selected"><?php echo $country['name']; ?></option>
-                <?php } else { ?>
-                <option value="<?php echo $country['country_id']; ?>"><?php echo $country['name']; ?></option>
-                <?php } ?>
-                <?php } ?>
-              </select>
-              <?php if ($error_country) { ?>
-              <div class="text-danger"><?php echo $error_country; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-zone"><?php echo $entry_zone; ?></label>
-            <div class="col-sm-10">
-              <select name="zone_id" id="input-zone" class="form-control">
-              </select>
-              <?php if ($error_zone) { ?>
-              <div class="text-danger"><?php echo $error_zone; ?></div>
-              <?php } ?>
-            </div>
-          </div>
+          
           <?php foreach ($custom_fields as $custom_field) { ?>
           <?php if ($custom_field['location'] == 'address') { ?>
           <?php if ($custom_field['type'] == 'select') { ?>
@@ -255,32 +453,13 @@
           <?php } ?>
           <?php } ?>
           <?php } ?>
-          <div class="form-group">
-            <label class="col-sm-2 control-label"><?php echo $entry_default; ?></label>
-            <div class="col-sm-10">
-              <?php if ($default) { ?>
-              <label class="radio-inline">
-                <input type="radio" name="default" value="1" checked="checked" />
-                <?php echo $text_yes; ?></label>
-              <label class="radio-inline">
-                <input type="radio" name="default" value="0" />
-                <?php echo $text_no; ?></label>
-              <?php } else { ?>
-              <label class="radio-inline">
-                <input type="radio" name="default" value="1" />
-                <?php echo $text_yes; ?></label>
-              <label class="radio-inline">
-                <input type="radio" name="default" value="0" checked="checked" />
-                <?php echo $text_no; ?></label>
-              <?php } ?>
-            </div>
-          </div>
-        </fieldset>
-        <div class="buttons clearfix">
-          <div class="pull-left"><a href="<?php echo $back; ?>" class="btn btn-default"><?php echo $button_back; ?></a></div>
+         
+        </div>
+       <div class="buttons clearfix">
+          <!--<div class="pull-left"><a href="<?php echo $back; ?>" class="btn btn-default" style=""><?php echo $button_back; ?></a></div>
           <div class="pull-right">
-            <input type="submit" value="<?php echo $button_continue; ?>" class="btn btn-primary" />
-          </div>
+            <input type="submit" value="<?php echo 'Save Address'; ?>" class="btn btn-default" style="background: #670067 !important;color:#fff;" />
+          </div>-->
         </div>
       </form>
       <?php echo $content_bottom; ?></div>

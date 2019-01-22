@@ -4,6 +4,7 @@
       <tr>
         <td class="text-left"><?php echo $column_date_added; ?></td>
         <td class="text-left"><?php echo $column_comment; ?></td>
+		<td class="text-left">Admin Comment</td>
         <td class="text-left"><?php echo $column_status; ?></td>
         <td class="text-left"><?php echo $column_notify; ?></td>
       </tr>
@@ -14,6 +15,7 @@
       <tr>
         <td class="text-left"><?php echo $history['date_added']; ?></td>
         <td class="text-left"><?php echo $history['comment']; ?></td>
+		<td class="text-left"><?php echo $history['admin_comment']; ?></td>
         <td class="text-left"><?php echo $history['status']; ?></td>
         <td class="text-left"><?php echo $history['notify']; ?></td>
       </tr>

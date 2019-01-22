@@ -3,7 +3,21 @@ class ControllerAccountLogout extends Controller {
 	public function index() {
 		if ($this->customer->isLogged()) {
 			$this->customer->logout();
+			
+			/* AbandonedCarts - Begin */
+			$this->load->model('setting/setting');
+			$abandonedCartsSettings = $this->model_setting_setting->getSetting('abandonedcarts', $this->config->get('store_id'));
+			if (isset($abandonedCartsSettings['abandonedcarts']['Enabled']) && $abandonedCartsSettings['abandonedcarts']['Enabled']=='yes') { 
+				if (!empty($this->session->data['abandonedCart_ID'])) {
+					$this->session->data['abandonedCart_ID'] = '';
+				unset($this->session->data['abandonedCart_ID']);
+				}
+			}
+			/* AbandonedCarts - End */
+			
+			
 
+			unset($this->session->data['token']);
 			unset($this->session->data['shipping_address']);
 			unset($this->session->data['shipping_method']);
 			unset($this->session->data['shipping_methods']);

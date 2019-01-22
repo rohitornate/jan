@@ -17,7 +17,7 @@ class ControllerInformationInformation extends Controller {
 		} else {
 			$information_id = 0;
 		}
-
+                $data['information_id'] = $this->request->get['information_id'];
 		$information_info = $this->model_catalog_information->getInformation($information_id);
 
 		if ($information_info) {

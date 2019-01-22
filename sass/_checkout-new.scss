@@ -1,0 +1,32 @@
+.checkout-new{ padding-bottom:$space20; 
+          h2{ font-size:$font32;}
+          h3{ @include font-size($font16); padding:$space15+3 $space0; font-family:$ubuntumedium; margin: 20px 0 20px; border: 1px solid #dddddd; background: #f5f5f5; padding: 12px 10px;}
+         .one-half{ float:left; width:48%; margin-right:2%;
+         &:last-child{ margin-right:0;}
+         p{ padding-bottom:8px; display:block;
+            textarea{ width:100%; height: 80px; padding: 10px;}
+         }
+         } 
+         .login-checkout{ margin:$space5+3 $space0;}
+        
+           .control-label{ display:inline-block; vertical-align:middle; width:100px;  @include font-size($font12);}
+           .form-control{ display:inline-block; width:80%; margin-bottom:$space5+3;}
+     
+    
+         .shopping-cart{ float:left; width:100%;}  
+                   
+         //.shipping-method{ padding-bottom:$space5; border-bottom:1px solid #ccc;}
+         
+        //.payment-method{ padding-bottom:$space10;   border-bottom:1px solid #ccc; margin-bottom:$space10+2;}
+             
+      .btn-danger{ background:$yellow; color:$black;}  
+      .radio{ display:inline-block; padding-bottom:$space5+3;}
+      .payment-method{margin: 0 0 10px;}
+      .btn-yellow{color: $black;}
+    }
+    
+    
+    
+
+
+    

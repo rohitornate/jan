@@ -52,8 +52,39 @@ class ModelReportProduct extends Model {
 		if (!empty($data['filter_date_end'])) {
 			$sql .= " AND DATE(o.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
 		}
+		if (!empty($data['filter_model'])) {
+			$sql .= " AND op.model LIKE '" . $this->db->escape($data['filter_model']) . "%'";
+		}
 
-		$sql .= " GROUP BY op.product_id ORDER BY total DESC";
+		$sql .= " GROUP BY op.product_id ";
+		
+		$sort_data = array(
+				
+			//'pd.name',
+			'model',
+		//	'p.price',
+			'quantity',
+			//'p2c.category_id',
+		//	'p.date_added',
+		//	'p.date_modified',
+		//	'p.status',
+		//	'p.sort_order'
+		);
+
+		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+			$sql .= " ORDER BY " . $data['sort'];
+		} else {
+			//$sql .= " ORDER BY pd.name";
+			$sql .= " ORDER BY quantity";
+		}
+
+		if (isset($data['order']) && ($data['order'] == 'ASC')) {
+			$sql .= " ASC";
+		} else {
+			$sql .= " Desc";
+		}
+//print_r($sql);exit;
+		
 
 		if (isset($data['start']) || isset($data['limit'])) {
 			if ($data['start'] < 0) {
@@ -87,6 +118,9 @@ class ModelReportProduct extends Model {
 
 		if (!empty($data['filter_date_end'])) {
 			$sql .= " AND DATE(o.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+		}
+		if (!empty($data['filter_model'])) {
+			$sql .= " AND op.model LIKE '" . $this->db->escape($data['filter_model']) . "%'";
 		}
 
 		$query = $this->db->query($sql);

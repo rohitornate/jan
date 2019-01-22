@@ -1,0 +1,13 @@
+// make sure the functions are imported
+@import 'blend-modes';
+
+// Solid background
+.multiply {
+	background-color: blend-multiply(#7FFFD4, #DEB887);
+}
+
+// RGBa background
+.multiply {
+	background-color: blend-multiply(rgba(#7FFFD4, 0.5), rgba(#DEB887, 0.5));
+}
+

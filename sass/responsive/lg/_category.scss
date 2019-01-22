@@ -1,0 +1,13 @@
+.categories-main{
+    .c-box{margin-right: $space25+1;
+        img{padding: $space10 $space0;}
+        .price-retail{
+            strike{@include font-size(15px);}
+            span{@include font-size(11px); padding-left: $space5;}
+        }
+        .price-save{
+            strong{@include font-size(20px);}
+            small{@include font-size(11px);}
+        }
+    }
+}

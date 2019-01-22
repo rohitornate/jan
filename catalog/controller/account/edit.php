@@ -8,6 +8,7 @@ class ControllerAccountEdit extends Controller {
 
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
+		
 
 		$this->load->language('account/edit');
 
@@ -18,7 +19,13 @@ class ControllerAccountEdit extends Controller {
 		$this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
 
 		$this->load->model('account/customer');
+if (isset($this->session->data['success'])) {
+			$data['success'] = $this->session->data['success'];
 
+			unset($this->session->data['success']);
+		} else {
+			$data['success'] = '';
+		} 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_account_customer->editCustomer($this->request->post);
 
@@ -36,7 +43,7 @@ class ControllerAccountEdit extends Controller {
 				$this->model_account_activity->addActivity('edit', $activity_data);
 			}
 
-			$this->response->redirect($this->url->link('account/account', '', true));
+			$this->response->redirect($this->url->link('account/edit', '', true));
 		}
 
 		$data['breadcrumbs'] = array();
@@ -197,9 +204,16 @@ class ControllerAccountEdit extends Controller {
 			$this->error['warning'] = $this->language->get('error_exists');
 		}
 
+		if (empty(trim($this->request->post['telephone']))) {
+			$this->error['telephone'] = $this->language->get('error_telephone_blank');
+		} else if ((utf8_strlen($this->request->post['telephone']) < 10) || (utf8_strlen($this->request->post['telephone']) > 10 || preg_match("/^[0-9]+$/", $this->request->post['telephone']) === 0)) {
+			$this->error['telephone'] = $this->language->get('error_telephone');
+		}
+		/*
 		if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
 			$this->error['telephone'] = $this->language->get('error_telephone');
 		}
+		*/
 
 		// Custom field validation
 		$this->load->model('account/custom_field');

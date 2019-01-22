@@ -1,0 +1,30 @@
+.bs-wizard > .bs-wizard-step:first-child > .progress {
+  left: 0;
+  right: 50%;
+}
+.bs-wizard > .bs-wizard-step:nth-child(2) > .progress {
+  left: 0;
+  right: 50%;
+}
+.lborder {
+  border-left: 0;
+  border-right: 1px solid #ddd;
+}
+.text-right {
+  text-align: left !important;
+}
+.tabs-left>li {
+  border-left: 0px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+.tabs-left>li.active>a,
+.tabs-left>li.active>a:hover,
+.tabs-left>li.active>a:focus {
+  border-right-color: #128c3a;
+  border-left: 0 !important;
+  border-right: 4px solid;
+}
+.dropdown-menu {
+  right: auto;
+  left: 0;
+}

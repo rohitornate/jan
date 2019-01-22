@@ -24,6 +24,8 @@ class Image {
 				$this->image = imagecreatefrompng($file);
 			} elseif ($this->mime == 'image/jpeg') {
 				$this->image = imagecreatefromjpeg($file);
+			} elseif ($this->mime == 'image/webp') {
+				$this->image = imagecreatefromwebp($file);
 			}
 		} else {
 			exit('Error: Could not load image ' . $file . '!');
@@ -66,6 +68,8 @@ class Image {
 				imagepng($this->image, $file);
 			} elseif ($extension == 'gif') {
 				imagegif($this->image, $file);
+			} elseif ($extension == 'webp') {
+				imagewebp($this->image, $file);
 			}
 
 			imagedestroy($this->image);

@@ -1,28 +1,30 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'https://wowoverseas.com/op/');
+define('HTTP_SERVER', 'http://localhost/dec/');
+define('HTTPS_IMAGE', 'https://www.ornatejewels.com/image/');
 
 // HTTPS
-define('HTTPS_SERVER', 'https://wowoverseas.com/op/');
-
+define('HTTPS_SERVER', 'http://localhost/dec/');
+define('CDN_HTTPS_SERVER', 'https://ornate-bc57.kxcdn.com/');
+define('HTTP_IMAGE', 'https://www.ornatejewels.com/image/');
 // DIR
-define('DIR_APPLICATION', '/home/wowovers/public_html/op/catalog/');
-define('DIR_SYSTEM', '/home/wowovers/public_html/op/system/');
-define('DIR_IMAGE', '/home/wowovers/public_html/op/image/');
-define('DIR_LANGUAGE', '/home/wowovers/public_html/op/catalog/language/');
-define('DIR_TEMPLATE', '/home/wowovers/public_html/op/catalog/view/theme/');
-define('DIR_CONFIG', '/home/wowovers/public_html/op/system/config/');
-define('DIR_CACHE', '/home/wowovers/public_html/op/system/storage/cache/');
-define('DIR_DOWNLOAD', '/home/wowovers/public_html/op/system/storage/download/');
-define('DIR_LOGS', '/home/wowovers/public_html/op/system/storage/logs/');
-define('DIR_MODIFICATION', '/home/wowovers/public_html/op/system/storage/modification/');
-define('DIR_UPLOAD', '/home/wowovers/public_html/op/system/storage/upload/');
+define('DIR_APPLICATION', 'C:/xampp/htdocs/dec/catalog/');
+define('DIR_SYSTEM', 'C:/xampp/htdocs/dec/system/');
+define('DIR_IMAGE', 'C:/xampp/htdocs/dec/image/');
+define('DIR_LANGUAGE', 'C:/xampp/htdocs/dec/catalog/language/');
+define('DIR_TEMPLATE', 'C:/xampp/htdocs/dec/catalog/view/theme/');
+define('DIR_CONFIG', 'C:/xampp/htdocs/dec/system/config/');
+define('DIR_CACHE', 'C:/xampp/htdocs/dec/system/storage/cache/');
+define('DIR_DOWNLOAD', 'C:/xampp/htdocs/dec/system/storage/download/');
+define('DIR_LOGS', 'C:/xampp/htdocs/dec/system/storage/logs/');
+define('DIR_MODIFICATION', 'C:/xampp/htdocs/dec/system/storage/modification/');
+define('DIR_UPLOAD', 'C:/xampp/htdocs/dec/system/storage/upload/');
 
 // DB
 define('DB_DRIVER', 'mysqli');
 define('DB_HOSTNAME', 'localhost');
-define('DB_USERNAME', 'wowovers_ocart29');
-define('DB_PASSWORD', 'p3S4[14Hl[');
-define('DB_DATABASE', 'wowovers_ocart29');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', '');
+define('DB_DATABASE', 'dec');
 define('DB_PORT', '3306');
-define('DB_PREFIX', 'octt_');
+define('DB_PREFIX', 'oc_');

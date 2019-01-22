@@ -1,5 +1,6 @@
 <?php
 // Text
+$_['text_home']        = 'Home';
 $_['text_search']              = 'Search';
 $_['text_brand']               = 'Brand';
 $_['text_manufacturer']        = 'Brand:';
@@ -17,7 +18,8 @@ $_['text_write']               = 'Write a review';
 $_['text_login']               = 'Please <a href="%s">login</a> or <a href="%s">register</a> to review';
 $_['text_no_reviews']          = 'There are no reviews for this product.';
 $_['text_note']                = '<span class="text-danger">Note:</span> HTML is not translated!';
-$_['text_success']             = 'Thank you for your review. It has been submitted to the webmaster for approval.';
+$_['text_success']             = 'Thank you for your review.';
+$_['text_success_question']    = 'Thanks for your question .';
 $_['text_related']             = 'Related Products';
 $_['text_tags']                = 'Tags:';
 $_['text_error']               = 'Product not found!';
@@ -45,6 +47,15 @@ $_['tab_attribute']            = 'Specification';
 $_['tab_review']               = 'Reviews (%s)';
 
 // Error
+
+$_['error_question_text']      = 'Warning: Question Details must be between 3 and 1000 characters!';
+$_['error_name_text']          = 'Warning: Question Name must be between 3 and 20 characters!';
 $_['error_name']               = 'Warning: Review Name must be between 3 and 25 characters!';
-$_['error_text']               = 'Warning: Review Text must be between 25 and 1000 characters!';
-$_['error_rating']             = 'Warning: Please select a review rating!';
+$_['error_question_name']      = 'Warning: Author Name must be between 3 and 25 characters!';
+$_['error_text']               = 'Warning: Review Text must be between 2 and 1000 characters!';
+$_['error_app_rating']             = 'Warning: Please select a rating!';
+$_['error_qua_rating']             = 'Warning: Please select a Quality rating!';
+$_['error_pri_rating']             = 'Warning: Please select a Price rating!';
+$_['error_email']             = 'Warning: Please enter email!';
+$_['error_email_correct']             = 'Warning: Please enter Correct Email!';
+$_['error_mobile']             = 'Warning: Please enter mobile!';

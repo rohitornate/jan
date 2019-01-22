@@ -65,25 +65,63 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 							'GBP'
 						);
 
-						if (in_array($this->session->data['currency'], $currencies)) {
-							$currency_code = $this->session->data['currency'];
-							$currency_value = $this->currency->getValue($this->session->data['currency']);
-						} else {
-							$currency_code = 'USD';
-							$currency_value = $this->currency->getValue('USD');
-						}
-
+						
+							$currency_code = 'INR';
+							$currency_value = $this->currency->getValue('INR');
+							//	$price=$product['special']. ' INR';
+						
 						if ((float)$product['special']) {
-							$output .= '  <g:price>' .  $this->currency->format($this->tax->calculate($product['special'], $product['tax_class_id']), $currency_code, $currency_value, false) . '</g:price>';
+							
+							$special=$product['special']. ' INR';
+							
+								
+
+							$output .= '  <g:price>' .  $special .  '</g:price>';
 						} else {
-							$output .= '  <g:price>' . $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id']), $currency_code, $currency_value, false) . '</g:price>';
+							$price=$product['price']. ' INR';
+							
+								$output .= '  <g:price>' .  $price .  '</g:price>';
 						}
+						
+						
+						
+						
+						
+						
+						//	$output .= '  <g:price>' .  $price .  '</g:price>';
+							
+
+						
+						
 
 						$output .= '  <g:google_product_category>' . $google_base_category['google_base_category_id'] . '</g:google_product_category>';
 
 						$categories = $this->model_catalog_product->getCategories($product['product_id']);
 
+						$parent_category=$this->model_catalog_product->getParentCategory($product['product_id']);
+						//echo '<PRE>';
+						//print_r($parent_category['name']);exit;
+						
+						
+						//echo '<PRE>';
+						
+						
+						$output .= '<g:product_type><![CDATA[' . $parent_category['name'] . ']]></g:product_type>';
+						
+						//print_r($parent_category['name']);
+						/*
 						foreach ($categories as $category) {
+							
+							
+							
+							
+							
+							
+
+							print_r($category);
+							
+							
+							
 							$path = $this->getPath($category['category_id']);
 
 							if ($path) {
@@ -103,7 +141,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 
 								$output .= '<g:product_type><![CDATA[' . $string . ']]></g:product_type>';
 							}
-						}
+						}*/
 
 						$output .= '  <g:quantity>' . $product['quantity'] . '</g:quantity>';
 						$output .= '  <g:weight>' . $this->weight->format($product['weight'], $product['weight_class_id']) . '</g:weight>';

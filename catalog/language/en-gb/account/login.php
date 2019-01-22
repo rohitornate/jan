@@ -3,6 +3,7 @@
 $_['heading_title']                = 'Account Login';
 
 // Text
+$_['text_home']            = 'Home';
 $_['text_account']                 = 'Account';
 $_['text_login']                   = 'Login';
 $_['text_new_customer']            = 'New Customer';

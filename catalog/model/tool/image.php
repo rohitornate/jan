@@ -6,7 +6,7 @@ class ModelToolImage extends Model {
 		}
 
 		$extension = pathinfo($filename, PATHINFO_EXTENSION);
-
+//$extension='webp';
 		$image_old = $filename;
 		$image_new = 'cache/' . utf8_substr($filename, 0, utf8_strrpos($filename, '.')) . '-' . (int)$width . 'x' . (int)$height . '.' . $extension;
 
@@ -40,10 +40,58 @@ class ModelToolImage extends Model {
 		
 		$image_new = str_replace(' ', '%20', $image_new);  // fix bug when attach image on email (gmail.com). it is automatic changing space " " to +
 		
-		if ($this->request->server['HTTPS']) {
+		/*if ($this->request->server['HTTPS']) {
 			return $this->config->get('config_ssl') . 'image/' . $image_new;
+			//return $this->config->get('config_ssl') . 'image/' . $new_image;
+			//return HTTPS_IMAGE . $new_image;
+			//return HTTPS_IMAGE . $new_image . '" width="' . $width . '" height="' . $height;
 		} else {
 			return $this->config->get('config_url') . 'image/' . $image_new;
+			//return HTTP_IMAGE . $new_image . '" width="' . $width . '" height="' . $height;
+		}*/
+	if (isset($this->request->get['route'])) {	
+		if($this->request->get['route']=='extension/feed/sitemap_pro'){
+			
+			if ($this->request->server['HTTPS']) {
+				return $this->config->get('config_ssl') . 'image/' . $image_new;
+				//return $this->config->get('config_ssl') . 'image/' . $new_image;
+				//return HTTPS_IMAGE . $new_image;
+				//return HTTPS_IMAGE . $new_image . '" width="' . $width . '" height="' . $height;
+			} else {
+				return $this->config->get('config_url') . 'image/' . $image_new;
+				//return HTTP_IMAGE . $new_image . '" width="' . $width . '" height="' . $height;
+			}	
+			
+			
+		}else{	
+			
+		
+		
+		if(CDN_HTTPS_SERVER !=""){
+				return CDN_HTTPS_SERVER . 'image/' . $image_new;
+					}else{
+				if ($this->request->server['HTTPS']) {
+					return $this->config->get('config_ssl') . 'image/' . $image_new;
+					} else {
+					return $this->config->get('config_url') . 'image/' . $image_new;
+				}
+			}
+
 		}
+		
+	}else{
+		
+		if(CDN_HTTPS_SERVER !=""){
+				return CDN_HTTPS_SERVER . 'image/' . $image_new;
+					}else{
+				if ($this->request->server['HTTPS']) {
+					return $this->config->get('config_ssl') . 'image/' . $image_new;
+					} else {
+					return $this->config->get('config_url') . 'image/' . $image_new;
+				}
+			}
+
+		}
+		
 	}
 }

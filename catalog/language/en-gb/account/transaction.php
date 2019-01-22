@@ -8,6 +8,7 @@ $_['column_description'] = 'Description';
 $_['column_amount']      = 'Amount (%s)';
 
 // Text
+$_['text_home']            = 'Home';
 $_['text_account']       = 'Account';
 $_['text_transaction']   = 'Your Transactions';
 $_['text_total']         = 'Your current balance is:';

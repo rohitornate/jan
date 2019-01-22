@@ -1,0 +1,94 @@
+//compass 
+@import "compass";
+@import "compass/reset";
+@import "compass/css3/border-radius";
+@import "compass/css3/user-interface";
+@import "compass/css3/transform";
+@import "compass/css3/appearance"; 
+
+//sprite
+@import "compass/utilities/sprites";  
+@import "my-icons/*.png";
+
+//fonts & font awesome
+@import "fonts/_variables.scss";
+@import "fonts/_core.scss";
+@import "fonts/_icons.scss";        
+@import "fonts/_path.scss";
+
+//variables & Mixins
+@import "_variables.scss";
+@import "_mixin.scss";
+
+// slider - flexslider
+@import "slider/_base.scss";
+
+//Popup - colorbox
+@import "popup/_popup.scss"; 
+
+@import "_fonts.scss";    
+@import "_common.scss";
+@import "common/_header.scss"; //
+@import "common/_footer.scss"; 
+@import "_form.scss";
+@import "_home.scss"; 
+@import "_categories.scss";
+@import "_product-detail.scss";
+@import "_signup.scss";
+//@import "_checkout.scss";
+@import "_cart.scss";
+@import "common/_cart-header.scss";
+@import "common/_cart-footer.scss";
+@import "_popup.scss";
+
+//About Us
+@import "_about-us.scss";
+//Conatct Us
+@import "_contact-us.scss";
+//Blog
+@import "_blog.scss";
+//Sitemap
+@import "_sitemap.scss";
+//404
+@import "_404.scss";
+//common text = ex. privacy policy etc.
+@import "_common-text.scss";
+
+
+//breadcrumb
+@import "_breadcrumb.scss";
+
+//My Accout
+@import "_my-account.scss";
+
+//Common Table Use
+@import "_table.scss";
+
+//checkout new
+@import "_checkout-new.scss";
+
+//Alerts
+@import "_alerts.scss"; 
+
+//Cart
+@import "_cart-blank.scss";
+
+//Star Ratting
+@import "_ratting.scss";
+
+//Live Search
+@import "_search.scss";
+
+//Search Result
+@import "_search-result.scss";
+
+//Success
+@import "_success.scss"; 
+
+
+
+//media query
+@import "_breakpoint-lg.scss";    // max-width=1169
+@import "_breakpoint-md.scss";  // max-width=992
+@import "_breakpoint-sm.scss";   // max-width=767
+@import "_breakpoint-xs.scss"; // max-width=480  

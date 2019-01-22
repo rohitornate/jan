@@ -4,6 +4,7 @@ $_['heading_title']        = 'Register Account';
 
 // Text
 $_['text_account']         = 'Account';
+$_['text_home']       = 'Home';
 $_['text_register']        = 'Register';
 $_['text_account_already'] = 'If you already have an account with us, please login at the <a href="%s">login page</a>.';
 $_['text_your_details']    = 'Your Personal Details';
@@ -35,7 +36,7 @@ $_['error_exists']         = 'Warning: E-Mail Address is already registered!';
 $_['error_firstname']      = 'First Name must be between 1 and 32 characters!';
 $_['error_lastname']       = 'Last Name must be between 1 and 32 characters!';
 $_['error_email']          = 'E-Mail Address does not appear to be valid!';
-$_['error_telephone']      = 'Telephone must be between 3 and 32 characters!';
+$_['error_telephone']      = 'Telephone must be 10 characters!';
 $_['error_address_1']      = 'Address 1 must be between 3 and 128 characters!';
 $_['error_city']           = 'City must be between 2 and 128 characters!';
 $_['error_postcode']       = 'Postcode must be between 2 and 10 characters!';

@@ -23,8 +23,12 @@ $_['column_price']           = 'Price';
 $_['column_quantity']        = 'Quantity';
 $_['column_status']          = 'Status';
 $_['column_action']          = 'Action';
+$_['column_date_added']      = 'Date Added';
 
 // Entry
+$_['entry_date_added']        = 'Date Added';
+$_['entry_date_modified']        = 'Date Modified';
+
 $_['entry_name']             = 'Product Name';
 $_['entry_description']      = 'Description';
 $_['entry_meta_title'] 	     = 'Meta Tag Title';
@@ -38,6 +42,8 @@ $_['entry_ean']              = 'EAN';
 $_['entry_jan']              = 'JAN';
 $_['entry_isbn']             = 'ISBN';
 $_['entry_mpn']              = 'MPN';
+$_['entry_alt']         	= 'Alt';
+$_['entry_no_follow']         = 'No Follow/ No Index';
 $_['entry_location']         = 'Location';
 $_['entry_shipping']         = 'Requires Shipping';
 $_['entry_manufacturer']     = 'Manufacturer';
@@ -100,6 +106,9 @@ $_['help_related']           = '(Autocomplete)';
 $_['help_tag']               = 'Comma separated';
 
 // Error
+$_['error_duplicateName']    = 'Warning: Product Name already Exist!';
+$_['error_duplicateModel']    = 'Warning: Model Name already Exist!';
+$_['error_duplicateSKU']    = 'Warning: SKU Name already Exist!';
 $_['error_warning']          = 'Warning: Please check the form carefully for errors!';
 $_['error_permission']       = 'Warning: You do not have permission to modify products!';
 $_['error_name']             = 'Product Name must be greater than 3 and less than 255 characters!';

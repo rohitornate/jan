@@ -1,0 +1,78 @@
+.cart-main{ padding-bottom:$space60+50+45;
+         
+        .cart-box{ border:1px solid #eeeeee; padding:$space20 $space20 $space50; margin-bottom:$space30;}
+          .heading{ border-bottom:1px solid #eeeeee; padding:$space0 $space20; display:flex; flex-wrap:wrap; justify-content:space-between;
+                       .title{ 
+                             @include font-size($font14); color:$black; font-family:$ubuntumedium;  width:19%; padding-bottom:$space10+3; 
+                        @include last(3){ text-align:center;}   
+                        @include last-of(5){text-align:right;}
+                           &:nth-child(1){ width:24%;}
+                       }
+              }
+    
+        .cart-descraption{  display:flex; flex-wrap:wrap; justify-content:space-between;  padding:$space40 $space20 $space0;
+                            
+                 .col{ width:19%; 
+                          @include between(2, 5){ padding-top:$space20;}
+                          @include last(3){ text-align:center;}   
+                         @include last-of(5){text-align:right;}
+                         &:nth-child(1){ width:24%;} 
+                  }
+                        
+                  .remove-btn{ background:#f9f9f9; @include size(35px,35px); @include border-radius(100%); display:block; cursor:pointer;; text-align:center; margin:$space0 auto;
+                          i{ display:block; @include font-size($font20); color:#7c7c7c;  line-height:$space35+2;}
+                  }
+                        
+                  .product{
+                            p{ display:block; color:$grey-medium;  @include font-size($font12+1); padding-top:$space15; }
+                  }
+                        
+                   .price{
+                             p{  display:block; color:$black;  @include font-size($font16); padding-bottom:$space5+2;
+                              strike{display:inline-block; color:$grey-medium;  @include font-size($font14); padding-right:$space5 - 3;}
+                             }
+                             small{display:block; color:$grey-medium;  @include font-size($font12);}
+                 }   
+                        
+                       .total {color:$black; @include font-size($font16); margin-top:$space10;} 
+                       
+                  .quantity{
+                        select{ background:#f9f9f9 url(../images/drop-quantity.png) no-repeat right center; @include size(65px,27px); border:none; @include appearance(none); @include font-size($font12+1); color:$black; padding:$space5; outline:none;}    
+                }
+                        
+       }
+                    
+                    
+             
+       .cart-coupon{ float:left; width:350px; 
+            label{ display:block; color:$grey-medium; @include font-size($font14+1); position:relative; padding-left:$space25; padding-bottom:$space10;
+             &:before{ position:absolute; left:0; top:0; content:''; @include size(16px,16px);@include my-icons-sprite(coupon-cart);}
+            }
+            .form-control{ border:1px solid #969696; @include size(100%,40px); color:$grey-medium; @include input-placeholder{color:#afafaf}; padding-right:$space50+50+10+2;}
+            .btn-apply{ background:$btn-apply; border:none; @include size(110px,40px); @include font-size($font14); font-family:$ubuntumedium; text-transform:uppercase; color:$white; @include border-radius(0 3px 3px 0px); position:absolute; right:0; top:0; cursor:pointer;}
+            .form-group{ position:relative;}
+           
+           
+       }   
+       
+       
+       .cart-coupon-info{ margin-bottom:$space20;
+            float:right;  background:$bg-pink-light; padding:$space20 $space25 $space5; width:334px;
+           p{ @include font-size($font14); color:$grey-medium; padding-top:$space5; padding-bottom:$space15;
+             span{ float:right; color:$black;}
+             &:last-child{
+                 font-family:$ubuntumedium; @include font-size($font14+1); color:$black;
+             }
+             
+           }
+       }
+ 
+ .btn-yellow{ color:$black; font-family:$ubuntumedium; @include font-size($font16+1); width:245px; @include border-radius(3px); padding:$space10+5 $space0; text-transform:capitalize; text-align:center; 
+   i{margin-right:$space10;} 
+ }
+    .btn-yellow-small{  text-align:center; 
+        i{ margin-left:$space5; margin-right:$space0;}
+    }
+
+}
+

@@ -1,0 +1,43 @@
+
+.signup-main{
+    .heading{ background:$bg-grey; padding:$space15 $space10; text-align:center;
+      .title{@include font-size($font22); color:$black; text-transform:uppercase; font-family:$ubuntumedium; padding-bottom:$space5+2;}
+            span{ display:block; font-family:$ubuntulight; @include font-size($font12+1); color:#545454;
+             a{ display:inline-block; font-family:$ubunturegular; color:$black; padding-left:$space5;}
+        }
+    }
+    
+   .in{ max-width:775px; margin:0 auto; padding:$space40 $space0 $space70+30}
+    
+    
+    .form{ width:50%; float:left; padding-right:$space70+5;  border-right:1px solid #dcdcdc; position:relative;
+           .form-control{ @include border-radius(0); @include size(100%,40px); @include  font-size($font14); font-family:$ubuntulight;  @include input-placeholder{ color:#bebebe}; }
+      .btn-yellow{ color:$black; font-family:$ubuntumedium; @include font-size($font14+1); margin-top:$space5; padding:$space10+3 $space10;}
+   
+    .or-tag{ display:block; background:$white; @include size(20px,30px); position:absolute; right:-10px; top:50%; line-height:$space30;}
+    }
+    
+    
+    .btngroup{ float:right; width:50%; text-align:center; padding-left:$space70; padding-top:$space50+50+10;    
+    
+               a{
+                   background:$bg-blurdark; @include font-size($font16); color:$white; padding:$space15 $space10; display:block; width:300px; margin:0 auto $space15;
+                  i{ @include font-size($font16); color:$white; padding-right:$space5+3;} 
+                   &:last-child{ background:$bg-red;}
+               }
+    }
+    .form-group{margin-bottom:$space15;}
+    .text-danger{padding-top: 5px;}
+ 
+
+    
+    
+}
+   //sign-in
+    .sign-in{ 
+        .form{
+                 .forgot{ @include font-size($font12); color:#545454; text-transform:uppercase; float:right; padding-bottom:$space15;}
+                 .or-tag{ top:42%;}
+            }
+    .btngroup{ padding-top:$space40;}
+    }

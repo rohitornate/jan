@@ -1,0 +1,91 @@
+.pull-left{ float:left;}
+
+.categories-main{ padding-bottom:$space60;
+                  .page-head{ text-align:center; padding:$space30 $space0;
+           .title{@include font-size($font22); color:$black; text-transform:uppercase; padding-bottom:$space5+3;}
+            p{color:$grey-medium; @include font-size($font14); line-height:$space20+4; margin-top:$space0; height: 50px; padding: 0 20px; overflow: hidden;
+              &.active{height: auto;}
+            }
+            .more-btn{@include font-size(13px); color: $grey; padding: 5px 0; 
+                      &:before{display: inline-block; content: 'Read More'; text-decoration: underline;}
+                      &.active{
+                          &:before{content: 'Less';}
+                      }
+            }
+}
+    .wholesale{ background:$bg-grey-regular;  display:flex; justify-content:space-between; flex-wrap:wrap;
+        article{
+            padding:$space25+3 $space40; width:55%;  position:relative;
+            .title{ @include font-size($font22); color:$black; text-transform:uppercase;}
+            small{ @include font-size($font16); font-family:$ubuntulight; color:$grey-medium; padding-top:$space5+3; display:block;}
+         .price{ display:block; background:$coffe; color:$white; @include font-size($font16); @include border-radius(100%); @include size(86px,86px); text-align:center; padding-top:$space25;  position:absolute; right:0; top:10px; line-height:$space20;}
+        }
+        figure{ width:45%;  text-align:right;
+         img{ vertical-align:bottom;}
+        }
+    }
+    
+    .filter{ border-top:1px solid #eeeeee; padding-top:$space30+5; padding-bottom:$space30+2;}
+     .filter-text{@include font-size($font14); color:$black; float:left;}        
+     
+     .categories{  display:flex; flex-wrap:wrap;}
+     
+     	.c-box{ background-color:$white;@include box-shadow(0 0 3px rgba(0,0,0,.2)); width:31.5%; text-align:center; margin:0 32px 32px 0; padding:0; 
+                @include every(3){margin-right: 0;}
+                img{ padding:$space50 $space0;}
+                .price-box{ border-top:1px solid #e5e5e5; padding:$space20 $space20 $space15+3; margin-top:$space15;}
+           .price-retail{float:left; width:50%; text-align:left; 
+             small{@include font-size($font12+1); display:block; color:$grey-medium;}
+             strike{@include font-size($font16+1); display:inline-block; color:$grey-medium;  padding-top:$space5;}
+             span{@include font-size($font12+1); display:inline-block; color:$pink; padding-left:$space5+5;}
+           }
+           .price-save{float:left; width:50%; border-left:1px solid #e5e5e5;
+            strong{@include font-size($font24+1); display:block; color:#010101;  padding-bottom:$space5 - 2;}
+            small{@include font-size($font12+1); display:block; color:$grey-medium;}
+           
+           }
+      
+        p{ @include font-size($font12+1);  color:$grey-medium;  padding:$space0 $space20; @include oneline;}
+        
+        .cart-btn{ border:$border-common; cursor:pointer; @include font-size($font12); display:inline-block; padding:$space5+3 $space15+2; text-transform:uppercase; margin-top:$space15; color:#8f8f8f;}
+        }
+.content{background-color:$white; @include box-shadow(0 0 3px rgba(0,0,0,.2)); padding:$space40 $space35 $space10;
+           .title{ color:$yellow!important;  @include font-size($font16+1); padding-bottom:$space10+2; }
+           p{ font-family:$ubuntulight; @include font-size($font14); color:$grey-medium; line-height:$space20+2; padding-bottom:$space10;}
+           .title-small{ color:$black;  @include font-size($font14+1); padding-bottom:$space10;
+            &:before{ content: '-'; display:inline-block; padding-right:$space10;}
+           }
+          
+        }
+   
+
+    
+}
+
+//Product Filter
+.filter-option{
+      label{@include font-size($font12+1); color:$black; display:inline-block; padding-right:$space10; text-transform:uppercase; }
+      select{ 
+        background:url(../images/drop-down.png)no-repeat right center; @include appearance(none);
+      }
+      .box{display: inline-block; position: relative;}
+      .title{display: block; border:1px solid #e6e6e6; @include size(118px,34px);@include font-size($font12+1); margin:$space0 $space0 - 2 ;  color:$black; text-transform:uppercase; padding:$space10; cursor: pointer;
+             &:after{float: right; font-family: FontAwesome; content: '\f107'; @include font-size(18px); position: relative; top: -2px;}
+             &:hover{
+                 ul{display: block;}
+             }
+      }
+      ul{display: none; position: absolute; width: 210px; background: #fff; border: 1px solid #e6e6e6; left: -2px; top: 100%;
+         label{display: block; cursor: pointer; padding: 5px; text-transform: inherit; padding: 8px 10px;
+               &:hover{color: $yellow;}
+         }  
+      }
+      input[type="checkbox"]{vertical-align: top; margin: 0 2px 0 0;}
+}
+
+//Filter Results
+.filter-result{margin-top: $space15;
+              .restext{border: 1px solid #e6e6e6; padding: 5px 10px; display: inline-block; font-size: 12px;
+                       span{@include font-size(10px); padding-left: $space5 - 2; color: $yellow; cursor: pointer;}
+              }
+}

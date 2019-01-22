@@ -1,4 +1,4 @@
 <?php
 // Text
-$_['text_title']       = 'Flat Rate';
-$_['text_description'] = 'Flat Shipping Rate';
+$_['text_title']       = 'Express Shipping';
+$_['text_description'] = 'Express Shipping <br> <br> &nbsp;&nbsp;&nbsp;&nbsp;ONLY FOR PREPAID ORDERS<br> &nbsp;&nbsp;&nbsp;&nbsp;NOT AVAILABLE ON COD ORDERS';

@@ -1,0 +1,28 @@
+<modification>
+    <name>SourceCode Compressor</name>
+    <version>1.0</version>
+    <code>SCC001</code>
+    <author>Nik Chankov</author>
+    <email>nik@chankov.net</email>
+    <link>http://nik.chankov.net/opencart</link>
+    <file path="system/library/response.php">
+        <operation>
+            <search position="replace"><![CDATA[
+    public function output() {
+            ]]></search>
+            <add><![CDATA[
+    public function output() {
+        /*source compressor*/
+        if ($this->output) {
+            //$this->output = preg_replace('/<!--(.|\n)*?-->/', " ", $this->output);
+            $this->output = preg_replace("/(\n)+/", "\n", $this->output);
+            $this->output = preg_replace("/\r\n+/", "\n", $this->output);
+            $this->output = preg_replace("/\n(\t)+/", "\n", $this->output);
+            $this->output = preg_replace("/\n(\ )+/", "\n", $this->output);
+            $this->output = preg_replace("/\>(\n)+</", '><', $this->output);
+            $this->output = preg_replace("/\>\r\n</", '><', $this->output);
+        }
+            ]]></add>
+        </operation>
+    </file>
+</modification>

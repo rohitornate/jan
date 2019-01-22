@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+  <name>Modification  Simpleblog</name>
+  <version>1.0</version>
+  <author>Opcrat</author>
+  <code>opcrat_simpleblog_ocmod_admin</code>
+	<link>http://opcrat.com</link>
+    <file path="admin/controller/common/column_left.php">
+      <operation>
+        <search><![CDATA[
+        // Sales
+        ]]></search>
+
+        <add position="before"><![CDATA[
+
+          // blogs
+          $blog = array();
+
+          if ($this->user->hasPermission('access', 'simple_blog/article')) {
+            $blog[] = array(
+              'name'	   => $this->language->get('text_article'),
+              'href'     => $this->url->link('simple_blog/article', 'token=' . $this->session->data['token'], true),
+              'children' => array()
+            );
+          }
+
+          if ($this->user->hasPermission('access', 'simple_blog/author')) {
+            $blog[] = array(
+              'name'	   => $this->language->get('text_author'),
+              'href'     => $this->url->link('simple_blog/author', 'token=' . $this->session->data['token'], true),
+              'children' => array()
+            );
+          }
+
+
+          if ($this->user->hasPermission('access', 'simple_blog/category')) {
+            $blog[] = array(
+              'name'	   => $this->language->get('text_category'),
+              'href'     => $this->url->link('simple_blog/category', 'token=' . $this->session->data['token'], true),
+              'children' => array()
+            );
+          }
+
+          if ($this->user->hasPermission('access', 'simple_blog/comment')) {
+            $blog[] = array(
+              'name'	   => $this->language->get('text_comment'),
+              'href'     => $this->url->link('simple_blog/comment', 'token=' . $this->session->data['token'], true),
+              'children' => array()
+            );
+          }
+
+          if ($this->user->hasPermission('access', 'simple_blog/report')) {
+            $blog[] = array(
+              'name'	   => $this->language->get('text_report'),
+              'href'     => $this->url->link('simple_blog/report', 'token=' . $this->session->data['token'], true),
+              'children' => array()
+            );
+          }
+
+          if ($blog) {
+            $data['menus'][] = array(
+              'id'       => 'menu-blog',
+              'icon'	   => 'fa-comment-o',
+              'name'	   => $this->language->get('text_blog'),
+              'href'     => '',
+              'children' => $blog
+            );
+          }
+
+            ]]>
+          </add>
+      </operation>
+    </file>
+
+    <file path="admin/language/en-gb/common/column_left.php">
+  		<operation>
+  			<search><![CDATA[
+  				$_['text_other_status']              = 'Other Statuses';
+  					]]>
+  			</search>
+
+  	    <add position="after"><![CDATA[
+
+          $_['text_report']                   = 'Report';
+          $_['text_blog']                   = 'Simple Blogs';
+          $_['text_article']                   = 'Article';
+          $_['text_author']                   = 'Author';
+          $_['text_category']                   = 'Category';
+          $_['text_comment']                   = 'Comment';
+
+  	      ]]>
+  	  	</add>
+  		</operation>
+	   </file>
+
+     <file path="admin/controller/setting/setting.php">
+      <operation>
+        <search><![CDATA[
+     //   if (isset($this->request->post['config_logo'])) {
+            ]]>
+        </search>
+
+        <add position="before"><![CDATA[
+
+          $data['captcha_pages'][] = array(
+      			'text'  => $this->language->get('text_captcha'),
+      			'value' => 'article_info'
+      		);
+
+          ]]>
+        </add>
+      </operation>
+
+      <operation>
+        <search><![CDATA[
+      $data['text_return'] = $this->language->get('text_return');
+            ]]>
+        </search>
+
+        <add position="after"><![CDATA[
+
+    		$data['text_captcha'] = $this->language->get('text_captcha');
+
+          ]]>
+        </add>
+      </operation>
+     </file>
+     <file path="admin/language/en-gb/setting/setting.php">
+      <operation>
+        <search><![CDATA[
+      $_['text_affiliate']               = 'Affiliates';
+            ]]>
+        </search>
+
+        <add position="after"><![CDATA[
+
+      $_['text_captcha']                 = 'BlogCaptcha';
+        
+
+          ]]>
+        </add>
+      </operation>
+     </file>
+</modification>

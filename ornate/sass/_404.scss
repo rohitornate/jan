@@ -1,0 +1,12 @@
+.foerror{text-align: center;
+        .heading{@include font-size(32px); @extend .font-medium; display: block;}
+        span{@include font-size(25px); @extend .font-light; display: block; color: #545454; padding: 15px 0 40px;}
+        p{padding: $space30 $space0 $space0;}
+        a{width: 20%; @include font-size(17px); color: #545454;
+          img{ display: block; margin: 0 auto 20px;}
+        }
+        small{@include font-size(10px); text-transform: uppercase; display: block; padding-top: $space5+1;
+              &:after{display: inline-block; content: '\f0da'; font-family: 'FontAwesome'; color: #c2c2c2; margin-left: 5px;}
+        }
+        .link{ border-top: $border1 #e7e7e7; margin-top: $space35; padding: $space50 $space0;}
+}

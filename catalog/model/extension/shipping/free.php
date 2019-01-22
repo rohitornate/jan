@@ -24,7 +24,9 @@ class ModelExtensionShippingFree extends Model {
 
 			$quote_data['free'] = array(
 				'code'         => 'free.free',
-				'title'        => $this->language->get('text_description'),
+				'title'        => $this->language->get('text_title'),
+				
+				'desc'        => $this->language->get('text_description'),
 				'cost'         => 0.00,
 				'tax_class_id' => 0,
 				'text'         => $this->currency->format(0.00, $this->session->data['currency'])
@@ -32,7 +34,9 @@ class ModelExtensionShippingFree extends Model {
 
 			$method_data = array(
 				'code'       => 'free',
-				'title'      => $this->language->get('text_title'),
+				'title'        => $this->language->get('text_title'),
+				'desc'        => $this->language->get('text_description'),
+				
 				'quote'      => $quote_data,
 				'sort_order' => $this->config->get('free_sort_order'),
 				'error'      => false

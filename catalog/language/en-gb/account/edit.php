@@ -3,6 +3,7 @@
 $_['heading_title']      = 'My Account Information';
 
 // Text
+$_['text_home']            = 'Home';
 $_['text_account']       = 'Account';
 $_['text_edit']          = 'Edit Information';
 $_['text_your_details']  = 'Your Personal Details';
@@ -20,5 +21,6 @@ $_['error_exists']                = 'Warning: E-Mail address is already register
 $_['error_firstname']             = 'First Name must be between 1 and 32 characters!';
 $_['error_lastname']              = 'Last Name must be between 1 and 32 characters!';
 $_['error_email']                 = 'E-Mail Address does not appear to be valid!';
-$_['error_telephone']             = 'Telephone must be between 3 and 32 characters!';
+$_['error_telephone_blank']= 'Telephone can not be blank!';
+$_['error_telephone']      = 'Telephone must be 10 characters and can contain only numbers!';
 $_['error_custom_field']          = '%s required!';

@@ -1,6 +1,14 @@
 <?php
 class ControllerAccountSuccess extends Controller {
 	public function index() {
+		/* // BOF - Betaout Opencart mod
+        
+            $this->load->model('tool/betaout');
+            $this->model_tool_betaout->userSignUp();
+        
+        // EOF - Betaout Opencart mod
+		
+		*/
 		$this->load->language('account/success');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -39,7 +47,7 @@ class ControllerAccountSuccess extends Controller {
 		if ($this->cart->hasProducts()) {
 			$data['continue'] = $this->url->link('checkout/cart');
 		} else {
-			$data['continue'] = $this->url->link('account/account', '', true);
+			$data['continue'] = $this->url->link('account/edit', '', true);
 		}
 
 		$data['column_left'] = $this->load->controller('common/column_left');

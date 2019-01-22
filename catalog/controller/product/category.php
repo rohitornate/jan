@@ -18,7 +18,9 @@ class ControllerProductCategory extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
+		//latest product show on category page 	
 			$sort = 'p.sort_order';
+		//	$sort = 'p.product_id';
 		}
 
 		if (isset($this->request->get['order'])) {
@@ -38,7 +40,7 @@ class ControllerProductCategory extends Controller {
 		} else {
 			$limit = $this->config->get($this->config->get('config_theme') . '_product_limit');
 		}
-
+       
 		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = array(
@@ -89,11 +91,29 @@ class ControllerProductCategory extends Controller {
 
 		$category_info = $this->model_catalog_category->getCategory($category_id);
 
+		
+		
+		
+		
 		if ($category_info) {
+			
+			
+			if($category_info['parent_id']==0){
+			
+				$data['og_image']=$this->model_tool_image->resize($category_info['image'], 391, 269);
+			
+				}	else {
+			
+				$getCategoryInfo=$this->model_catalog_category->getCategoryInfo($category_info['parent_id']);
+				
+				$data['og_image']=$this->model_tool_image->resize($getCategoryInfo['image'], 391, 269);
+			}
+			
+			
 			$this->document->setTitle($category_info['meta_title']);
 			$this->document->setDescription($category_info['meta_description']);
 			$this->document->setKeywords($category_info['meta_keyword']);
-
+			$this->document->addScript('catalog/view/javascript/brainyfilter.js');
 			$data['heading_title'] = $category_info['name'];
 
 			$data['text_refine'] = $this->language->get('text_refine');
@@ -114,6 +134,7 @@ class ControllerProductCategory extends Controller {
 			$data['button_continue'] = $this->language->get('button_continue');
 			$data['button_list'] = $this->language->get('button_list');
 			$data['button_grid'] = $this->language->get('button_grid');
+			$data['path'] = $this->request->get['path'];
 
 			// Set the last category breadcrumb
 			$data['breadcrumbs'][] = array(
@@ -126,8 +147,49 @@ class ControllerProductCategory extends Controller {
 			} else {
 				$data['thumb'] = '';
 			}
-
+			$data['category_id'] = $category_id;
+			if ($category_info['strip_alt']) {
+				$data['strip_alt'] = $category_info['strip_alt'];
+			} else {
+				$data['strip_alt'] = 'ornatejewels offer';
+			}
+			if ($category_info['url']) {
+				$data['url'] = $category_info['url'];
+			} else {
+				$data['url'] = '';
+			}
+			
+			
+			if (($category_info['strip'])) {
+				
+			//	echo "hi";
+				$data['cat_strip'] = $this->model_tool_image->resize($category_info['strip'], 1170, 102);
+			} else {
+			//	echo "else";
+				$data['cat_strip'] = $this->model_tool_image->resize($this->config->get('config_cat_strip'), 1170, 102);
+			}
+			
+			
+			$data['logged'] = $this->customer->isLogged();
+			if ($this->customer->isLogged()){
+			$data['firstname'] = $this->customer->getFirstName();
+			}
+			
+			if ($category_info['hone']) {
+				$data['hone'] = $category_info['hone'];
+			} else {
+				$data['hone'] = '';
+			}
+		
 			$data['description'] = html_entity_decode($category_info['description'], ENT_QUOTES, 'UTF-8');
+             
+				if ($category_info['long_description']) {
+				$data['long_description'] = html_entity_decode($category_info['long_description'], ENT_QUOTES, 'UTF-8');
+			} else {
+				$data['long_description'] = '';
+			}
+
+			
 			$data['compare'] = $this->url->link('product/compare');
 
 			$url = '';
@@ -165,7 +227,7 @@ class ControllerProductCategory extends Controller {
 			}
 
 			$data['products'] = array();
-
+$parent_category = array();
 			$filter_data = array(
 				'filter_category_id' => $category_id,
 				'filter_filter'      => $filter,
@@ -194,8 +256,12 @@ class ControllerProductCategory extends Controller {
 
 				if ((float)$result['special']) {
 					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                                        $discount_price = $result['price'] - $result['special'];
+                                        $discount_percent = (($result['price'] - $result['special'])/$result['price'])*100;
 				} else {
 					$special = false;
+                    $discount_percent=false;
+                    $discount_price=false;
 				}
 
 				if ($this->config->get('config_tax')) {
@@ -209,14 +275,36 @@ class ControllerProductCategory extends Controller {
 				} else {
 					$rating = false;
 				}
+				$plated_category_value=$this->model_catalog_product->getProductCategoryForGoldPlated($result['product_id']);
+				
+				$parent_category_data=$this->model_catalog_product->getProductCategory($result['product_id']);
+				
+				$new_arrival=$this->model_catalog_product->getProductCategoryForNewArrival($result['product_id']);
+				
+			//	print_r($parent_category_data);
+				/*
+				foreach ($parent_category_data as $category){
+				
+					if($category['category_id']==116){
+						$parent_category[]=$category['category_id'];
+					
+					}
+				
+				}*/
 
 				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
-					'name'        => $result['name'],
-					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')) . '..',
+					'name'        =>    utf8_substr(strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')) . '..',
+					'alt'        => $result['alt'],
+					'quantity'        => $result['quantity'],
+					//'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')) . '..',
 					'price'       => $price,
 					'special'     => $special,
+					'gold_category_id' => $plated_category_value,
+					'category_id_new_arrical' => $new_arrival,
+                                        'discount_price'=> $this->currency->format($this->tax->calculate($discount_price, $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']),
+                                        'discount_persent'=>round($discount_percent),
 					'tax'         => $tax,
 					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
 					'rating'      => $result['rating'],
@@ -371,9 +459,12 @@ class ControllerProductCategory extends Controller {
 			$data['column_right'] = $this->load->controller('common/column_right');
 			$data['content_top'] = $this->load->controller('common/content_top');
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
+			
+
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
 
+			
 			$this->response->setOutput($this->load->view('product/category', $data));
 		} else {
 			$url = '';

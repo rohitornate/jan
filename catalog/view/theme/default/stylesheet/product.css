@@ -1,0 +1,204 @@
+﻿.product__details__wrap__price__panel__price{margin:5px 0;font-weight:600;display:inline-block;}
+.product{background:#fff;padding:10px;border-bottom:5px solid #dee5ef;}
+.supports-fontface{display:flex;width:100%;flex-wrap:wrap;align-items:center;border-top:1px solid #e8e8e8;padding:15px 10px;}
+.supports-fontface .social-title{text-transform:uppercase;font-weight:600;color:#000;margin-right:45px;}
+.supports-fontface .social-sharing.is-clean a{border-width:0;background-color:transparent;margin-right:15px;}
+.rts__wrap__h3{font-weight:400;font-size:14px;}
+.select-size{margin-top:0;background:0;overflow:hidden;float:left;}
+.ringsize{padding-bottom:20px;}
+.chat-v{margin-top:0;background:0;overflow:hidden;text-transform:capitalize;color:#333;font-size:13px;position:relative;}
+.select-size{background:#f2f2f2;text-transform:capitalize;color:#333;font-size:13px;padding-bottom:11px;}
+.name-section-separator{margin:25px 0;}
+hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0;}
+.mdl-textfield__input{border:none !important;border-bottom:1px solid rgba(0,0,0,.12) !important;display:block;margin:0;padding:4px;width:100%;background:none;text-align:left;color:#ef8643;}
+.mdl-textfield{position:relative;display:inline-block;box-sizing:border-box;max-width:100%;margin:0;padding:15px 0;font-weight:700;}
+.mdl-textfield__error{color:#d50000;position:absolute;margin-top:3px;visibility:hidden;display:block;}
+.flat-btn{outline-style:none!important;border:none;background:#fff;height:100%;width:100%;text-align:center;position:relative;}
+#add-to-cart-btn1, #buy-now-btn1{font-weight:700;background:#670067;height:40px;border-radius:0;color:#fff;white-space:nowrap;margin:10px 0;text-align:center;}
+.add-to-both{font-weight:700;background:#670067;height:40px;border-radius:0;color:#fff;white-space:nowrap;margin-bottom:10px;text-align:center;padding-left:30%;}
+.mdl-button__ripple-container{display:block;height:100%;left:0;position:absolute;top:0;width:100%;z-index:0;overflow:hidden;}
+button > span{pointer-events:none;}
+.product__offer{background:red;color:#fff;padding:5px;font-size:10px;}
+#buy-now-btn{font-weight:700;background:#670067;height:40px;border-radius:0;color:#fff;}
+.checkdelivery p{padding-bottom:10px;}
+.section-heading{line-height:20px;margin-bottom:20px;font-weight:500;}
+.height-100-percent{vertical-align:middle;margin-top:68px;font-size:1.4em;font-weight:600;text-align:center;}
+.fbt-product-details{margin-top:10px;}
+.fbt-discount{font-size:.9em;padding-left:5px;}
+.blue-text{color:#69a6d8;text-align:center;}
+.add-both-to-cart-container{margin-top:20px!important;}
+.width-100-percent{width:100%!important;}
+#add-both-to-cart-btn{margin-top:20px;}
+.add-to-both-btn{text-transform:uppercase;font-weight:700;background:#670067;height:40px;border-radius:0;color:#fff;text-align:center;width:100%;}
+.q-submit{font-weight:700;font-size:14px;background:#670067;height:40px;border-radius:0;color:#fff;padding:10px;text-transform:uppercase;}
+.flex-valign{align-items:center;font-weight:700;}
+#write-review-form-container{padding-top:20px;}
+.mdl-textfield__input{border:none;border-bottom:1px solid rgba(0,0,0,.12);display:block;margin:0;padding:4px;width:100%;background:none;text-align:left;color:inherit;}
+.mdl-textfield--floating-label .mdl-textfield__label{transition-duration:.2s;transition-timing-function:cubic-bezier(.4,0,.2,1);}
+.grey-text-lighten-3{color:rgba(0,0,0,.38);}
+.mdl-textfield__label{bottom:0;color:rgba(0,0,0,.26);font-size:16px;left:0;right:0;pointer-events:none;position:absolute;display:block;top:24px;width:100%;overflow:hidden;white-space:nowrap;text-align:left;}
+.size-error-msg{margin-top:5px;}
+.blue-text{font-weight:400;font-style:normal;color:#222;text-rendering:optimizeLegibility;margin-top:.2rem;margin-bottom:.5rem;line-height:1.4;}
+.ch-btn{margin-bottom:20px;}
+#cancel-review, #submit-review{font-weight:700;line-height:34px;}
+#cancel-review,#submit-review{margin-right:20px;border:2px solid rgba(0,0,0,.38);padding:0 10px;font-weight:700;font-size:14px;background:#670067;height:40px;border-radius:0;color:#fff;text-transform:uppercase;}
+.check{margin-top:14px;float:right;}
+.check button{padding:7px;background:#dee5ef;}
+.rupee-strike{width:20px;height:24px;position:absolute;left:0;top:-5px;}
+.code{text-transform:uppercase;}
+.product__details__wrap__price__panel__strike{font-weight:500;display:inline-block;color:#a1a0a0;text-decoration:line-through;position:relative;padding:5px;}
+.captions{padding:10px;font-weight:normal;}
+.helpcontent{display:none;}
+.view__more__pd{padding:24px 0;background:#fff;margin-top:8px;}
+.checkdelivery{color:#680068;font-weight:700;padding-left:18px;}
+.ptitle{font-weight:600;padding:10px 0 10px 20px;}
+.ptitles{font-weight:600;display:inline-block;padding-bottom:10px;}
+.outs{text-align:center;}
+.ptitle1{font-weight:600;margin:10px 0;display:inline-block;color:#ec524f;}
+.description{line-height:25px;margin-bottom:12px;font-weight:500;padding:0 20px;text-align:justify;}
+.prdetails{width:50%;float:left;}
+.prdescription{width:50%;}
+.view__more__pd__h3{padding:5px;}
+::placeholder{color:rgba(0,0,0,.22);opacity:1;}
+.view__more__pd__article__label{display:inline-block;margin:5px 0;line-height:20px;}
+.prohead a{font-weight:700;font-size:16px;}
+.prohead{display:inline-block;font-weight:600;margin:5px 0;color:#403838;line-height:20px;}
+.prohead1{display:inline-block;font-weight:600;margin:5px 0;color:#403838;line-height:20px;}
+.productname{padding:10px;font-weight:700;}
+.proheading{font-size:1.0625rem;color:#000;padding-bottom:3px;line-height:26px;text-transform:uppercase;font-weight:700;margin-left:4px;}
+.comment1{overflow-y:scroll;height:96px;text-align:justify;font-family:"AvenirNextLTW01-Regular";line-height:20px;font-weight:100;}
+.is-clean span{color:#70aae6;}
+.pd__container__other__products{border-bottom:1px solid #ddd;padding-bottom:0;}
+.pd__container__other__pro__tabs li a{padding:10px;display:block;border-top:2px solid transparent;font-weight:600;}
+.pd__container__other__pro__tabs li a.active{color:#434343;border-color:#67768f;}
+.pd__container__other__pro__tabs li{list-style:none;display:inline-block;margin:0 25px;}
+.owl-wrapper-outer{box-shadow:none !important;}
+.question{box-shadow:0 2px 4px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);padding:10px;}
+.p-testimonial{margin:10px 0 7px;font-weight:700;color:#222;}
+span.card-title{display:block;padding:20px;font-weight:700;text-align:center;text-transform:uppercase;}
+.freq-inner-container{display:flex;width:90%;margin:0 auto;}
+.frequent-area .freq-main-part{width:60%;padding:10px 0;display:flex;justify-content:left;border-right:1px solid #dcdcdc;}
+.freq-main-part .image-box{display:flex;flex-direction:column;width:40%;align-items:start;}
+.fbt-plus-icon{margin:0 10px;}
+.freq-checkbox span{color:#8a8a8a;font-size:.69em;}
+.mdl-checkbox__label{position:relative;cursor:pointer;font-size:16px;margin:0;}
+.image-box p{margin-bottom:0;font-weight:700;}
+.frequent-area .freq-add-to-cart{width:40%;padding:60px 20px;}
+.frequent-area .freq-combo-text{font-size:17px;margin-bottom:6px;}
+.frequent-area .second-part{margin-bottom:30px;}
+.frequent-area .btn3{padding:0 50px;background-color:#69a6d8;color:#fff;border-radius:2px;z-index:1;box-shadow:0 3px 5px #b3f1ed;font-size:12px;cursor:pointer;font-weight:500;width:100%;text-transform:none;}
+.frequent-area .second-part .freq-combo-price{font-size:20px;font-weight:700;}
+.frequent-area .second-part .freq-combo-save{color:#59c1ba;margin-left:3px;font-size:15px;}
+.mdl-card{box-shadow:0 2px 10px #dcdcdc !important;margin:20px 0;position:static;}
+.description-cards-area span.card-title{display:block;padding:20px;font-size:1.3em;font-weight:700;}
+.review-count-area{padding:10px;padding-bottom:30px;}
+.review-area .rating{float:left;width:25%;text-align:left;}
+.review-area .rating .box{margin-bottom:5px;padding:13px;display:inline-block;box-shadow:0 0 11px #8a8a8a;border-radius:3px;width:80px;height:80px;}
+.flex-center-column, .flex-center-row{display:flex;justify-content:center;align-items:center;}
+.green-star-icon{background-position:-456px -573px;width:23px;height:21px;}
+.review-area .rating .box span{font-size:22px;font-weight:700;color:#69a6d8;}
+.review-area .rating .box p{margin:0;text-align:center;}
+.margin-0{margin:0;}
+.review-area .detailed-rating{width:35%;float:left;color:#8a8a8a;margin-top:-20px;}
+.review-area .detailed-rating .each-rating{display:flex;justify-content:space-between;align-content:center;}
+.review-area .detailed-rating .each-rating .each-rating-title{width:25%;font-size:11px;color:#8a8a8a;line-height:21px;}
+.review-area .detailed-rating .each-rating .mdl-progress{width:65%;height:6px;margin:auto;}
+.detailed-rating .mdl-progress-green>.progressbar{background-color:#69a6d8;border-radius:3px;}
+.detailed-rating .mdl-progress-green>.bufferbar{background-image:linear-gradient(90deg,hsla(0,0%,100%,.7),hsla(0,0%,100%,.7)),linear-gradient(90deg,#59c1ba,#69a6d8);border-radius:3px;}
+.required{border:0;float:left;}
+.mdl-progress>.progressbar{background-color:#3f51b5;z-index:1;left:0;}
+.mdl-progress{display:flex;position:relative;height:4px;width:500px;max-width:100%;}
+.review-area .detailed-rating .each-rating .each-rating-number{width:5%;font-size:12px;color:#8a8a8a;margin-top:5px;}
+.review-area .write-review, .review-area .write-review-zero{margin-left:25px;padding-right:10px;float:left;width:35%;color:#8a8a8a;font-size:.9em;}
+.review-area .write-review .review-button{margin:20px 0;padding:10px 25px;border:1px solid #dcdcdc;text-align:center;}
+.review-area .write-review .review-button span{color:#69a6d8;}
+.review-area .customer-reviews ul{border:none;box-shadow:none;padding:0;margin-top:30px;}
+.review-area .customer-reviews .review-block{display:flex;justify-content:center;border:none;padding:10px 0;margin:0 20px;}
+.review-area .customer-reviews .review-block .review{width:90%;float:left;margin-right:15px;padding-top:20px;padding-bottom:20px;}
+.review-area .customer-reviews .review-block .review .review-stars{float:left;padding-right:5px;}
+.review-stars img{width:12px;height:12px;}
+.review-area .customer-reviews .review-block .review .author{color:#ef8643;}
+.none{display:none!important;}
+.review-area .customer-reviews .view-more-review{color:#69a6d8;font-size:.8em;font-weight:600;margin-left:20px;margin-right:20px;cursor:pointer;padding:15px 10px;}
+.view-btn-arrow{padding-left:6px;margin:4px 5px;}
+.selected-star, .unselected-star{margin-right:3px;}
+#write-review-form-container{margin:0 20%;padding:20px 0;}
+.filled-star,.unfilled-star,.rate-jewellery{float:left;}
+.review-image-container{padding:10px 0;}
+#qas-entery-section .mdl-card{min-height:unset;}
+.qa-layout{padding:20px;width:100%;margin:0 0 8px;}
+.qa-section{display:flex;flex-direction:row;justify-content:space-between;padding:10px 10px 20px 10px;}
+.qa-section>h3{text-transform:uppercase;font-weight:700;margin:0;}
+.ask-ques-button{justify-content:center;color:#69a6d8;cursor:pointer;text-transform:none;text-transform:uppercase;}
+.qa-layout hr{display:block;height:2px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0;}
+.user-qas-section{max-height:300px;overflow-y:scroll;padding:5px 10px;}
+.user-qas-section p{line-height:20px;font-size:14px;font-weight:100;}
+.user-qa-section h3{margin:0;}
+button.shop{font-size:12px;color:#fff;background:#6f7782;font-weight:700;padding:10px;text-align:center;margin-left:38%;}
+#write-review-form-container{display:none;}
+.pd__container__other__pro__tabs li.active{color:#434343;border-color:#67768f;}
+.card{padding:10px 0;}
+.paratext{text-align:right;}
+.policy-tips{line-height:20px;padding-left:20px;}
+@media (max-width:767px){.card{padding:0px;}
+form#qas-form1{padding:0 10px;}
+.ask-ques-button{text-align:center;text-transform:uppercase;}
+.qa-section{display:flex;flex-direction:row;justify-content:space-between;padding:10px;}
+.mdl-card{border-bottom:20px solid #dee5ee;margin:0px -20px 10px -20px;box-shadow:none !important;padding:10px 0;}
+.proheading{font-size:14px;color:#000;padding-bottom:0px;line-height:20px;text-transform:uppercase;font-weight:700;margin-left:4px;}
+.prdetails{width:100% !important;}
+.rate-jewellery{float:left;}
+#write-review-form-container{margin:0 6%;padding:20px 0;margin-bottom:20px;}
+.prdescription{width:100% !important;}
+.height-100-percent{vertical-align:middle;margin-top:0px;font-size:1.4em;font-weight:600;}
+.comment1{overflow-y:scroll;height:80px;text-align:justify;font-family:"AvenirNextLTW01-Regular";line-height:20px;font-weight:100;}
+.rts__wrap__h3{font-weight:400;font-size:11px;}
+.advantage{box-shadow:0 1px 4px rgba(0,0,0,.2);}
+.p-testimonial{font-size:14px;margin:5px 0 20px;font-weight:600;color:#000;text-transform:uppercase;}
+body{font-size:12px;}
+.user-qas-section{max-height:120px;overflow-y:scroll;padding:5px 10px;}.cart-btn #soldout{}
+.cart-btn #add-to-cart-btn1{position:fixed;bottom:0;left:0;width:50%;z-index:2;font-weight:700;background:#9a579a;height:40px;border-radius:0;color:#fff;white-space:nowrap;margin-bottom:0px;text-align:center;}
+.cart-btn #buy-now-btn1{position:fixed;width:50%;right:0;bottom:0;z-index:2;font-weight:700;background:#670067;height:40px;border-radius:0;color:#fff;white-space:nowrap;margin-bottom:0px;text-align:center;}
+.flat-btn{border:none;background:#fff;height:auto;width:auto;position:fixed;}
+.rating-container-large{padding:10px;box-shadow:0 0 5px 1px rgba(0,0,0,.2);border-radius:3px;height:71px;width:71px;}
+.rating-large{font-size:1.7em;font-weight:700;padding-left:5px;}
+.total-reviews-large{text-align:left;line-height:1.3;padding-top:10px;}
+.rating-bars-container{border-left:1px solid rgba(0,0,0,.2);padding-left:15px;justify-content:center;}
+.rating-type-container{margin:0 0 6px;}
+.rating-type{width:44%;float:left;font-size:small;}
+.mdl-progress{height:4px;float:left;top:5px;}
+.rating-bar{width:50%;}
+#write-review-btn{font-size:1.2em;margin:20px 0 0!important;font-weight:700;}
+.blue-text{color:#69a6d8;}
+#top-reviews{margin-top:0;}
+.heading-3{line-height:20px;margin-bottom:24px;}
+#view-all-reviews-btn{margin-top:10px;}
+.mdl-progress>.bufferbar{background-image:linear-gradient(90deg,hsla(0,0%,100%,.7),hsla(0,0%,100%,.7)),linear-gradient(90deg,#3f51b5,#3f51b5);z-index:0;left:0;margin-right:3px;}
+.section-heading{line-height:20px;margin-bottom:20px;font-weight:700;text-align:center;font-size:14px;}
+.progressbar{background-color:#69a6d8!important;border-radius:10px;}
+#write-review-form-container{padding:20px 0;margin-bottom:20px;}
+.title-1:before, .title-1:after{content:'';display:inline-block;height:1px;background-color:#000;margin:auto;vertical-align:middle;}
+#top-reviews-container{padding:0 10px;}
+.prohead a{font-weight:700;font-size:12px;}
+.ptitle{font-weight:700;margin:10px 5px;display:inline-block;color:#000;font-size:14px;padding:5px;width:100%;}
+.ptitles{font-weight:700;margin:5px;display:inline-block;color:#000;font-size:14px;padding-bottom:0px;}
+.prohead1{display:inline-block;font-weight:600;margin:5px 5px;color:#403838;line-height:20px;}
+.grey-text-lighten-2{font-size:12px;color:rgba(0,0,0,.54);line-height:16px;font-weight:600;}
+.title-1{font-size:.938em;padding:10px 0 20px !important;}
+.advantages{margin:10px 0px;}
+.flex-row.flex-center.space-even{padding:0px 0 40px;}
+.m-offers{padding:10px 0;}
+.qa-section>h3{font-weight:600;color:#000;text-transform:uppercase;}
+.supports-fontface{display:flex;width:100%;flex-wrap:wrap;align-items:center;border-top:1px solid #e8e8e8;padding:15px 0px;margin:15px -4px;}
+.description{padding:0 10px;}
+.description p{line-height:25px;margin-bottom:12px;font-weight:500;text-align:justify;}
+.description li{list-style:disc;line-height:25px;font-weight:500;margin-left:14px;}
+.owl-item p{font-size:14px;}
+.supports-fontface .social-title{font-size:14px;text-transform:uppercase;font-weight:600;color:#000;margin-right:45px;}
+}
+@media (max-width:320px){.rating-type{width:46% !important;}
+.rating-bar{width:48% !important;}
+.product__details__wrap__price__panel__strike{padding-left:5px;}
+}
+@media (max-width:414px){.product__offer{background:red;color:#fff;padding:5px;font-size:10px;float:left;}
+}

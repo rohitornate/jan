@@ -3,6 +3,7 @@
 $_['heading_title']  = 'Contact Us';
 
 // Text
+$_['text_home']  = 'Home';
 $_['text_location']  = 'Our Location';
 $_['text_store']     = 'Our Stores';
 $_['text_contact']   = 'Contact Form';

@@ -1,3 +1,63 @@
+<div class="step-info"> <!--step-info start  here --> 
+                          <div class="step-name">  
+                              <div class="title">Shipping Address</div>
+
+                              <div class="form-group">
+                                  <label>First Name *</label>
+                                  <input type="text" name="firstname"  class="form-control">
+                              </div>
+                              <div class="form-group">
+                                  <label>Last Name</label>
+                                  <input type="text" name="lastname"  class="form-control">
+                              </div>
+                              <div class="form-group">
+                                  <label>Mobile No * </label>
+                                  <input type="text" name="mobile"  class="form-control">
+                              </div>
+                              <div class="form-group">
+                                  <label>Post Code: * </label>
+                                  <input type="text" name="post"  class="form-control">
+                              </div>
+                              <div class="form-group">
+                                  <label>Address: *</label>
+                                  <textarea class="form-control  textarea"> </textarea>
+                              </div>
+                              <div class="form-group">
+                                  <label>Address: *</label>
+                                  <textarea class="form-control  textarea"> </textarea>
+
+                              </div>
+                              <div class="form-group">
+                                  <label>City: *</label>
+                                  <input type="text" name="" value="" placeholder="" class="form-control">
+
+                              </div>
+                              <div class="form-group">
+                                  <label>State *</label>
+                                  <select class="form-control select">
+                                      <option>Rajasthan</option>
+                                  </select>                        
+                              </div>
+
+                          </div> 
+                          <div class="step-detail">   
+                              <div class="title">Order Summary<a href="#">Edit</a></div>
+                              <div class="clearfix in">
+                                  <div class="step-product">
+                                      <img src="images/product-checkou.jpg">
+                                      <p>18K Yellow Gold Plated Knotty</p>
+                                  </div>
+                                  <div class="price">
+                                      <strike>Rs 3,461</strike>
+                                      Rs 2,287
+                                  </div>
+                              </div>
+                              <p class="step-descraption clearfix">Sub-Total:<span class="pull-right">Rs 699</span></p>
+                              <p class="step-descraption green-text clearfix">Coupon(SUM17)<span class="pull-right green-text">Rs -20,750</span></p>
+                              <p class="step-descraption clearfix">Total:<span class="pull-right"> Rs 699</span></p>
+                          </div>
+                      </div>  <!--step-info end  here --> 
+                      <a href="#" class="next action-button btn-yellow pull-right">Save & Continue<i class="my-icons-arrow-right"></i></a>
 <div class="row">
   <div class="col-sm-6">
     <fieldset id="account">

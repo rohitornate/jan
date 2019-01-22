@@ -43,6 +43,13 @@ class ControllerCommonColumnLeft extends Controller {
 			// Catalog
 			$catalog = array();
 			
+			if ($this->user->hasPermission('access', 'catalog/havequestion')) {
+				$catalog[] = array(
+					'name'	   => $this->language->get('text_havequestion'),
+					'href'     => $this->url->link('catalog/havequestion', 'token=' . $this->session->data['token'], true),
+					'children' => array()		
+				);
+			}
 			if ($this->user->hasPermission('access', 'catalog/category')) {
 				$catalog[] = array(
 					'name'	   => $this->language->get('text_category'),
@@ -56,6 +63,20 @@ class ControllerCommonColumnLeft extends Controller {
 					'name'	   => $this->language->get('text_product'),
 					'href'     => $this->url->link('catalog/product', 'token=' . $this->session->data['token'], true),
 					'children' => array()		
+				);
+			}
+			if ($this->user->hasPermission('access', 'catalog/seo_product')) {
+				$catalog[] = array(
+						'name'	   => $this->language->get('Seo Products'),
+						'href'     => $this->url->link('catalog/seo_product', 'token=' . $this->session->data['token'], true),
+						'children' => array()
+				);
+			}
+			if ($this->user->hasPermission('access', 'catalog/product')) {
+				$catalog[] = array(
+						'name'	   => $this->language->get('New Arrival'),
+						'href'     => $this->url->link('extension/module/featured', 'token=' . $this->session->data['token'].'&module_id=28', true),
+						'children' => array()
 				);
 			}
 			
@@ -395,6 +416,13 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
+			if ($this->user->hasPermission('access', 'extension/module/newsletters')) {
+				$marketing[] = array(
+					'name'	   => 'Newsletter Subscribers',
+					'href'     => $this->url->link('common/newsletter', 'token=' . $this->session->data['token'], true),
+					'children' => array()		
+				);
+			}
 			
 			if ($marketing) {
 				$data['menus'][] = array(
@@ -419,7 +447,13 @@ class ControllerCommonColumnLeft extends Controller {
 		
 			// Users
 			$user = array();
-			
+			// Custom SEO URL Start 
+                        $system[] = array(
+                            'name'	   => "Custom SEO URL",
+                            'href'     => $this->url->link('setting/custom_seo_url', 'token=' . $this->session->data['token'], true),
+                            'children' => array()		
+                        );	
+                    // Custom SEO URL end
 			if ($this->user->hasPermission('access', 'user/user')) {
 				$user[] = array(
 					'name'	   => $this->language->get('text_users'),
@@ -443,6 +477,24 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);	
 			}
+			
+			$this->load->model('setting/setting');
+            $abandonedCartsSettings = $this->model_setting_setting->getSetting('abandonedcarts', $this->config->get('store_id'));
+            
+            if (isset($abandonedCartsSettings['abandonedcarts']['Enabled']) && $abandonedCartsSettings['abandonedcarts']['Enabled']=='yes' && isset($abandonedCartsSettings['abandonedcarts']['MenuWidget']) && $abandonedCartsSettings['abandonedcarts']['MenuWidget']=='yes') { 
+                $AB_count = $this->db->query("SELECT count(*) as total FROM `" . DB_PREFIX . "abandonedcarts` WHERE `notified`=0");
+                
+                $data['menus'][] = array(
+                    'id'       => 'menu-abandonedcarts',
+                    'icon'	   => 'fa fa-shopping-cart fa-fw', 
+                    'name'	   => 'Abandoned Carts <span class="label label-danger">'. $AB_count->row['total'] . '</span>',
+                    'href'     => $this->url->link('extension/module/abandonedcarts', 'token=' . $this->session->data['token'], true),
+                    'children' => array()
+                );	
+            }
+            /* AbandonedCarts - End */
+			
+			
 			
 			if ($user) {
 				$system[] = array(
@@ -631,7 +683,13 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
-			
+			if ($this->user->hasPermission('access', 'tool/export_import')) {
+				$tool[] = array(
+						'name'	   => 'Export Import',
+						'href'     => $this->url->link('tool/export_import', 'token=' . $this->session->data['token'], true),
+						'children' => array()
+				);
+			}
 			if ($tool) {
 				$system[] = array(
 					'name'	   => $this->language->get('text_tools'),

@@ -39,6 +39,7 @@
             <li><a href="#tab-ftp" data-toggle="tab"><?php echo $tab_ftp; ?></a></li>
             <li><a href="#tab-mail" data-toggle="tab"><?php echo $tab_mail; ?></a></li>
             <li><a href="#tab-server" data-toggle="tab"><?php echo $tab_server; ?></a></li>
+			 <li><a href="#tab-google" data-toggle="tab"><?php echo "Google"; ?></a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
@@ -155,6 +156,12 @@
                 <label class="col-sm-2 control-label" for="input-image"><?php echo $entry_image; ?></label>
                 <div class="col-sm-10"><a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="<?php echo $thumb; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
                   <input type="hidden" name="config_image" value="<?php echo $config_image; ?>" id="input-image" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-image-strip">Category Strip</label>
+                <div class="col-sm-10"><a href="" id="category-strip" data-toggle="image" class="img-thumbnail"><img src="<?php echo $categorystrip; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
+                  <input type="hidden" name="config_cat_strip" value="<?php echo $config_cat_strip; ?>" id="input-image-strip" />
                 </div>
               </div>
               <div class="form-group">
@@ -307,6 +314,34 @@
               </div>
             </div>
             <div class="tab-pane" id="tab-option">
+			<fieldset>
+                <legend>Timmer</legend>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="Timer Status"><?php echo 'Timmer Status'; ?></span></label>
+                  <div class="col-sm-10">
+                    <label class="radio-inline">
+                      <?php if ($config_timer_status) { ?>
+                      <input type="radio" name="config_timer_status" value="1" checked="checked" />
+                      <?php echo $text_yes; ?>
+                      <?php } else { ?>
+                      <input type="radio" name="config_timer_status" value="1" />
+                      <?php echo $text_yes; ?>
+                      <?php } ?>
+                    </label>
+                    <label class="radio-inline">
+                      <?php if (!$config_timer_status) { ?>
+                      <input type="radio" name="config_timer_status" value="0" checked="checked" />
+                      <?php echo $text_no; ?>
+                      <?php } else { ?>
+                      <input type="radio" name="config_timer_status" value="0" />
+                      <?php echo $text_no; ?>
+                      <?php } ?>
+                    </label>
+                  </div>
+                </div>
+                
+              </fieldset>
+			
               <fieldset>
                 <legend><?php echo $text_product; ?></legend>
                 <div class="form-group">
@@ -1170,9 +1205,9 @@
             </div>
             <div class="tab-pane" id="tab-server">
               <fieldset>
-                <legend><?php echo $text_general; ?></legend>
+                
                 <div class="form-group">
-                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="<?php echo $help_maintenance; ?>"><?php echo $entry_maintenance; ?></span></label>
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="<?php echo 'Set to Exclude if you dont want any front-end site activity being sent to Google Analytics for reporting when logged in to the back-end as admin. This covers all data sent to GA.'; ?>"><?php echo 'Exclude Admin Visits/Data:'; ?></span></label>
                   <div class="col-sm-10">
                     <label class="radio-inline">
                       <?php if ($config_maintenance) { ?>
@@ -1391,6 +1426,109 @@
                 </div>
               </fieldset>
             </div>
+			<div class="tab-pane" id="tab-google">
+              
+          	<div class="form-group">
+              <label class="col-sm-2 control-label" for="input-error-filename">Domain URL:</label>
+              <div class="col-sm-10"><input type="text" name="config_ga_domain" value="<?php echo $config_ga_domain; ?>" class="form-control"/><?php echo $config_ga_domain; ?>
+              
+              </div>
+            </div>
+          	<div class="form-group">
+             <label class="col-sm-2 control-label">Google Analytics Expert Version:</label>
+              <div class="col-sm-10">5.2.9.4</div>
+            </div>
+            <div class="form-group">
+             <label class="col-sm-2 control-label"><?php echo $entry_ga_exclude_admin; ?></label>
+               <div class="col-sm-10"><?php if ($config_ga_exclude_admin) { ?>
+              	<input type="radio" name="config_ga_exclude_admin" value="0" <?php if ($config_ga_exclude_admin == 0) { echo ' checked="checked"'; } ?> />
+                <?php echo $text_include; ?>
+                <input type="radio" name="config_ga_exclude_admin" value="1" <?php if ($config_ga_exclude_admin == 1) { echo ' checked="checked"'; } ?> />
+                <?php echo $text_exclude; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_ga_exclude_admin" value="0" checked="checked" />
+                <?php echo $text_include; ?>
+                <input type="radio" name="config_ga_exclude_admin" value="1" />
+                <?php echo $text_exclude; ?>
+                <?php } ?></div>
+            </div>
+           <div class="form-group">
+              <label class="col-sm-2 control-label"><?php echo $entry_ga_tracking_type; ?></label>
+              <div class="col-sm-10"><?php if ($config_ga_tracking_type) { ?>
+                <input type="radio" name="config_ga_tracking_type" value="1" <?php if ($config_ga_tracking_type == 1) { echo ' checked="checked"'; } ?> />
+                <?php echo $text_classic; ?>
+                <input type="radio" name="config_ga_tracking_type" value="0" <?php if ($config_ga_tracking_type == 0) { echo ' checked="checked"'; } ?> />
+                <?php echo $text_universal; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_ga_tracking_type" value="1" />
+                <?php echo $text_classic; ?>
+                <input type="radio" name="config_ga_tracking_type" value="0" checked="checked" />
+                <?php echo $text_universal; ?>
+                <?php } ?></div>
+            </div>
+            <div class="form-group">
+             <label class="col-sm-2 control-label"><?php echo $entry_ua_tracking; ?></label>
+               <div class="col-sm-10"><input type="text" name="config_ua_tracking" value="<?php echo $config_ua_tracking; ?>" class="form-control"/></div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><?php echo $entry_ga_remarketing; ?></label>
+               <div class="col-sm-10"><?php if ($config_ga_remarketing) { ?>
+              	<input type="radio" name="config_ga_remarketing" value="0" <?php if ($config_ga_remarketing == 0) { echo ' checked="checked"'; } ?> />
+                <?php echo $text_disabled; ?>
+                <input type="radio" name="config_ga_remarketing" value="1" <?php if ($config_ga_remarketing == 1) { echo ' checked="checked"'; } ?> />
+                <?php echo $text_enabled; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_ga_remarketing" value="0" checked="checked" />
+                <?php echo $text_disabled; ?>
+                <input type="radio" name="config_ga_remarketing" value="1" />
+                <?php echo $text_enabled; ?>
+                <?php } ?></div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><?php echo $entry_ga_cookie; ?></label>
+               <div class="col-sm-10"><?php if ($config_ga_cookie) { ?>
+              	<input type="radio" name="config_ga_cookie" value="0" <?php if ($config_ga_cookie == 0) { echo ' checked="checked"'; } ?> />
+                <?php echo $text_disabled; ?>
+                <input type="radio" name="config_ga_cookie" value="1" <?php if ($config_ga_cookie == 1) { echo ' checked="checked"'; } ?> />
+                <?php echo $text_enabled; ?>
+                <?php } else { ?>
+                <input type="radio" name="config_ga_cookie" value="0" checked="checked" />
+                <?php echo $text_disabled; ?>
+                <input type="radio" name="config_ga_cookie" value="1" />
+                <?php echo $text_enabled; ?>
+                <?php } ?></div>
+           </div>
+            <div class="form-group">
+             <label class="col-sm-2 control-label"><?php echo $entry_ga_adwords; ?></label>
+              <div class="col-sm-10"><?php if ($config_ga_adwords) { ?>
+              	<input class="show-adwords" type="radio" name="config_ga_adwords" value="0" <?php if ($config_ga_adwords == 0) { echo ' checked="checked"'; } ?> />
+                <?php echo $text_disabled; ?>
+                <input class="show-adwords" type="radio" name="config_ga_adwords" value="1" <?php if ($config_ga_adwords == 1) { echo ' checked="checked"'; } ?> />
+                <?php echo $text_enabled; ?>
+                <?php } else { ?>
+                <input class="show-adwords" type="radio" name="config_ga_adwords" value="0" checked="checked" />
+                <?php echo $text_disabled; ?>
+                <input class="show-adwords" type="radio" name="config_ga_adwords" value="1" />
+                <?php echo $text_enabled; ?>
+                <?php } ?></div>
+           </div>
+           <div class="form-group">
+              <label class="col-sm-2 control-label"><?php echo $entry_ga_conversion_id; ?></label>
+               <div class="col-sm-10"><input type="text" name="config_ga_conversion_id" value="<?php echo $config_ga_conversion_id; ?>" class="form-control"/>
+              	<?php if ($error_ga_conversion_id) { ?>
+                <span class="error"><?php echo $error_ga_conversion_id; ?></span>
+                <?php } ?></div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><?php echo $entry_ga_label; ?></label>
+              <div class="col-sm-10"><input type="text" name="config_ga_label" value="<?php echo $config_ga_label; ?>" class="form-control" />
+              	<?php if ($error_ga_label) { ?>
+                <span class="error"><?php echo $error_ga_label; ?></span>
+                <?php } ?></div>
+            </div>
+			 
+			
+			
           </div>
         </form>
       </div>

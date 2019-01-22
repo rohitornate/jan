@@ -66,4 +66,99 @@ class ModelCatalogCategory extends Model {
 
 		return $query->row['total'];
 	}
+        public function createNewsletter()
+	{
+			
+		$res0 = $this->db->query("SHOW TABLES LIKE '".DB_PREFIX."newsletter'");
+		if($res0->num_rows == 0){
+			$this->db->query("
+				CREATE TABLE IF NOT EXISTS `". DB_PREFIX. "newsletter` (
+				  `news_id` int(11) NOT NULL AUTO_INCREMENT,
+				  `news_email` varchar(255) NOT NULL,
+				  `subscribe_date` date NOT NULL,
+				  PRIMARY KEY (`news_id`)
+				) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+			");
+		}
+		
+		
+	}
+	public function subscribes($data) {
+		$res = $this->db->query("select * from ". DB_PREFIX ."newsletter where news_email='".$data['email']."'");
+		if($res->num_rows == 1)
+		{
+			return "You are already subscribed";
+		}
+		else
+		{
+		
+			if($this->db->query("INSERT INTO " . DB_PREFIX . "newsletter(news_email,subscribe_date) values ('".$data['email']."','".date("Y-m-d")."')"))
+			{
+				//$this->response->redirect($this->url->link('common/home', '', 'SSL'));
+				return "Subscription Successfull";
+			}
+			else
+			{
+				//$this->response->redirect($this->url->link('common/home', '', 'SSL'));
+				return "Subscription Fail";
+			}
+		}
+	}
+	public function callback($data){
+		//print_r($data);exit;
+		if (isset($data['email'])) {
+			$email = $this->request->post['email'];
+		//	$this->model_catalog_notifyme->send($email);
+		//	$text = 'Call Back Request From ' .$data['email'];
+			
+			$message = sprintf(('Request Call Back'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')) . "\n\n";
+		//	$message = sprintf($this->language->get('text_welcome'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')) . "\n\n";
+				
+			$message .= 'Name : ' .$data['name']. "\n";
+			$message .= 'Email : ' .$data['email']. "\n";
+			$message .= 'Phone : ' .$data['phone']. "\n";
+			$message .= 'Time Slot : ' .$data['slot_time']. "\n";
+			$message .= 'Message : ' .$data['message']. "\n";
+			
+			$subject = 'Call Back Request From ' .$data['email'];
+			$mail = new Mail();
+			$mail->protocol = $this->config->get('config_mail_protocol');
+			$mail->parameter = $this->config->get('config_mail_parameter');
+			$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+			$mail->smtp_username = $this->config->get('config_mail_smtp_username');
+			$mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+			$mail->smtp_port = $this->config->get('config_mail_smtp_port');
+			$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+		
+			/*
+			$mail->setTo($this->config->get('config_email'));
+			$mail->setFrom($email);
+			$mail->setSender(html_entity_decode($email, ENT_QUOTES, 'UTF-8'));
+			$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
+			$mail->setHtml($);
+			$mail->setText($text);
+			*/
+			
+			$mail->setTo('sales@ornatejewels.com');
+			$mail->setFrom($email);
+			$mail->setSender(html_entity_decode($data['name'], ENT_QUOTES, 'UTF-8'));
+			$mail->setSubject($subject);
+			$mail->setText($message);
+			//print_r($message);exit;
+			$mail->send();
+		
+			echo '1';
+		}
+		
+		
+	}
+	public function getCategoryInfo($category_id){
+		$query = $this->db->query("SELECT * FROM `oc_category` WHERE `category_id` ='". $category_id."'" );
+	return $query->row;
+	}
+	public function getCategoryName($category_id) {
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.category_id = '" . (int)$category_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND c.status = '1' AND c.parent_id=0");
+
+		return $query->row;
+	}
 }

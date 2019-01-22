@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+	<name>Shipway - Courier Tracking,Notifications and order reviews</name>
+	<version>2.3.0.2</version>
+	<author>ONjection Solutions</author>
+	<code>onj_shipway_pro_2_3_0_2</code>
+	<link>http://www.onjection.com/contact-us/</link>
+	
+	
+	<file path="admin/controller/sale/order.php">	
+
+		<operation>
+			<search><![CDATA[
+			$results = $this->model_sale_order->getOrders($filter_data);
+			]]></search>
+			<add position="after" ><![CDATA[
+			if($this->config->get('shipway_login')){
+				$this->load->model('shipway/courier_tracking');
+				$data['couriers'] = $this->model_shipway_courier_tracking->getCourierList(true);
+				$data['all_couriers'] = $this->model_shipway_courier_tracking->getCourierList();
+				$data['hasShipWayAccount'] = true;
+				$results = $this->model_shipway_courier_tracking->getOrderShipwayFields($results);
+			}
+			]]></add>
+		</operation>
+		
+		<operation>
+			<search><![CDATA[
+			'order_status'  => $result['order_status'] ? $result['order_status'] : $this->language->get('text_missing'),
+			]]></search>
+			<add position="before" ><![CDATA[
+				'courier_id'      => ($this->config->get('shipway_login'))?$result['courier_id']:'',
+				'awbno'  		  => ($this->config->get('shipway_login'))?$result['awbno']:'',			
+			]]></add>
+		</operation>
+		
+		<operation>
+			<search><![CDATA[
+			$data['ip'] = $order_info['ip'];
+			]]></search>
+			<add position="before"><![CDATA[
+			if($this->config->get('shipway_login')){
+				$this->load->model('shipway/courier_tracking');
+				$data['couriers'] = $this->model_shipway_courier_tracking->getCourierList(true);
+			}
+			]]></add>
+		</operation>
+		
+		<operation>
+			<search><![CDATA[
+			$this->response->setOutput($this->load->view('sale/order_info', $data));
+			]]></search>
+			<add position="before" ><![CDATA[
+			if($this->config->get('shipway_login')){
+				$this->load->model('shipway/courier_tracking');
+				$data['couriers'] = $this->model_shipway_courier_tracking->getCourierList(true);
+				//$this->data['trackingshipment_orderid'] = $order_id;
+			}			
+			]]></add>
+		</operation>
+						
+	</file>
+	
+	<file path="admin/view/template/sale/order_list.tpl">	
+		<operation>
+			<search><![CDATA[
+			<td class="text-right"><?php if ($sort == 'o.total') { ?>
+			]]></search>
+			<add position="before" ><![CDATA[
+			<?php if(isset($hasShipWayAccount) && $hasShipWayAccount){ ?>
+				<td class="text-center"><b><?php echo 'Tracking/Awb No.'; ?></b></td>
+			<?php } ?>
+			]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[<?php echo $footer; ?>]]></search>
+			<add position="before" ><![CDATA[
+			<?php if(isset($hasShipWayAccount) && $hasShipWayAccount){ ?>
+				<script type="text/javascript">
+				function assignAWB(order_id){
+					
+					if($('#'+order_id+'awbno').val() == '' ){
+						alert("AWB No cannot be empty.");
+						$('#'+order_id+'awbno').focus();
+						return false;
+					}
+					
+					var awbno = $('#' + order_id +'awbno' ).val();
+					var courier_id = $( "#" + order_id + "courier_id option:selected" ).val();
+
+					var jsondata = {"order_id":order_id,"courier_id":courier_id,"awbno" :awbno};
+
+					$.ajax({
+								type: 'POST',
+								url: 'index.php?route=extension/module/shipway_login_panel/pushAWB&token=<?php echo $token; ?>',
+								dataType: 'json',
+								data: jsondata,
+								beforeSend : function(){
+									$('#ship_spin'+order_id).show();
+								},
+								success: function(data) {
+									alert(data.message);							
+									location.reload();							
+								},
+								complete: function(){
+									$('#ship_spin'+order_id).hide();
+								},
+								failure: function(){
+
+								},
+								error: function() {
+
+								}
+							});
+				}
+				</script>
+				<style>
+				.btnShip{color:#fff;background-color:#2EADE0;border:thin solid #2C95C0;box-shadow:0 0 3px #33B0E2;cursor:pointer;margin-left:5px;padding:2px 5px}
+				.ship_td p{padding: 0px;margin: 0px 0px 5px 0px;}
+				</style>
+			<?php } ?>
+			]]></add>
+		</operation>		
+		
+		<operation>
+			<search><![CDATA[
+			 <td class="text-left"><?php echo $order['order_status']; ?></td>
+			]]></search>
+			<add position="after" ><![CDATA[
+			<?php if(isset($hasShipWayAccount) && $hasShipWayAccount){ ?>
+				<td class="<?php echo ($order['awbno']) ? 'text-center' : 'text-left'; ?> track<?php echo $order['order_id']; ?> ship_td">
+					<?php 
+					if($order['awbno']){
+						$courier_id = $order['courier_id'] ;
+						$courier_list = array();
+						foreach($all_couriers as $courier){
+							$courier_list[$courier['courier_id']] =  $courier['name'];
+							$sw_order_id = $order['order_id'] ;
+						}
+						$courier_name = $courier_list[$courier_id];
+						echo  '<b>'.$courier_name .'</b></br>'.$order['awbno'];  
+					}  else { ?> 
+					<p><label>AWB No:&nbsp;</label><input type="text" name="awb" id="<?php echo  $order['order_id']; ?>awbno"></input></p>
+					<p><label>Courier:&nbsp;</label>
+						<select name="courier_id" id="<?php echo  $order['order_id']; ?>courier_id">
+							<?php foreach ($couriers as $courier){ ?>
+							<option value="<?php echo $courier['courier_id']; ?>"><?php echo $courier['name']; ?></option>
+							<?php } ?>
+						</select>
+						<input type="button" name="Assign" class="btnShip btn btn-primary" onclick="assignAWB(<?php echo  $order['order_id']; ?>)" id="assign" value="Assign" />
+						<img id="ship_spin<?php echo  $order['order_id']; ?>" src="<?php echo '../image/data/demo/ship_spin.gif'; ?>" style="display: none;position: absolute;">
+					</p>					
+					<?php } ?>
+				</td>
+			<?php } ?>
+			]]></add>
+		</operation>	
+	</file>	
+</modification>

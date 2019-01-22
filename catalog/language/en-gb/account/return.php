@@ -1,8 +1,10 @@
 <?php
 // Heading
 $_['heading_title']      = 'Product Returns';
+$_['heading_title2']      = 'Product Cancel';
 
 // Text
+$_['text_home']            = 'Home';
 $_['text_account']       = 'Account';
 $_['text_return']        = 'Return Information';
 $_['text_return_detail'] = 'Return Details';
@@ -53,6 +55,7 @@ $_['entry_fault_detail'] = 'Faulty or other details';
 // Error
 $_['text_error']         = 'The returns you requested could not be found!';
 $_['error_order_id']     = 'Order ID required!';
+$_['comment']     	   	 = 'Comment required!';
 $_['error_firstname']    = 'First Name must be between 1 and 32 characters!';
 $_['error_lastname']     = 'Last Name must be between 1 and 32 characters!';
 $_['error_email']        = 'E-Mail Address does not appear to be valid!';

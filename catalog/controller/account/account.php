@@ -1,12 +1,28 @@
 <?php
 class ControllerAccountAccount extends Controller {
 	public function index() {
+		/*
+		// BOF - Betaout Opencart mod
+        
+            $this->load->model('tool/betaout');
+            $this->model_tool_betaout->userAccountPage();
+        
+        // EOF - Betaout Opencart mod
+		*/
+//           echo $this->customer->isLogged();
+//             echo 'hello account';
+//            echo '<prE>';print_R($_SESSION);
+            //exit;
 		if (!$this->customer->isLogged()) {
+                    //echo 'in'; die();
 			$this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
-
+		if ($this->customer->isLogged()) {
+			
+			$this->response->redirect($this->url->link('account/edit', '', true));
+		}
 		$this->load->language('account/account');
 
 		$this->document->setTitle($this->language->get('heading_title'));

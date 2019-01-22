@@ -3,6 +3,9 @@
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right">
+	  <?php if($customersordersexportfree_status=="1"){ ?>
+			<a href="<?php echo $export; ?>" data-toggle="tooltip" title="<?php echo $button_export; ?>" class="btn btn-success"><i class="fa fa-download"></i></a>
+			<?php } ?>
         <button type="submit" id="button-shipping" form="form-order" formaction="<?php echo $shipping; ?>" formtarget="_blank" data-toggle="tooltip" title="<?php echo $button_shipping_print; ?>" class="btn btn-info"><i class="fa fa-truck"></i></button>
         <button type="submit" id="button-invoice" form="form-order" formaction="<?php echo $invoice; ?>" formtarget="_blank" data-toggle="tooltip" title="<?php echo $button_invoice_print; ?>" class="btn btn-info"><i class="fa fa-print"></i></button>
         <a href="<?php echo $add; ?>" data-toggle="tooltip" title="<?php echo $button_add; ?>" class="btn btn-primary"><i class="fa fa-plus"></i></a>
@@ -105,11 +108,17 @@
                     <?php } else { ?>
                     <a href="<?php echo $sort_customer; ?>"><?php echo $column_customer; ?></a>
                     <?php } ?></td>
+				  <td class="text-left">Invoice No</td>	
+				   <td class="text-left">Model</td>
+				  <td class="text-left">Payment Method</td>	
                   <td class="text-left"><?php if ($sort == 'order_status') { ?>
                     <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
                     <?php } else { ?>
                     <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
                     <?php } ?></td>
+					<?php if(isset($hasShipWayAccount) && $hasShipWayAccount){ ?>
+				  <td class="text-center"><b><?php echo 'Tracking/Awb No.'; ?></b></td>
+					<?php } ?>
                   <td class="text-right"><?php if ($sort == 'o.total') { ?>
                     <a href="<?php echo $sort_total; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_total; ?></a>
                     <?php } else { ?>
@@ -140,7 +149,50 @@
                     <input type="hidden" name="shipping_code[]" value="<?php echo $order['shipping_code']; ?>" /></td>
                   <td class="text-right"><?php echo $order['order_id']; ?></td>
                   <td class="text-left"><?php echo $order['customer']; ?></td>
+				   <td class="text-left"><?php echo $order['invoice']; ?></td>
+				   <td class="text-left">
+					
+					<?php foreach($order['order_product'] as $product_model) {//print_r($product_model)?>
+					
+					
+					
+					<?php echo $product_model['model']; ?>
+					
+					<br>
+					
+					<?php } ?>
+					
+					
+					</td>
+				   
+				   <td class="text-left"><?php echo $order['payment_method']; ?></td>
                   <td class="text-left"><?php echo $order['order_status']; ?></td>
+				  <?php if(isset($hasShipWayAccount) && $hasShipWayAccount){ ?>
+				<td class="<?php echo ($order['awbno']) ? 'text-center' : 'text-left'; ?> track<?php echo $order['order_id']; ?> ship_td">
+					<?php 
+					if($order['awbno']){
+						$courier_id = $order['courier_id'] ;
+						$courier_list = array();
+						foreach($all_couriers as $courier){
+							$courier_list[$courier['courier_id']] =  $courier['name'];
+							$sw_order_id = $order['order_id'] ;
+						}
+						$courier_name = $courier_list[$courier_id];
+						echo  '<b>'.$courier_name .'</b></br>'.$order['awbno'];  
+					}  else { ?> 
+					<p><label>AWB No:&nbsp;</label><input type="text" name="awb" id="<?php echo  $order['order_id']; ?>awbno"></input></p>
+					<p><label>Courier:&nbsp;</label>
+						<select name="courier_id" id="<?php echo  $order['order_id']; ?>courier_id">
+							<?php foreach ($couriers as $courier){ ?>
+							<option value="<?php echo $courier['courier_id']; ?>"><?php echo $courier['name']; ?></option>
+							<?php } ?>
+						</select>
+						<input type="button" name="Assign" class="btnShip btn btn-primary" onclick="assignAWB(<?php echo  $order['order_id']; ?>)" id="assign" value="Assign" />
+						<img id="ship_spin<?php echo  $order['order_id']; ?>" src="<?php echo '../image/data/demo/ship_spin.gif'; ?>" style="display: none;position: absolute;">
+					</p>					
+					<?php } ?>
+				</td>
+			<?php } ?>
                   <td class="text-right"><?php echo $order['total']; ?></td>
                   <td class="text-left"><?php echo $order['date_added']; ?></td>
                   <td class="text-left"><?php echo $order['date_modified']; ?></td>
@@ -272,4 +324,48 @@ $('.date').datetimepicker({
 	pickTime: false
 });
 //--></script></div>
+<?php if(isset($hasShipWayAccount) && $hasShipWayAccount){ ?>
+				<script type="text/javascript">
+				function assignAWB(order_id){
+					
+					if($('#'+order_id+'awbno').val() == '' ){
+						alert("AWB No cannot be empty.");
+						$('#'+order_id+'awbno').focus();
+						return false;
+					}
+					
+					var awbno = $('#' + order_id +'awbno' ).val();
+					var courier_id = $( "#" + order_id + "courier_id option:selected" ).val();
+
+					var jsondata = {"order_id":order_id,"courier_id":courier_id,"awbno" :awbno};
+
+					$.ajax({
+								type: 'POST',
+								url: 'index.php?route=extension/module/shipway_login_panel/pushAWB&token=<?php echo $token; ?>',
+								dataType: 'json',
+								data: jsondata,
+								beforeSend : function(){
+									$('#ship_spin'+order_id).show();
+								},
+								success: function(data) {
+									alert(data.message);							
+									location.reload();							
+								},
+								complete: function(){
+									$('#ship_spin'+order_id).hide();
+								},
+								failure: function(){
+
+								},
+								error: function() {
+
+								}
+							});
+				}
+				</script>
+				<style>
+				.btnShip{color:#fff;background-color:#2EADE0;border:thin solid #2C95C0;box-shadow:0 0 3px #33B0E2;cursor:pointer;margin-left:5px;padding:2px 5px}
+				.ship_td p{padding: 0px;margin: 0px 0px 5px 0px;}
+				</style>
+			<?php } ?>
 <?php echo $footer; ?> 

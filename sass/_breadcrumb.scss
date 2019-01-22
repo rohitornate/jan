@@ -1,0 +1,19 @@
+.breadcrumb{  margin:$space25 auto $space20;
+              li{ 
+                  display:inline-block;  text-transform:uppercase;
+               a{ 
+                  color:$black; @include font-size($font12); padding:$space0 $space5 - 3; 
+                   &:hover{ color:$yellow;}
+               } 
+              &:after{ content: '/'; display:inline-block;}
+              &:last-child{
+                   &:after{ display:none;}
+              }
+              
+              &.active{
+                  a{color:$yellow;
+                  }
+              }
+    }
+  
+}

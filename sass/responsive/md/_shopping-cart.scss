@@ -1,0 +1,22 @@
+header{
+   .logo{width:300px;} 
+} 
+.cart-header{
+    .logo{width: 280px;}
+    .cart-logo{width:216px; padding-top:$space15;}
+    .contact-us{padding-top:$space10;}
+} 
+.cart-footer{ padding-top:$space10;
+    .payement-service{width:42%;padding-top:$space40+1;}
+    .payement-col{width:28%;}
+}
+.cart-main{padding-bottom:0;
+          .cart-descraption{
+              .price{
+                  p{
+                      strike{@include font-size(12px);}
+                  }
+              }
+          }
+} 
+ 

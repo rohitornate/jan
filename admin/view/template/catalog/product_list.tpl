@@ -41,6 +41,14 @@
                 <label class="control-label" for="input-model"><?php echo $entry_model; ?></label>
                 <input type="text" name="filter_model" value="<?php echo $filter_model; ?>" placeholder="<?php echo $entry_model; ?>" id="input-model" class="form-control" />
               </div>
+			  <div class="form-group">
+                <label class="control-label" for="input-date-added"><?php echo $entry_date_added; ?></label>
+                <div class="input-group date">
+                  <input type="text" name="filter_date_added" value="<?php echo $filter_date_added; ?>" placeholder="<?php echo $entry_date_added; ?>" data-date-format="YYYY-MM-DD" id="input-date-added" class="form-control" />
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                  </span></div>
+              </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
@@ -50,6 +58,14 @@
               <div class="form-group">
                 <label class="control-label" for="input-quantity"><?php echo $entry_quantity; ?></label>
                 <input type="text" name="filter_quantity" value="<?php echo $filter_quantity; ?>" placeholder="<?php echo $entry_quantity; ?>" id="input-quantity" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="input-date-modified"><?php echo $entry_date_modified; ?></label>
+                <div class="input-group date">
+                  <input type="text" name="filter_date_modified" value="<?php echo $filter_date_modified; ?>" placeholder="<?php echo $entry_date_modified; ?>" data-date-format="YYYY-MM-DD" id="input-date-modified" class="form-control" />
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                  </span></div>
               </div>
             </div>
             <div class="col-sm-4">
@@ -85,6 +101,20 @@
                   <?php } ?>
                 </select>
               </div>
+              <div class="form-group">
+			  <label class="control-label" for="input-image"><?php echo 'Category'; ?></label>
+                <select name="filter_category" id="input-image" class="form-control">
+                 
+                  <option value="*"></option>
+              <?php foreach ($categories as $category) { ?>
+                <?php if ($category['category_id']==$filter_category) { ?>
+                  <option value="<?php echo $category['category_id']; ?>" selected="selected"><?php echo $category['name']; ?></option>
+                <?php } else { ?>
+                  <option value="<?php echo $category['category_id']; ?>"><?php echo $category['name']; ?></option> 
+                <?php } ?>
+              <?php } ?>
+                </select>
+			  </div>
               <button type="button" id="button-filter" class="btn btn-primary pull-right"><i class="fa fa-filter"></i> <?php echo $button_filter; ?></button>
             </div>
           </div>
@@ -95,6 +125,11 @@
               <thead>
                 <tr>
                   <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                  <td class="text-right"><?php if ($sort == 'p.product_id') { ?>
+                    <a href="<?php echo $sort_id; ?>" class="<?php echo strtolower($order); ?>">Product Id</a>
+                    <?php } else { ?>
+                    <a href="<?php echo $sort_id; ?>">Product Id</a>
+                    <?php } ?></td>
                   <td class="text-center"><?php echo $column_image; ?></td>
                   <td class="text-left"><?php if ($sort == 'pd.name') { ?>
                     <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_name; ?></a>
@@ -116,6 +151,11 @@
                     <?php } else { ?>
                     <a href="<?php echo $sort_quantity; ?>"><?php echo $column_quantity; ?></a>
                     <?php } ?></td>
+                    <td class="text-right"><?php if ($sort == 'p.date_added') { ?>
+                    <a href="<?php echo $sort_date_added; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_added; ?></a>
+                    <?php } else { ?>
+                    <a href="<?php echo $sort_date_added; ?>"><?php echo $column_date_added; ?></a>
+                    <?php } ?></td> 
                   <td class="text-left"><?php if ($sort == 'p.status') { ?>
                     <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
                     <?php } else { ?>
@@ -126,13 +166,14 @@
               </thead>
               <tbody>
                 <?php if ($products) { ?>
-                <?php foreach ($products as $product) { ?>
+                <?php foreach ($products as $product) { //print_r($product);?>
                 <tr>
                   <td class="text-center"><?php if (in_array($product['product_id'], $selected)) { ?>
                     <input type="checkbox" name="selected[]" value="<?php echo $product['product_id']; ?>" checked="checked" />
                     <?php } else { ?>
                     <input type="checkbox" name="selected[]" value="<?php echo $product['product_id']; ?>" />
                     <?php } ?></td>
+                    <td class="text-left"><?php echo $product['product_id']; ?></td>
                   <td class="text-center"><?php if ($product['image']) { ?>
                     <img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>" class="img-thumbnail" />
                     <?php } else { ?>
@@ -140,6 +181,7 @@
                     <?php } ?></td>
                   <td class="text-left"><?php echo $product['name']; ?></td>
                   <td class="text-left"><?php echo $product['model']; ?></td>
+                  
                   <td class="text-right"><?php if ($product['special']) { ?>
                     <span style="text-decoration: line-through;"><?php echo $product['price']; ?></span><br/>
                     <div class="text-danger"><?php echo $product['special']; ?></div>
@@ -153,6 +195,7 @@
                     <?php } else { ?>
                     <span class="label label-success"><?php echo $product['quantity']; ?></span>
                     <?php } ?></td>
+                    <td class="text-left"><?php echo $product['date_added'] ?></td>
                   <td class="text-left"><?php echo $product['status']; ?></td>
                   <td class="text-right"><a href="<?php echo $product['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
                 </tr>
@@ -212,6 +255,23 @@ $('#button-filter').on('click', function() {
   if (filter_image != '*') {
     url += '&filter_image=' + encodeURIComponent(filter_image);
   }
+    var filter_category = $('select[name=\'filter_category\']').val();
+
+  if (filter_category != '*') {
+    url += '&filter_category=' + encodeURIComponent(filter_category);
+  }
+  
+  var filter_date_added = $('input[name=\'filter_date_added\']').val();
+
+	if (filter_date_added) {
+		url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
+	}
+
+	var filter_date_modified = $('input[name=\'filter_date_modified\']').val();
+
+	if (filter_date_modified) {
+		url += '&filter_date_modified=' + encodeURIComponent(filter_date_modified);
+	}
 
 	location = url;
 });
@@ -256,5 +316,15 @@ $('input[name=\'filter_model\']').autocomplete({
 		$('input[name=\'filter_model\']').val(item['label']);
 	}
 });
-//--></script></div>
+//--></script>
+ <script src="view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+  <link href="view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" media="screen" />
+  <script type="text/javascript"><!--
+$('.date').datetimepicker({
+	pickTime: false
+});
+//--></script>
+
+
+</div>
 <?php echo $footer; ?>

@@ -1,0 +1,10 @@
+.popup{@extend .sm-paddin10;
+      .title{@extend .sm-font16; padding-bottom: $space10;}
+      .one-half{float: none; width: auto; margin: 0;}
+      .rating-box{float: none; width: auto; padding: 10px 60px 0px 15px; margin-bottom: 10px;}
+      .form-control{height: 30px;}
+      textarea{height: 50px !important;}
+      .code{height: 30px}
+      .bg-none{padding: 0;}
+      .btncom{margin-top: 5px;}
+}

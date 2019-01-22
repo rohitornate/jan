@@ -55,6 +55,13 @@ class Mail {
 		$this->attachments[] = $filename;
 	}
 
+	protected $abandoned_carts_bcc;       
+
+	public function setAbandonedCartsBcc($abandoned_carts_bcc) {
+		$this->abandoned_carts_bcc = $abandoned_carts_bcc;
+	}
+	
+	
 	public function send() {
 		if (!$this->to) {
 			throw new \Exception('Error: E-Mail to required!');
@@ -90,7 +97,12 @@ class Mail {
 			$header .= 'To: <' . $to . '>' . PHP_EOL;
 			$header .= 'Subject: =?UTF-8?B?' . base64_encode($this->subject) . '?=' . PHP_EOL;
 		}
-
+		
+		if (!empty($this->abandoned_carts_bcc)) {
+			$header .= 'Bcc: ' . $this->abandoned_carts_bcc . PHP_EOL;
+		}
+		
+		
 		$header .= 'Date: ' . date('D, d M Y H:i:s O') . PHP_EOL;
 		$header .= 'From: =?UTF-8?B?' . base64_encode($this->sender) . '?= <' . $this->from . '>' . PHP_EOL;
 		

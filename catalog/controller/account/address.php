@@ -2,7 +2,7 @@
 class ControllerAccountAddress extends Controller {
 	private $error = array();
 
-	public function index() {
+	public function   index()  {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/address', '', true);
 
@@ -76,6 +76,9 @@ class ControllerAccountAddress extends Controller {
 		$this->load->model('account/address');
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+			
+			//print_r($this->request->post);exit;
+			
 			$this->model_account_address->editAddress($this->request->get['address_id'], $this->request->post);
 
 			// Default Shipping Address
@@ -374,6 +377,8 @@ class ControllerAccountAddress extends Controller {
 			$address_info = $this->model_account_address->getAddress($this->request->get['address_id']);
 		}
 
+	//print_r($address_info);	exit;
+		
 		if (isset($this->request->post['firstname'])) {
 			$data['firstname'] = $this->request->post['firstname'];
 		} elseif (!empty($address_info)) {
@@ -388,6 +393,13 @@ class ControllerAccountAddress extends Controller {
 			$data['lastname'] = $address_info['lastname'];
 		} else {
 			$data['lastname'] = '';
+		}
+		if (isset($this->request->post['telephone'])) {
+			$data['telephone'] = $this->request->post['telephone'];
+		} elseif (!empty($address_info)) {
+			$data['telephone'] = $address_info['telephone'];
+		} else {
+			$data['telephone'] = '';
 		}
 
 		if (isset($this->request->post['company'])) {
@@ -502,11 +514,15 @@ class ControllerAccountAddress extends Controller {
 		}
 
 		$this->load->model('localisation/country');
-
+		$this->load->model('account/customer');
 		$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
-
+		$pincode=$this->model_account_customer->getDeliveredPincode($this->request->post['postcode']);
 		if ($country_info && $country_info['postcode_required'] && (utf8_strlen(trim($this->request->post['postcode'])) < 2 || utf8_strlen(trim($this->request->post['postcode'])) > 10)) {
 			$this->error['postcode'] = $this->language->get('error_postcode');
+		}else if (!$pincode) {
+		
+		//if (!$pincode) {
+				$this->error['postcode']= "WE CAN'T DELIVER  TO THIS PINCODE. CAN WE SEND YOUR ORDER TO A DIFFRENT ADDRESS? PLEASE FILL YOUR ADDRESS AGAIN WHERE YOU WANT YOUR ORDER TO BE SHIPPED ";
 		}
 
 		if ($this->request->post['country_id'] == '' || !is_numeric($this->request->post['country_id'])) {
